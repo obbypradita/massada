@@ -1,44 +1,41 @@
-october.controllers['administration-sites'] = function ($scope, $request) {
+october.controllers['administration-sites'] = function ($scope, $request, $parse) {
     $scope.site={};
-    //var list =  $request('onGetSites');
-    var global=[];
+    
+    // on start
     $.request('onGetSites', {
         success: function(data) {
-          var a = data.result;
-          global = a;
-          $scope.site.sites = a.result;
+            var temp = data.result;
+            $scope.$apply(function () {
+                $scope.site.sites = $parse(temp)($scope);
+            });
         }
     });
-    
-   
-   // var list = $request('onGetSites');
-   // console.log(list);
-            
-   // $scope.site.sites = list;
-    
-    $scope.muncul = function() {
-        /*
-        var list = $request('onGetLocation');
-        console.log(list);
-        document.getElementById("myDiv").innerHTML=list.textStatus;
-        */
-        
+  
+    $scope.refresh = function() {
         $.request('onGetSites', {
             success: function(data) {
-              var a = {};
-              a = data.result;
-       
-                     $scope.site.sites = a;
-               //console.log(a);
-              
-              //a = a.replace('{"result":"','');
-             
+                var temp = data.result;
+                $scope.$apply(function () {
+                     $scope.site.sites = $parse(temp)($scope);
+                });
+                $('#confirmation').show();
+            }
+        });
+    };
+    
+    $scope.onDelete = function(id) {
+        $.request('onDelete', {
+
+            data    : { siteId: id},
+            loading : $('#confirmation').hide(),
+            success : function() {
+                $scope.refresh();
             }
         });
     };
     
     
-    $scope.ajax = function ()
+    $scope.ajax1 = function ()
     {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -56,7 +53,4 @@ october.controllers['administration-sites'] = function ($scope, $request) {
         xmlhttp.open("GET","http://localhost:8080/massada/administration/sites?onGetSites",true);
         xmlhttp.send();
     }
-
-
-
 }

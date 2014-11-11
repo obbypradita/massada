@@ -70,15 +70,20 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                     <span class=\"fa fa-gear\"></span>
                 </button>
             </div>
+            
+            <div class=\"form-group\">
+                <button type=\"button\" class=\"btn btn-default\" ng-click=\"refresh()\">
+                    <span class=\"fa fa-refresh\"></span>
+                </button>
+            </div>
+            
         </form>
         <hr/>
         
         
         
-        
-       <div id=\"myDiv\"></div>
-       <button ng-click=\"ajax()\">Ajax</button>
-        <button ng-click=\"muncul()\">Muncul</button>
+        <h1 id=\"confirmation\">zentot</h1>
+        <div id=\"myDiv\"></div>
         
         <div class=\"table-responsive\"  id=\"siteTable\">
            <table  class=\"table table-striped table-hover\">
@@ -95,50 +100,45 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat=\"site in site.sites | filter:search\">
-                        <td>";
-        // line 73
-        echo "{{ site.id }}";
-        echo "</td>
-                        <td>";
-        // line 74
-        echo "{{ site.name }}";
-        echo "</td>
-                        <td>";
-        // line 75
-        echo "{{ site.owner }}";
-        echo "</td>
-                        <td>";
-        // line 76
-        echo "{{ site.project_type }}";
-        echo "</td>
-                        <td>";
-        // line 77
-        echo "{{ site.locations.name }}";
-        echo "</td>
+                    <tr ng-repeat=\"st in site.sites | filter:search \">
                         <td>";
         // line 78
-        echo "{{ site.address }}";
+        echo "{{ st.id }}";
         echo "</td>
                         <td>";
         // line 79
-        echo "{{ site.photo }}";
+        echo "{{ st.name }}";
+        echo "</td>
+                        <td>";
+        // line 80
+        echo "{{ st.owner }}";
+        echo "</td>
+                        <td>";
+        // line 81
+        echo "{{ st.project_type }}";
+        echo "</td>
+                        <td>";
+        // line 82
+        echo "{{ st.locations.name }}";
+        echo "</td>
+                        <td>";
+        // line 83
+        echo "{{ st.address }}";
+        echo "</td>
+                        <td>";
+        // line 84
+        echo "{{ st.photo }}";
         echo "</td>
                         <td><a href=\"#\">Update</a> | 
                             <a href=\"\" ng-click=\"onDelete(";
-        // line 81
-        echo "site.id";
-        echo ")\"
-                            >Delete</a></td>
+        // line 86
+        echo "st.id";
+        echo ")\">Delete</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    ";
-        // line 88
-        echo "{{ site.sites }}";
-        echo "
 </div>";
     }
 
@@ -154,6 +154,6 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
 
     public function getDebugInfo()
     {
-        return array (  140 => 88,  130 => 81,  125 => 79,  121 => 78,  117 => 77,  113 => 76,  109 => 75,  105 => 74,  101 => 73,  57 => 32,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  135 => 86,  130 => 84,  126 => 83,  122 => 82,  118 => 81,  114 => 80,  110 => 79,  106 => 78,  57 => 32,  26 => 3,  22 => 2,  19 => 1,);
     }
 }

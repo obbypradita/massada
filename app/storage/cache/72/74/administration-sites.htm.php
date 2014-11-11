@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;class Cms54610d371ef85_520562101Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;class Cms5461f3cf660e6_1615661839Class extends \Cms\Classes\PageCode
 {
 
 
@@ -14,15 +14,12 @@ public function onDelete() {
     
     array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
-    
-    $temp=Sites::with('locations')->get();
-    $this['sites'] = str_replace("\"","'", $temp);
 }
-public function onRun() {
-    $temp = Sites::with('locations')->get();
+public function onStart() {
+    $temp = Sites::get();
     $temp = json_encode($temp);
-    $temp = str_replace("\"","'", $temp);
-    $this->page['mysite'] = $temp;
+    //$temp = str_replace("\"","'", $temp);
+
 
     //return $temp;
     
@@ -30,12 +27,18 @@ public function onRun() {
 }
 public function onGetSites() {
 
-    $temp = Sites::with('locations')->get();
+    //$temp = Sites::with('locations')->get();
+    $temp = Sites::get();
     $temp = json_encode($temp);
     
-    //$temp = str_replace("[]","", $temp);
-    $temp = str_replace("\"","'", $temp);
+  
     
+    //$temp = str_replace("[]","", $temp);
+    //$temp = str_replace("\"","", $temp);
+    //$temp = str_replace("\\","", $temp);
+    
+    //$temp = str_replace("[", "data:{", $temp);
+    //$temp = str_replace("]", "}", $temp);
     //$temp = str_replace("\"","'", $temp);
     
     //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);

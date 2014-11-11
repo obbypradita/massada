@@ -1,4 +1,4 @@
-1415646685s:15207:"a:5:{s:5:"mtime";i:1415617604;s:7:"content";s:7175:"title = "Administration - Site - Insert"
+1415712280s:15374:"a:5:{s:5:"mtime";i:1415710962;s:7:"content";s:7243:"title = "Administration - Site - Insert"
 url = "/administration/site/insert"
 layout = "default"
 description = "Page for insert site"
@@ -36,11 +36,13 @@ exp = "[a-z A-z.]"
 exp_msg = "Alphabet Only"
 
 [mRadiobutton siteProjectType]
-mId = "1;2"
+mId = "siteProject"
 mName = "siteProjectType"
 mLabel = "Project Type :"
 model = "site.siteProjectType"
 base = "siteForm"
+mObject = "mRadiobutton"
+mKey = "1;2"
 mValue = "Multi Operator;Reseller"
 
 [mDropdown siteLocation]
@@ -103,6 +105,8 @@ id = "sitePhoto"
 name = "sitePhoto"
 model = "site.sitePhoto"
 src = "sitePhoto"
+req = "true"
+req_msg = "Butuh foto neh"
 ==
 <?php
 use Massada\Application\Models\Sites;
@@ -110,7 +114,7 @@ use Massada\Application\Classes\Operation;
 function onInsert() {
     
     $data = post('forpost');
-    $rand=Operation::generateRandomString(10);
+    $rand = Operation::generateRandomString(10);
     
     $site = new Sites;
     $site->name         = post('siteName');
@@ -192,8 +196,6 @@ function onInsert() {
             
 
             <form data-request="onInsert" name="siteForm" method="POST" enctype="multipart/from-data">
-        
-            
             {#{ form_open({ request: 'onInsert', name: 'myForm' }) }#}
                 <div class="form-inline">
                     <div class="form-group">
@@ -239,13 +241,13 @@ function onInsert() {
             
         </div>
     </div>
-</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Insert";s:3:"url";s:27:"/administration/site/insert";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for insert site";s:6:"hidden";s:1:"0";s:10:"components";a:8:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:8:"siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:6:{s:3:"mId";s:3:"1;2";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:8:"siteForm";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:8:"siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:4:{s:2:"id";s:9:"sitePhoto";s:4:"name";s:9:"sitePhoto";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";}}}s:4:"code";s:926:"
+</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Insert";s:3:"url";s:27:"/administration/site/insert";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for insert site";s:6:"hidden";s:1:"0";s:10:"components";a:8:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:8:"siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:8:{s:3:"mId";s:11:"siteProject";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:8:"siteForm";s:7:"mObject";s:12:"mRadiobutton";s:4:"mKey";s:3:"1;2";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:8:"siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:6:{s:2:"id";s:9:"sitePhoto";s:4:"name";s:9:"sitePhoto";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}}}s:4:"code";s:928:"
 use Massada\Application\Models\Sites;
 use Massada\Application\Classes\Operation;
 function onInsert() {
     
     $data = post('forpost');
-    $rand=Operation::generateRandomString(10);
+    $rand = Operation::generateRandomString(10);
     
     $site = new Sites;
     $site->name         = post('siteName');
@@ -274,7 +276,7 @@ function onInsert() {
         
         
 }
-";s:6:"markup";s:4075:"<style>
+";s:6:"markup";s:4051:"<style>
 
     .alert-fixed {
         position: fixed;
@@ -325,8 +327,6 @@ function onInsert() {
             
 
             <form data-request="onInsert" name="siteForm" method="POST" enctype="multipart/from-data">
-        
-            
             {#{ form_open({ request: 'onInsert', name: 'myForm' }) }#}
                 <div class="form-inline">
                     <div class="form-group">

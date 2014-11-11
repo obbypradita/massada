@@ -36,11 +36,13 @@ exp = "[a-z A-z.]"
 exp_msg = "Alphabet Only"
 
 [mRadiobutton siteProjectType]
-mId = "1;2"
+mId = "siteProject"
 mName = "siteProjectType"
 mLabel = "Project Type :"
 model = "site.siteProjectType"
 base = "siteForm"
+mObject = "mRadiobutton"
+mKey = "1;2"
 mValue = "Multi Operator;Reseller"
 
 [mDropdown siteLocation]
@@ -103,6 +105,8 @@ id = "sitePhoto"
 name = "sitePhoto"
 model = "site.sitePhoto"
 src = "sitePhoto"
+req = "true"
+req_msg = "Butuh foto neh"
 ==
 <?php
 use Massada\Application\Models\Sites;
@@ -110,7 +114,7 @@ use Massada\Application\Classes\Operation;
 function onInsert() {
     
     $data = post('forpost');
-    $rand=Operation::generateRandomString(10);
+    $rand = Operation::generateRandomString(10);
     
     $site = new Sites;
     $site->name         = post('siteName');
@@ -130,6 +134,8 @@ function onInsert() {
     $data = base64_decode($data);
     
     file_put_contents("uploads/public/images/site/avatar/$rand.png", $data);
+    
+    
     
     
     
@@ -192,8 +198,6 @@ function onInsert() {
             
 
             <form data-request="onInsert" name="siteForm" method="POST" enctype="multipart/from-data">
-        
-            
             {#{ form_open({ request: 'onInsert', name: 'myForm' }) }#}
                 <div class="form-inline">
                     <div class="form-group">

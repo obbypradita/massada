@@ -1,6 +1,7 @@
 <?php namespace Massada\Application\Components;
 
 use Cms\Classes\ComponentBase;
+use Massada\Application\Classes\Operation;
 
 
 class Image extends ComponentBase
@@ -18,6 +19,8 @@ class Image extends ComponentBase
     public $mRequired_msg;
 
     public $src;
+
+    public $modalLink;
 
 
 
@@ -94,6 +97,8 @@ class Image extends ComponentBase
 
         $this->mRequired        = $this->property('req');
         $this->mRequired_msg    = $this->property('req_msg');
+
+        $this->modalLink        = Operation::generateRandomString(10);
     }
 
     public function onCrop() {

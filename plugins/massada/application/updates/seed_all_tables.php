@@ -17,6 +17,7 @@ class SeedAllTables extends Seeder
                   ['name' => 'Bogor'],
                   ['name' => 'Manado'],
                   ['name' => 'Lombok'],
+                  ['name' => 'Semarang'],
             ]);
 
             $jk = Locations::whereId('1')->first();

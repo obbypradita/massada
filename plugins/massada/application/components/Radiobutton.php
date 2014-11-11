@@ -11,7 +11,7 @@ class Radiobutton extends ComponentBase
     public $mModel;
     public $mBase;
 
-    public $mValue;
+    public $mObject;
 
     public function componentDetails()
     {
@@ -26,7 +26,7 @@ class Radiobutton extends ComponentBase
         return [
             'mId' => [
                 'title'         => 'ID',
-                'description'   => 'ID for each item. Seperated by \';\'',
+                'description'   => 'RadioButtonGroup ID',
                 'type'          => 'string',
                 'group'         => 'Common',
                 'default'       => '1;2;3',
@@ -61,12 +61,28 @@ class Radiobutton extends ComponentBase
                 'description'   => 'Form parent name of this element',
                 'type'          => 'string',
                 'group'         => 'Common',
-                'default'       => 'mTextbox'
+                'default'       => 'mRadiobutton'
+            ],
+
+            'mObject' => [
+                'title'         => 'Object Name',
+                'description'   => 'Object radio items base on key value',
+                'type'          => 'string',
+                'group'         => 'Common',
+                'default'       => 'mRadiobutton'
+            ],
+
+            'mKey' => [
+                'title'         => 'Object Key',
+                'description'   => 'Key for each objectitem. Seperated by \';\'',
+                'type'          => 'string',
+                'group'         => 'Common',
+                'default'       => 'mRadiobutton'
             ],
 
             'mValue' => [
-                'title'         => 'Value',
-                'description'   => 'Value for each item. Seperated by \';\'',
+                'title'         => 'Object Value',
+                'description'   => 'Value for each object item. Seperated by \';\'',
                 'type'          => 'string',
                 'group'         => 'Common',
                 'default'       => 'one;two;three',
@@ -75,24 +91,23 @@ class Radiobutton extends ComponentBase
     }
 
     public function onRender() {
-        //$this->mId      = $this->property('mId');
-        $this->mName    = $this->property('mName');
-        $this->mLabel   = $this->property('mLabel');
-        $this->mModel    = $this->property('model');
-        $this->mBase            = $this->property('base');
+        $this->mId          = $this->property('mId');
+        $this->mName        = $this->property('mName');
+        $this->mLabel       = $this->property('mLabel');
+        $this->mModel       = $this->property('model');
+        $this->mBase        = $this->property('base');
+        //$this->mObject      = $this->property('mObject');
 
-        //$this->mValue   = str_replace("\"","'", json_encode(explode(';', $this->property('mValue'))));
-
-        $id=[];$val=[];
-        $id = explode(';', $this->property('mId'));
-        $val = explode(';', $this->property('mValue'));
+        $key=[];$value=[];
+        $key    = explode(';', $this->property('mKey'));
+        $value  = explode(';', $this->property('mValue'));
 
         $cmb="[";
-        foreach($id as $index=>$code) {
-            $cmb.="{mId: '".$code."', mValue: '".$val[$index]."'},";
+        foreach($key as $index=>$code) {
+            $cmb.="{key: '".$code."', value: '".$value[$index]."'},";
         }
         $cmb.="]";
-        $this->mValue=$cmb;
+        $this->mObject=$cmb;
     }
 
 }

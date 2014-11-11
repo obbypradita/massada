@@ -30,7 +30,7 @@ class Dropdown extends ComponentBase
         return [
             'mId' => [
                 'title'         => 'ID',
-                'description'   => 'ID for each item. Seperated by \';\'',
+                'description'   => 'Form Group Element Id',
                 'type'          => 'string',
                 'group'         => 'Common',
             ],
@@ -67,9 +67,9 @@ class Dropdown extends ComponentBase
                 'default'       => 'mTextbox'
             ],
 
-            'mValue' => [
-                'title'         => 'Value',
-                'description'   => 'Value for each item. Seperated by \';\'',
+            'mObject' => [
+                'title'         => 'Object',
+                'description'   => 'Name of object set from datasource',
                 'type'          => 'string',
                 'group'         => 'Common',
             ],
@@ -98,15 +98,14 @@ class Dropdown extends ComponentBase
         $this->mModel   = $this->property('model');
         $this->mBase    = $this->property('base');
         
-        //$this->mValue   = str_replace("\"","'", json_encode(explode(';', $this->property('mValue'))));
 
         $temp = "[";
         $cmb = Locations::get();
         foreach($cmb as $key=>$value) {
-            $temp .= "{mId: '".$value->id ."', mValue: '".$value->name."'},";
+            $temp .= "{key: '".$value->id ."', value: '".$value->name."'},";
         }
         $temp .= "]";
-        $this->mValue=$temp;
+        $this->mObject=$temp;
 
         $this->mRequired        = $this->property('req');
         $this->mRequired_msg    = $this->property('req_msg');

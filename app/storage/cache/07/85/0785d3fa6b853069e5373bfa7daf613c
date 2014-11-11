@@ -1,0 +1,137 @@
+1415646685s:6295:"a:2:{s:5:"mtime";i:1415619043;s:7:"content";s:6240:"<script src="{{ ['$/responsiv/angular/assets/js/angular-bridge.js']|theme }}"></script>
+<script>
+
+    var app = angular.module('{{ __SELF__ }}', {{ dependencyString|raw }}), {{ __SELF__ }} = app
+
+    app.config(
+        ['$routeProvider', '$cmsRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
+        function ($routeProvider, $cmsRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
+
+        /*
+         * Switch on HTML5 mode
+         */
+        $locationProvider.html5Mode(true);
+
+        /*
+         * Helpers
+         */
+        app.register = {
+            controller: $controllerProvider.register,
+            directive: $compileProvider.directive,
+            filter: $filterProvider.register,
+            factory: $provide.factory,
+            service: $provide.service
+        }
+
+        /*
+         * Configure the router
+         */
+        var routeConfig = $cmsRouterProvider.routeConfig
+
+        // Change base url
+        routeConfig.setBaseUrl('{{ '/'|app }}')
+
+        {% for page in pages %}
+            routeConfig.mapPage('{{ page.baseFileName }}', '{{ page.url }}', '{{ page.baseFilename|page({}, false) }}')
+        {% endfor %}
+
+        /*
+         * Define routes - controllers will be loaded dynamically
+         */
+        var route = $cmsRouterProvider.route
+
+        {% for page in pages %}
+            $routeProvider.when('{{ page.url }}', route.resolve('{{ page.baseFileName }}'))
+        {% endfor %}
+       
+
+        // @todo This should be page name with 404
+        $routeProvider.otherwise({ redirectTo: '/404' })
+
+        return app
+    }])
+
+    october.bootApp(app)
+
+
+
+    /*
+         var app = angular.module('appLayout', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ocServices']), appLayout = app
+
+    app.config(
+        ['$routeProvider', '$cmsRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
+        function ($routeProvider, $cmsRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
+
+        /*
+         * Switch on HTML5 mode
+         */
+         /*
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        })
+*/
+        /*
+         * Helpers
+         */
+   /*     app.register = {
+            controller: $controllerProvider.register,
+            directive: $compileProvider.directive,
+            filter: $filterProvider.register,
+            factory: $provide.factory,
+            service: $provide.service
+        }
+*/
+        /*
+         * Configure the router
+         */
+  //      var routeConfig = $cmsRouterProvider.routeConfig
+
+        // Change base url
+    /*    routeConfig.setBaseUrl('http://localhost:8080/massada/default')
+
+                    routeConfig.mapPage('404', '/404', 'http://localhost:8080/massada/404')
+                    routeConfig.mapPage('accounting', '/accounting', 'http://localhost:8080/massada/accounting')
+                    routeConfig.mapPage('administration-operators', '/default/administration/operators', 'http://localhost:8080/massada/default/administration/operators')
+                    routeConfig.mapPage('administration-site-insert', '/administration/site/insert', 'http://localhost:8080/massada/administration/site/insert')
+                    routeConfig.mapPage('administration-sites', '/administration/sites', 'http://localhost:8080/massada/administration/sites')
+                    routeConfig.mapPage('administration', '/default/administration', 'http://localhost:8080/massada/default/administration')
+                    routeConfig.mapPage('dashboard', '/default/dashboard', 'http://localhost:8080/massada/default/dashboard')
+                    routeConfig.mapPage('error', '/default/error', 'http://localhost:8080/massada/default/error')
+                    routeConfig.mapPage('home', '/', 'http://localhost:8080/massada')
+                    routeConfig.mapPage('human-resource', '/default/human-resource', 'http://localhost:8080/massada/default/human-resource')
+                    routeConfig.mapPage('inventory', '/default/inventory', 'http://localhost:8080/massada/default/inventory')
+                    routeConfig.mapPage('legal', '/default/legal', 'http://localhost:8080/massada/default/legal')
+                    routeConfig.mapPage('technical', '/default/technical', 'http://localhost:8080/massada/default/technical')
+                    routeConfig.mapPage('users', '/default/users', 'http://localhost:8080/massada/default/users')
+      */  
+        /*
+         * Define routes - controllers will be loaded dynamically
+         */
+        /*var route = $cmsRouterProvider.route
+
+                    $routeProvider.when('/404', route.resolve('404'))
+                    $routeProvider.when('/accounting', route.resolve('accounting'))
+                    $routeProvider.when('/default/administration/operators', route.resolve('administration-operators'))
+                    $routeProvider.when('/administration/site/insert', route.resolve('administration-site-insert'))
+                    $routeProvider.when('/administration/sites', route.resolve('administration-sites'))
+                    $routeProvider.when('/default/administration', route.resolve('administration'))
+                    $routeProvider.when('/default/dashboard', route.resolve('dashboard'))
+                    $routeProvider.when('/default/error', route.resolve('error'))
+                    $routeProvider.when('/', route.resolve('home'))
+                    $routeProvider.when('/default/human-resource', route.resolve('human-resource'))
+                    $routeProvider.when('/default/inventory', route.resolve('inventory'))
+                    $routeProvider.when('/default/legal', route.resolve('legal'))
+                    $routeProvider.when('/default/technical', route.resolve('technical'))
+                    $routeProvider.when('/default/users', route.resolve('users'))
+        */
+        // @todo This should be page name with 404
+        //$routeProvider.otherwise({ redirectTo: '/404' })
+
+        /*return app
+    }])
+
+    october.bootApp(app)
+    */
+</script>
+";}";

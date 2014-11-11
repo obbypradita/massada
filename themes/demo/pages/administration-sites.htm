@@ -1,0 +1,155 @@
+title = "Administration - Sites"
+url = "/administration/sites"
+layout = "default"
+hidden = "0"
+==
+<?php
+use Massada\Application\Models\Sites;
+use Massada\Application\Models\Locations;
+function onInit() {
+    
+}
+
+function onDelete() {
+    $siteId = post('siteId');
+    $site = Sites::find($siteId);
+    $sitePhoto=$site->photo;
+    
+    array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
+    $site->delete();
+    
+    $temp=Sites::with('locations')->get();
+    $this['sites'] = str_replace("\"","'", $temp);
+}
+
+function onRun() {
+    $temp = Sites::with('locations')->get();
+    $temp = json_encode($temp);
+    $temp = str_replace("\"","'", $temp);
+    $this->page['mysite'] = $temp;
+
+    //return $temp;
+    
+    
+}
+
+
+
+function onGetSites() {
+
+    $temp = Sites::with('locations')->get();
+    $temp = json_encode($temp);
+    
+    //$temp = str_replace("[]","", $temp);
+    $temp = str_replace("\"","'", $temp);
+    
+    //$temp = str_replace("\"","'", $temp);
+    
+    //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);
+    
+    //$temp=Locations::get();
+   // $temp=json_encode($temp);
+    return $temp;
+}
+
+function onGetLocation() {
+    $temp = Locations::all()->toJson();
+    echo $temp;
+}
+
+function onAjaxTest()
+{
+    // update MySQL here
+    echo "Called";
+}
+?>
+==
+<div class="row">
+    {% partial 'administration/sidebar' %}
+    <div class="col-sm-9 col-md-10">
+        <h1 class="page-header">Sites</h1>
+
+        <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Label</h4>
+                <span class="text-muted">Something else</span>
+            </div>
+        </div>
+
+        <h2 class="sub-header">Sites List</h2>
+        <form class="form-inline">
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
+                    <span class="fa fa-plus"></span>
+                    Add New Site
+                </a>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
+                <i class="form-control-feedback fa fa-search"></i>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
+                    <span class="fa fa-gear"></span>
+                </button>
+            </div>
+        </form>
+        <hr/>
+        
+        
+        
+        
+       <div id="myDiv"></div>
+       <button ng-click="ajax()">Ajax</button>
+        <button ng-click="muncul()">Muncul</button>
+        
+        <div class="table-responsive"  id="siteTable">
+           <table  class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Site Name</th>
+                        <th>Building Owner</th>
+                        <th>Project Type</th>
+                        <th>Location</th>
+                        <th>Address</th>
+                        <th>Photo</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="site in site.sites | filter:search">
+                        <td>{{ '{{ site.id }}' }}</td>
+                        <td>{{ '{{ site.name }}' }}</td>
+                        <td>{{ '{{ site.owner }}' }}</td>
+                        <td>{{ '{{ site.project_type }}' }}</td>
+                        <td>{{ '{{ site.locations.name }}' }}</td>
+                        <td>{{ '{{ site.address }}' }}</td>
+                        <td>{{ '{{ site.photo }}' }}</td>
+                        <td><a href="#">Update</a> | 
+                            <a href="" ng-click="onDelete({{ 'site.id' }})"
+                            >Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{ '{{ site.sites }}' }}
+</div>

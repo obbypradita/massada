@@ -1,0 +1,5 @@
+1.0.1: 
+- First version of application
+- create_locations_table.php
+- create_sites_table.php
+- seed_all_tables.php

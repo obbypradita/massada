@@ -1,0 +1,32 @@
+
+
+<script>
+	app.controller('{{ __SELF__.mId }}', function($scope) {
+
+		$scope.services = {{ __SELF__.mValue|raw }};
+		
+	});
+
+</script>
+
+<div ng-controller="{{ __SELF__.mId }}">	
+	<div class="form-group has-feedback" ng-class="{
+	 	'has-error': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty , 
+		'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid }">
+	    <label for="modal-country-id" class="col-lg-3 col-sm-5 col-md-4 control-label">{{ __SELF__.mLabel }}</label>
+	    <div class="col-lg-9 col-sm-7 col-md-8">
+	        <select class="form-control" id="{{ __SELF__.mId }}" name="{{ __SELF__.mName }}"
+	        		ng-model="{{ __SELF__.mModel }}" 
+	        		ng-required="{{ __SELF__.mRequired }}"
+	        		ng-options="opt.mId as opt.mValue for opt in services">
+			</select>
+			 <i style="right: 25px" ng-class="{ 
+	        	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
+	        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid, 
+	         }"></i>
+	        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+	        	* {{ __SELF__.mRequired_msg }} <br/>
+	        </small>
+	    </div>
+	</div>
+</div>

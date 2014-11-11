@@ -1,0 +1,34 @@
+
+<script>
+	app.controller('{{ __SELF__.mName }}', function($scope) {
+		$scope.objects = {{ __SELF__.mValue|raw }};
+	});
+
+</script>
+
+<div ng-controller="{{ __SELF__.mName }}">	
+	 <div class="form-group has-feedback" ng-class="{
+	 	'has-error': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty , 
+		'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid }">
+	    <label for="modal-country-id" class="col-lg-3 col-sm-5 col-md-4 control-label">{{ __SELF__.mLabel }}</label>
+	    <div class="col-lg-9 col-sm-7 col-md-8">
+	        <div class="radio" ng-repeat="object in objects">
+	            <label>
+	                <input type="radio" name="{{ __SELF__.mName }}" id="{{ '{{ object.mId }}' }}" 
+	                value="{{ '{{ object.mValue }}' }}" 
+	             
+	                ng-model="{{ __SELF__.mModel }}"
+	                ng-required="true">
+	                    {{ '{{ object.mValue }}' }}
+	            </label>
+	        </div>
+	        <i ng-class="{ 
+	        	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
+	        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid, 
+	         }"></i>
+	        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+	        	* dipilih coy <br/>
+	        </small>
+	    </div>
+	</div>
+</div>

@@ -1,0 +1,206 @@
+1415646685s:8779:"a:5:{s:5:"mtime";i:1415619416;s:7:"content";s:4312:"description = "Default layout"
+
+[appLayout]
+idParam = ":slug"
+==
+<!DOCTYPE html>
+<html ng-app="appLayout">
+    <head>
+        <base href="/massada/home"></base>
+        <title>October CMS - {{ this.page.title }}</title>
+        <meta name="author" content="October CMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ 'assets/images/massadaTransp.png'|theme }}" />
+       
+       
+        <script src="{{ [
+            'assets/js/angular.min.js',
+            'assets/js/angular-animate.min.js',
+            'assets/js/angular-route.min.js',
+            'assets/js/angular-sanitize.min.js',
+            'assets/js/ng-img-crop.js',
+            'assets/js/massada.js'
+        ]|theme }}"></script>
+
+        
+        {% styles %}
+        
+        <link href="{{ [
+            'assets/css/theme.css',
+            'assets/css/jasny-bootstrap.min.css',
+            'assets/css/bootstrap.min.css',
+            'assets/css/font-awesome.min.css',
+            'assets/css/ng-img-crop.css',
+            'assets/css/massada.css'
+        ]|theme }}" rel="stylesheet">
+
+        {% placeholder css %}
+
+    </head>
+
+    
+    <body>
+
+        <!-- Header -->
+        <header id="layout-header">
+            <!-- Nav -->
+            <nav id="layout-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ 'home'|page }}">  Massada</a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-main-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="{% if this.page.id == 'home' %}active{% endif %}"><a href="{{ 'dashboard'|page }}">Dashboard</a></li>
+                            <li class="{% if this.page.id == 'administration' %}active{% endif %}"><a href="{{ 'administration'|page }}">Administration</a></li>
+                            <li class="{% if this.page.id == 'legal' %}active{% endif %}"><a href="{{ 'legal'|page }}">Legal</a></li>
+                            <li class="{% if this.page.id == 'technical' %}active{% endif %}"><a href="{{ 'technical'|page }}">Technical</a></li>
+                            <li class="{% if this.page.id == 'inventory' %}active{% endif %}"><a href="{{ 'inventory'|page }}">Inventory</a></li>
+                            <li class="{% if this.page.id == 'accounting' %}active{% endif %}"><a href="{{ 'accounting'|page }}">Accounting</a></li>
+                            <li class="{% if this.page.id == 'human-resource' %}active{% endif %}"><a href="{{ 'human-resource'|page }}">Human Resource</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="{% if this.page.id == 'users' %}active{% endif %}"><a href="{{ 'users'|page }}">Users</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        
+        
+        
+        
+        <div class="container-fluid nopadding">
+            <div class="col-md-10 col-sm-9">
+                   <ng-view></ng-view> 
+            </div>
+            {% partial 'rightbar' %}
+        </div>
+        
+        {% component 'appLayout' %}
+        
+        <!-- Footer -->
+        <footer id="layout-footer">
+            {% partial "footer" %}
+        </footer>
+
+        <!-- Scripts -->
+        <script src="{{ [
+            'assets/js/jquery.js',
+            'assets/js/app.js'
+        ]|theme }}"></script>
+
+        {% placeholder jquery %}
+        
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>";s:8:"settings";a:2:{s:11:"description";s:14:"Default layout";s:10:"components";a:1:{s:9:"appLayout";a:1:{s:7:"idParam";s:5:":slug";}}}s:4:"code";N;s:6:"markup";s:4242:"<!DOCTYPE html>
+<html ng-app="appLayout">
+    <head>
+        <base href="/massada/home"></base>
+        <title>October CMS - {{ this.page.title }}</title>
+        <meta name="author" content="October CMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ 'assets/images/massadaTransp.png'|theme }}" />
+       
+       
+        <script src="{{ [
+            'assets/js/angular.min.js',
+            'assets/js/angular-animate.min.js',
+            'assets/js/angular-route.min.js',
+            'assets/js/angular-sanitize.min.js',
+            'assets/js/ng-img-crop.js',
+            'assets/js/massada.js'
+        ]|theme }}"></script>
+
+        
+        {% styles %}
+        
+        <link href="{{ [
+            'assets/css/theme.css',
+            'assets/css/jasny-bootstrap.min.css',
+            'assets/css/bootstrap.min.css',
+            'assets/css/font-awesome.min.css',
+            'assets/css/ng-img-crop.css',
+            'assets/css/massada.css'
+        ]|theme }}" rel="stylesheet">
+
+        {% placeholder css %}
+
+    </head>
+
+    
+    <body>
+
+        <!-- Header -->
+        <header id="layout-header">
+            <!-- Nav -->
+            <nav id="layout-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ 'home'|page }}">  Massada</a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-main-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="{% if this.page.id == 'home' %}active{% endif %}"><a href="{{ 'dashboard'|page }}">Dashboard</a></li>
+                            <li class="{% if this.page.id == 'administration' %}active{% endif %}"><a href="{{ 'administration'|page }}">Administration</a></li>
+                            <li class="{% if this.page.id == 'legal' %}active{% endif %}"><a href="{{ 'legal'|page }}">Legal</a></li>
+                            <li class="{% if this.page.id == 'technical' %}active{% endif %}"><a href="{{ 'technical'|page }}">Technical</a></li>
+                            <li class="{% if this.page.id == 'inventory' %}active{% endif %}"><a href="{{ 'inventory'|page }}">Inventory</a></li>
+                            <li class="{% if this.page.id == 'accounting' %}active{% endif %}"><a href="{{ 'accounting'|page }}">Accounting</a></li>
+                            <li class="{% if this.page.id == 'human-resource' %}active{% endif %}"><a href="{{ 'human-resource'|page }}">Human Resource</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="{% if this.page.id == 'users' %}active{% endif %}"><a href="{{ 'users'|page }}">Users</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        
+        
+        
+        
+        <div class="container-fluid nopadding">
+            <div class="col-md-10 col-sm-9">
+                   <ng-view></ng-view> 
+            </div>
+            {% partial 'rightbar' %}
+        </div>
+        
+        {% component 'appLayout' %}
+        
+        <!-- Footer -->
+        <footer id="layout-footer">
+            {% partial "footer" %}
+        </footer>
+
+        <!-- Scripts -->
+        <script src="{{ [
+            'assets/js/jquery.js',
+            'assets/js/app.js'
+        ]|theme }}"></script>
+
+        {% placeholder jquery %}
+        
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>";}";

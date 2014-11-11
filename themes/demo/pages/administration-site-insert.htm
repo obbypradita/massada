@@ -1,0 +1,242 @@
+title = "Administration - Site - Insert"
+url = "/administration/site/insert"
+layout = "default"
+description = "Page for insert site"
+hidden = "0"
+
+[mTextbox siteName]
+id = "siteName"
+name = "siteName"
+label = "Name :"
+model = "site.siteName"
+base = "siteForm"
+req = "true"
+req_msg = "Name Required"
+max = "50"
+max_msg = "too long"
+min = "5"
+min_msg = "to short"
+exp = "[A-Za-z 0-9()&]"
+exp_msg = "No Ilegal Characters please"
+
+[mTextbox siteOwner]
+id = "siteOwner"
+name = "siteOwner"
+label = "Owner :"
+model = "site.siteOwner"
+base = "siteForm"
+capitalize = "true"
+req = "true"
+req_msg = "Owner Required"
+max = "50"
+max_msg = "too long"
+min = "10"
+min_msg = "too short"
+exp = "[a-z A-z.]"
+exp_msg = "Alphabet Only"
+
+[mRadiobutton siteProjectType]
+mId = "1;2"
+mName = "siteProjectType"
+mLabel = "Project Type :"
+model = "site.siteProjectType"
+base = "siteForm"
+mValue = "Multi Operator;Reseller"
+
+[mDropdown siteLocation]
+mId = "siteLocation"
+mName = "siteLocation"
+mLabel = "Location :"
+model = "site.siteLocation"
+base = "siteForm"
+req = "true"
+req_msg = "select location pls"
+
+[mTextarea siteAddress]
+id = "siteAddress"
+name = "siteAddress"
+label = "Address :"
+model = "site.siteAddress"
+base = "siteForm"
+rws = "2"
+req = "true"
+req_msg = "Address Needed"
+exp = "[a-zA-Z(-) @/.,#&]"
+exp_msg = "no ilegal characters"
+max = "100"
+max_msg = "Address To long"
+min = "10"
+min_msg = "10 Characters minimum"
+
+[mTextbox sitePhone]
+id = "sitePhone"
+name = "sitePhone"
+label = "Phone :"
+model = "site.sitePhone"
+base = "siteForm"
+req = "true"
+req_msg = "Phone required"
+max = "14"
+max_msg = "beetwen 12-14 digits"
+min = "12"
+min_msg = "beetwen 12-14 digits"
+exp = "[0-9()]"
+exp_msg = "Invalid phone format"
+
+[mTextbox siteFax]
+id = "siteFax"
+name = "siteFax"
+label = "Fax :"
+model = "site.siteFax"
+base = "siteForm"
+req = "true"
+req_msg = "Fax required"
+max = "14"
+max_msg = "12-14"
+min = "12"
+min_msg = "12-14"
+exp = "[0-9 ()-]"
+exp_msg = "Invalid fax format"
+
+[mImage sitePhoto]
+id = "sitePhoto"
+name = "sitePhoto"
+model = "site.sitePhoto"
+src = "sitePhoto"
+==
+<?php
+use Massada\Application\Models\Sites;
+use Massada\Application\Classes\Operation;
+function onInsert() {
+    
+    $data = post('forpost');
+    $rand=Operation::generateRandomString(10);
+    
+    $site = new Sites;
+    $site->name         = post('siteName');
+    $site->owner        = post('siteOwner');
+    $site->address      = post('siteAddress');
+    $site->project_type = post('siteProjectType');
+    $site->phone        = post('sitePhone');
+    $site->fax          = post('siteFax');
+    $site->photo        = $rand;//post('forpost');
+    $site->locations_id = post('siteLocation') + 1;
+    $site->save();
+    
+    
+    // INSERT AVATAR
+    list($type, $data) = explode(';', $data);
+    list(, $data)      = explode(',', $data);
+    $data = base64_decode($data);
+    
+    file_put_contents("uploads/public/images/site/avatar/$rand.png", $data);
+    
+    
+    
+    
+
+
+        
+        
+}
+?>
+==
+<style>
+
+    .alert-fixed {
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+    }
+</style>
+
+
+<div id = "alert_placeholder"></div>
+
+<div class="alert alert-info flash fade-in alert-fixed">  
+  <a class="close" data-dismiss="alert">×</a>  
+  <strong>Info!</strong>Watch this, but you may forget.  
+</div> 
+
+
+<div>
+    <div class="row">
+        {% partial 'administration/sidebar' %}
+        <div class="col-sm-9 col-md-10">
+            <h1 class="page-header">Sites</h1>
+    
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+            </div>
+    
+            <h2 class="sub-header">Insert New Site</h2>
+            
+
+            <form data-request="onInsert" name="siteForm" method="POST" enctype="multipart/from-data">
+        
+            
+            {#{ form_open({ request: 'onInsert', name: 'myForm' }) }#}
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
+                            <span class="fa fa-plus"></span>Cancel
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" ng-click="clear()">
+                            <span class="fa fa-gear"></span>Clear
+                        </button>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-default"> 
+                            <span class="fa fa-gear"></span>Save
+                        </button>
+                    </div>
+                </div>
+                <hr/>
+                <div class="container-fluid">
+                    <div class="col-md-4 col-sm-5">
+                        {% component 'sitePhoto' %}
+                    </div>
+                    <div class="col-md-8 col-sm-7">
+                        <div class="form-horizontal">
+                            
+                            {% component 'siteName' %}
+                            {% component 'siteOwner' %}
+                            {% component 'siteProjectType' %}
+                            {% component 'siteLocation' %}
+                            {% component 'siteAddress' %}
+                            {% component 'sitePhone' %}
+                            {% component 'siteFax' %}
+                        </div>
+                    </div>
+                </div>
+                {#{ form_close() }#}
+            
+            </form>
+            
+            
+        </div>
+    </div>
+</div>

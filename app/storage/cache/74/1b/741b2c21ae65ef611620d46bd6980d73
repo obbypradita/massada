@@ -1,0 +1,31 @@
+1415646685s:1481:"a:5:{s:5:"mtime";i:1415323501;s:7:"content";s:671:"description = "Sidebar in right for every module"
+==
+<div class="col-sm-3 col-md-2 nopadding">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="{{ 'administration'|page }}">Overview</a></li>
+            <li><a href="{{ 'administration-sites'|page }}">Sites</a></li>
+            <li><a href="{{ 'administration-operators'|page }}">Operators</a></li>
+            <li><a href="{{ 'users'|page }}">Contact Person</a></li>
+        </ul>
+      </div>
+    </div>
+</div>";s:8:"settings";a:2:{s:11:"description";s:33:"Sidebar in right for every module";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:616:"<div class="col-sm-3 col-md-2 nopadding">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="{{ 'administration'|page }}">Overview</a></li>
+            <li><a href="{{ 'administration-sites'|page }}">Sites</a></li>
+            <li><a href="{{ 'administration-operators'|page }}">Operators</a></li>
+            <li><a href="{{ 'users'|page }}">Contact Person</a></li>
+        </ul>
+      </div>
+    </div>
+</div>";}";

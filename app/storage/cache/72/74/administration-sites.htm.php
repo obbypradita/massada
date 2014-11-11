@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;class Cms5461f3cf660e6_1615661839Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;class Cms54623d7d3b6e0_1842581533Class extends \Cms\Classes\PageCode
 {
 
 
@@ -7,7 +7,7 @@ use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;cl
 public function onInit() {
     
 }
-public function onDelete() {
+public function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
@@ -18,33 +18,11 @@ public function onDelete() {
 public function onStart() {
     $temp = Sites::get();
     $temp = json_encode($temp);
-    //$temp = str_replace("\"","'", $temp);
-
-
-    //return $temp;
-    
-    
 }
-public function onGetSites() {
-
-    //$temp = Sites::with('locations')->get();
-    $temp = Sites::get();
+public function onSelectSite() {
+    $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
-    
-  
-    
-    //$temp = str_replace("[]","", $temp);
-    //$temp = str_replace("\"","", $temp);
-    //$temp = str_replace("\\","", $temp);
-    
-    //$temp = str_replace("[", "data:{", $temp);
-    //$temp = str_replace("]", "}", $temp);
-    //$temp = str_replace("\"","'", $temp);
-    
-    //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);
-    
-    //$temp=Locations::get();
-   // $temp=json_encode($temp);
+
     return $temp;
 }
 public function onGetLocation() {

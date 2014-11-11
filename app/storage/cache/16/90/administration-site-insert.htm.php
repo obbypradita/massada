@@ -1,12 +1,19 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Classes\Operation;class Cms5462093dac7ec_1160059359Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Sites;use Massada\Application\Classes\Operation;class Cms54625782a6662_2051561308Class extends \Cms\Classes\PageCode
 {
 
 
 
-public function onInsert() {
+public function onGetSites() {
+    $temp = Sites::get();
+    $temp = json_encode($temp);
+
+    return $temp;
+}
+public function onInsertSite() {
     
-    $data = post('forpost');
+    $photo = post('sitePhoto');
+    $avtr = post('siteAvatar');
     $rand = Operation::generateRandomString(10);
     
     $site = new Sites;
@@ -17,23 +24,23 @@ public function onInsert() {
     $site->phone        = post('sitePhone');
     $site->fax          = post('siteFax');
     $site->photo        = $rand;//post('forpost');
-    $site->locations_id = post('siteLocation') + 1;
+    $site->locations_id = post('siteLocation');
     $site->save();
     
     
-    // INSERT AVATAR
-    list($type, $data) = explode(';', $data);
-    list(, $data)      = explode(',', $data);
-    $data = base64_decode($data);
-    
-    file_put_contents("uploads/public/images/site/avatar/$rand.png", $data);
+    list($type, $avtr) = explode(';', $avtr);
+    list(, $avtr)      = explode(',', $avtr);
+    $avtr = base64_decode($avtr);
+    file_put_contents("uploads/public/images/site/avatar/$rand.png", $avtr);
     
     
+    // INSERT PHOTO
+    list($type, $photo) = explode(';', $photo);
+    list(, $photo)      = explode(',', $photo);
+    $photo = base64_decode($photo);
+    file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
     
     
-
-
-        
         
 }
 

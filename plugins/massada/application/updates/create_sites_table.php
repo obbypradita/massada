@@ -29,6 +29,7 @@ class CreateSitesTable extends Migration
     {
         Schema::dropIfExists('massada_application_sites');
 
+        array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/*.png'));
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/avatar/*.png'));
    
 

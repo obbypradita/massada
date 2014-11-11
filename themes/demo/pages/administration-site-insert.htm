@@ -102,7 +102,8 @@ exp_msg = "Invalid fax format"
 
 [mImage sitePhoto]
 id = "sitePhoto"
-name = "sitePhoto"
+namePhoto = "sitePhoto"
+nameAvatar = "siteAvatar"
 model = "site.sitePhoto"
 src = "sitePhoto"
 req = "true"
@@ -111,9 +112,18 @@ req_msg = "Butuh foto neh"
 <?php
 use Massada\Application\Models\Sites;
 use Massada\Application\Classes\Operation;
-function onInsert() {
+
+function onGetSites() {
+    $temp = Sites::get();
+    $temp = json_encode($temp);
+
+    return $temp;
+}
+
+function onInsertSite() {
     
-    $data = post('forpost');
+    $photo = post('sitePhoto');
+    $avtr = post('siteAvatar');
     $rand = Operation::generateRandomString(10);
     
     $site = new Sites;
@@ -124,25 +134,23 @@ function onInsert() {
     $site->phone        = post('sitePhone');
     $site->fax          = post('siteFax');
     $site->photo        = $rand;//post('forpost');
-    $site->locations_id = post('siteLocation') + 1;
+    $site->locations_id = post('siteLocation');
     $site->save();
     
     
-    // INSERT AVATAR
-    list($type, $data) = explode(';', $data);
-    list(, $data)      = explode(',', $data);
-    $data = base64_decode($data);
-    
-    file_put_contents("uploads/public/images/site/avatar/$rand.png", $data);
+    list($type, $avtr) = explode(';', $avtr);
+    list(, $avtr)      = explode(',', $avtr);
+    $avtr = base64_decode($avtr);
+    file_put_contents("uploads/public/images/site/avatar/$rand.png", $avtr);
     
     
+    // INSERT PHOTO
+    list($type, $photo) = explode(';', $photo);
+    list(, $photo)      = explode(',', $photo);
+    $photo = base64_decode($photo);
+    file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
     
     
-    
-    
-
-
-        
         
 }
 ?>
@@ -197,7 +205,7 @@ function onInsert() {
             <h2 class="sub-header">Insert New Site</h2>
             
 
-            <form data-request="onInsert" name="siteForm" method="POST" enctype="multipart/from-data">
+            <form name="siteForm" method="POST" enctype="multipart/from-data">
             {#{ form_open({ request: 'onInsert', name: 'myForm' }) }#}
                 <div class="form-inline">
                     <div class="form-group">

@@ -36,10 +36,10 @@
  <div class="form-group" id="{{ __SELF__.mId }}">
    		
 	<div class="avatar-view" title="Change the avatar" data-toggle="modal" id="tae" data-target="#{{ __SELF__.modalLink }}"> 	
-		<img ng-src="{{ '{{ img }}' }}">
+		<img ng-src="{{ '{{ avatar }}' }}">
 	</div>
-	{% set src='{{ img }}' %} 
-	<input type="text" name="forpost" ng-model="img" hidden>
+	<input type="text" name="{{ __SELF__.mNamePhoto }}" ng-model="img" hidden>
+    <input type="text" name="{{ __SELF__.mNameAvatar }}" ng-model="avatar" hidden>
 
 </div>
 
@@ -66,7 +66,7 @@
   						    </div>
   						</div>
   						<div class="cropArea">
-  							<img-crop image="{{ __SELF__.mModel }}" area-type="square" result-image="img"></img-crop>
+  							<img-crop image="{{ __SELF__.mModel }}" area-type="square" change-on-fly="false" result-image="img"></img-crop>
   						</div>
                     </div>
 
@@ -80,9 +80,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" 
-                		data-request="{{ __SELF__ }}::onCrop" 
-                		data-dismiss="modal">Save</button>         
+                <button type="button" class="btn btn-primary" ng-click="capture()" data-dismiss="modal">Save</button>         
             </div>
         </div>
     </div>

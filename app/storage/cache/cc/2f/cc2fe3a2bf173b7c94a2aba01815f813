@@ -1,4 +1,4 @@
-1415712280s:11023:"a:5:{s:5:"mtime";i:1415705580;s:7:"content";s:5433:"title = "Administration - Sites"
+1415731905s:9896:"a:5:{s:5:"mtime";i:1415724407;s:7:"content";s:4870:"title = "Administration - Sites"
 url = "/administration/sites"
 layout = "default"
 hidden = "0"
@@ -10,7 +10,7 @@ function onInit() {
     
 }
 
-function onDelete() {
+function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
@@ -22,36 +22,14 @@ function onDelete() {
 function onStart() {
     $temp = Sites::get();
     $temp = json_encode($temp);
-    //$temp = str_replace("\"","'", $temp);
-
-
-    //return $temp;
-    
-    
 }
 
 
 
-function onGetSites() {
-
-    //$temp = Sites::with('locations')->get();
-    $temp = Sites::get();
+function onSelectSite() {
+    $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
-    
-  
-    
-    //$temp = str_replace("[]","", $temp);
-    //$temp = str_replace("\"","", $temp);
-    //$temp = str_replace("\\","", $temp);
-    
-    //$temp = str_replace("[", "data:{", $temp);
-    //$temp = str_replace("]", "}", $temp);
-    //$temp = str_replace("\"","'", $temp);
-    
-    //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);
-    
-    //$temp=Locations::get();
-   // $temp=json_encode($temp);
+
     return $temp;
 }
 
@@ -125,7 +103,7 @@ function onAjaxTest()
         
         
         
-        <h1 id="confirmation">place giv</h1>
+        <h1 id="confirmation">ganti lah</h1>
         <div id="myDiv"></div>
         
         <div class="table-responsive"  id="siteTable">
@@ -158,14 +136,14 @@ function onAjaxTest()
             </table>
         </div>
     </div>
-</div>";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:1332:"
+</div>";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:769:"
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\Locations;
 function onInit() {
     
 }
 
-function onDelete() {
+function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
@@ -177,36 +155,14 @@ function onDelete() {
 function onStart() {
     $temp = Sites::get();
     $temp = json_encode($temp);
-    //$temp = str_replace("\"","'", $temp);
-
-
-    //return $temp;
-    
-    
 }
 
 
 
-function onGetSites() {
-
-    //$temp = Sites::with('locations')->get();
-    $temp = Sites::get();
+function onSelectSite() {
+    $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
-    
-  
-    
-    //$temp = str_replace("[]","", $temp);
-    //$temp = str_replace("\"","", $temp);
-    //$temp = str_replace("\\","", $temp);
-    
-    //$temp = str_replace("[", "data:{", $temp);
-    //$temp = str_replace("]", "}", $temp);
-    //$temp = str_replace("\"","'", $temp);
-    
-    //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);
-    
-    //$temp=Locations::get();
-   // $temp=json_encode($temp);
+
     return $temp;
 }
 
@@ -278,7 +234,7 @@ function onAjaxTest()
         
         
         
-        <h1 id="confirmation">place giv</h1>
+        <h1 id="confirmation">ganti lah</h1>
         <div id="myDiv"></div>
         
         <div class="table-responsive"  id="siteTable">

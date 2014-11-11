@@ -10,15 +10,14 @@ class Image extends ComponentBase
     public $mId;
     public $mName;
     public $mLabel;
-    public $mModel;
-    public $mSource;
+    public $mModelPhoto;
+    public $mModelAvatar;
 
-    public $mData;
 
     public $mRequired;
     public $mRequired_msg;
 
-    public $src;
+   
 
     public $modalLink;
 
@@ -43,9 +42,17 @@ class Image extends ComponentBase
                 'default'       => 'mImage',
             ],
 
-            'name' => [
-                'title'         => 'Name',
-                'description'   => 'Textbox Name',
+            'namePhoto' => [
+                'title'         => 'Name Photo',
+                'description'   => 'Name for $_POST photo parameter ',
+                'type'          => 'string',
+                'group'         => 'Common',
+                'default'       => 'mImage',
+            ],
+
+            'nameAvatar' => [
+                'title'         => 'Name Avatar',
+                'description'   => 'Name for $_POST avatar parameter',
                 'type'          => 'string',
                 'group'         => 'Common',
                 'default'       => 'mImage',
@@ -86,14 +93,12 @@ class Image extends ComponentBase
 
     public function onRender() {
         $this->mId              = $this->property('id');
-        $this->mName            = $this->property('name');
+        $this->mNamePhoto       = $this->property('namePhoto');
+        $this->mNameAvatar      = $this->property('nameAvatar');
         $this->mModel           = $this->property('model');
-        $this->mSource          = $this->property('src');
 
 
-        //$this->page['global']   = "http://localhost:8080/cropper-master/examples/crop-avatar/img/picture.jpg";
-        //$this->mData            = $this->page['global'];
-        $this->mData            = "http://localhost:8080/cropper-master/examples/crop-avatar/img/picture.jpg";
+
 
         $this->mRequired        = $this->property('req');
         $this->mRequired_msg    = $this->property('req_msg');

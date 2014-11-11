@@ -10,7 +10,7 @@ function onInit() {
     
 }
 
-function onDelete() {
+function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
@@ -22,36 +22,14 @@ function onDelete() {
 function onStart() {
     $temp = Sites::get();
     $temp = json_encode($temp);
-    //$temp = str_replace("\"","'", $temp);
-
-
-    //return $temp;
-    
-    
 }
 
 
 
-function onGetSites() {
-
-    //$temp = Sites::with('locations')->get();
-    $temp = Sites::get();
+function onSelectSite() {
+    $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
-    
-  
-    
-    //$temp = str_replace("[]","", $temp);
-    //$temp = str_replace("\"","", $temp);
-    //$temp = str_replace("\\","", $temp);
-    
-    //$temp = str_replace("[", "data:{", $temp);
-    //$temp = str_replace("]", "}", $temp);
-    //$temp = str_replace("\"","'", $temp);
-    
-    //$temp = str_replace('{"readyState":4,"responseText":"{\"result\":\"',"", $temp);
-    
-    //$temp=Locations::get();
-   // $temp=json_encode($temp);
+
     return $temp;
 }
 
@@ -125,7 +103,7 @@ function onAjaxTest()
         
         
         
-        <h1 id="confirmation">place giv</h1>
+        <h1 id="confirmation">ganti lah</h1>
         <div id="myDiv"></div>
         
         <div class="table-responsive"  id="siteTable">

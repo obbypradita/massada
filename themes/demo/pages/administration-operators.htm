@@ -2,6 +2,12 @@ title = "Administration - Operators"
 url = "/administration/operators"
 layout = "default"
 hidden = "0"
+
+[mImage sitePhoto]
+id = "sitePhoto"
+name = "sitePhoto"
+model = "site.sitePhoto"
+src = "sitePhoto"
 ==
 <div class="row">
         {% partial 'administration/sidebar' %}
@@ -31,8 +37,9 @@ hidden = "0"
                 </div>
             </div>
             
-            
-
+            {% component 'sitePhoto' %}
+            <input type="text" ng-model="site.mysite">
+            {{ '{{ site.mysite }}' }}
 
             <h2 class="sub-header">Section title</h2>
             <div class="table-responsive">

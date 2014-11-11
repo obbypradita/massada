@@ -1,7 +1,13 @@
-1415712280s:5214:"a:5:{s:5:"mtime";i:1415617598;s:7:"content";s:2526:"title = "Administration - Operators"
+1415731905s:5701:"a:5:{s:5:"mtime";i:1415728348;s:7:"content";s:2751:"title = "Administration - Operators"
 url = "/administration/operators"
 layout = "default"
 hidden = "0"
+
+[mImage sitePhoto]
+id = "sitePhoto"
+name = "sitePhoto"
+model = "site.sitePhoto"
+src = "sitePhoto"
 ==
 <div class="row">
         {% partial 'administration/sidebar' %}
@@ -31,8 +37,9 @@ hidden = "0"
                 </div>
             </div>
             
-            
-
+            {% component 'sitePhoto' %}
+            <input type="text" ng-model="site.mysite">
+            {{ '{{ site.mysite }}' }}
 
             <h2 class="sub-header">Section title</h2>
             <div class="table-responsive">
@@ -58,7 +65,7 @@ hidden = "0"
                 </table>
             </div>
         </div>
-    </div>";s:8:"settings";a:5:{s:5:"title";s:26:"Administration - Operators";s:3:"url";s:25:"/administration/operators";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:2415:"<div class="row">
+    </div>";s:8:"settings";a:5:{s:5:"title";s:26:"Administration - Operators";s:3:"url";s:25:"/administration/operators";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:1:{s:16:"mImage sitePhoto";a:4:{s:2:"id";s:9:"sitePhoto";s:4:"name";s:9:"sitePhoto";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";}}}s:4:"code";N;s:6:"markup";s:2535:"<div class="row">
         {% partial 'administration/sidebar' %}
         <div class="col-sm-9 col-md-10">
             <h1 class="page-header">Operators</h1>
@@ -86,8 +93,9 @@ hidden = "0"
                 </div>
             </div>
             
-            
-
+            {% component 'sitePhoto' %}
+            <input type="text" ng-model="site.mysite">
+            {{ '{{ site.mysite }}' }}
 
             <h2 class="sub-header">Section title</h2>
             <div class="table-responsive">

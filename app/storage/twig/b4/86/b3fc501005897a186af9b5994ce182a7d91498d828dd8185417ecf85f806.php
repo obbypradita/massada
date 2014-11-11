@@ -62,14 +62,17 @@ class __TwigTemplate_b486b3fc501005897a186af9b5994ce182a7d91498d828dd8185417ecf8
         echo "\"> \t
 \t\t<img ng-src=\"";
         // line 39
-        echo "{{ img }}";
+        echo "{{ avatar }}";
         echo "\">
 \t</div>
-\t";
+\t<input type=\"text\" name=\"";
         // line 41
-        $context["src"] = "{{ img }}";
-        echo " 
-\t<input type=\"text\" name=\"forpost\" ng-model=\"img\" hidden>
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mNamePhoto", array()), "html", null, true);
+        echo "\" ng-model=\"img\" hidden>
+    <input type=\"text\" name=\"";
+        // line 42
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mNameAvatar", array()), "html", null, true);
+        echo "\" ng-model=\"avatar\" hidden>
 
 </div>
 
@@ -105,7 +108,7 @@ class __TwigTemplate_b486b3fc501005897a186af9b5994ce182a7d91498d828dd8185417ecf8
   \t\t\t\t\t\t\t<img-crop image=\"";
         // line 69
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mModel", array()), "html", null, true);
-        echo "\" area-type=\"square\" result-image=\"img\"></img-crop>
+        echo "\" area-type=\"square\" change-on-fly=\"false\" result-image=\"img\"></img-crop>
   \t\t\t\t\t\t</div>
                     </div>
 
@@ -122,12 +125,7 @@ class __TwigTemplate_b486b3fc501005897a186af9b5994ce182a7d91498d828dd8185417ecf8
             </div>
             <div class=\"modal-footer\">
                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button>
-                <button type=\"button\" class=\"btn btn-primary\" 
-                \t\tdata-request=\"";
-        // line 84
-        echo twig_escape_filter($this->env, (isset($context["__SELF__"]) ? $context["__SELF__"] : null), "html", null, true);
-        echo "::onCrop\" 
-                \t\tdata-dismiss=\"modal\">Save</button>         
+                <button type=\"button\" class=\"btn btn-primary\" ng-click=\"capture()\" data-dismiss=\"modal\">Save</button>         
             </div>
         </div>
     </div>
@@ -147,6 +145,6 @@ class __TwigTemplate_b486b3fc501005897a186af9b5994ce182a7d91498d828dd8185417ecf8
 
     public function getDebugInfo()
     {
-        return array (  128 => 84,  118 => 77,  107 => 69,  98 => 63,  79 => 47,  70 => 41,  65 => 39,  61 => 38,  56 => 36,  19 => 1,);
+        return array (  121 => 77,  110 => 69,  101 => 63,  82 => 47,  74 => 42,  70 => 41,  65 => 39,  61 => 38,  56 => 36,  19 => 1,);
     }
 }

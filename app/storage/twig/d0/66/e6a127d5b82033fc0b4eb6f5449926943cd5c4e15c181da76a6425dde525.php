@@ -71,7 +71,7 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
             <h2 class=\"sub-header\">Insert New Site</h2>
             
 
-            <form data-request=\"onInsert\" name=\"siteForm\" method=\"POST\" enctype=\"multipart/from-data\">
+            <form name=\"siteForm\" method=\"POST\" enctype=\"multipart/from-data\">
             ";
         // line 53
         echo "                <div class=\"form-inline\">

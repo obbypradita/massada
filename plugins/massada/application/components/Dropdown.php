@@ -102,8 +102,10 @@ class Dropdown extends ComponentBase
         $temp = "[";
         $cmb = Locations::get();
         foreach($cmb as $key=>$value) {
-            $temp .= "{key: '".$value->id ."', value: '".$value->name."'},";
+            $temp .= "{key: '" . $value->id . "', value: '" . $value->name . "'}, ";
         }
+        $temp = rtrim($temp, ',');
+
         $temp .= "]";
         $this->mObject=$temp;
 

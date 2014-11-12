@@ -1,6 +1,6 @@
-1415731273s:2192:"a:2:{s:5:"mtime";i:1415705812;s:7:"content";s:2137:"<div class="form-group has-feedback ng-pristine" ng-class="{ 
-		'has-error': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty , 
-		'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid }">
+1415810695s:2294:"a:2:{s:5:"mtime";i:1415751340;s:7:"content";s:2239:"<div class="form-group has-feedback ng-pristine" ng-class="{ 
+		'has-error': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
+		'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty }">
     <label for="{{ __SELF__.mId }}" class="col-lg-3 col-sm-5 col-md-4 control-label">{{ __SELF__.mLabel }}</label>
     <div class="col-lg-9 col-sm-7 col-md-8">
         <input type="text" class="form-control" 
@@ -16,7 +16,7 @@
                />
         <i ng-class="{ 
         	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
-        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid, 
+        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid  && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty
          }"></i>
         <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
         	* {{ __SELF__.mRequired_msg }} <br/>

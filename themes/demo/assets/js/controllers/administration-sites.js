@@ -1,6 +1,6 @@
 october.controllers['administration-sites'] = function ($scope, $request, $parse) {
     $scope.site={};
-    
+    $('#confirmation').hide();
     // on start
     /*
     $.request('onGetSites', {
@@ -12,10 +12,16 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
         }
     });
     */
+     //nanti diganti sama query coy
+    
+    
+    
+    $scope.sortField='id';
+    //$scope.reverse=true;
     
     $request('onSelectSite', { 
         success: function(data) {
-            console.log(data)
+            //console.log(data)
             var temp = data.result;
             $scope.$apply(function () {
                 $scope.site.sites = $parse(temp)($scope);
@@ -41,12 +47,13 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
   
     $scope.refresh = function() {
         $request('onSelectSite', {
+            loading : $('#confirmation').show(),
             success: function(data) {
                 var temp = data.result;
                 $scope.$apply(function () {
                      $scope.site.sites = $parse(temp)($scope);
                 });
-                $('#confirmation').show();
+                $('#confirmation').hide();
             }
         });
     };

@@ -40,10 +40,10 @@ class __TwigTemplate_67a4c556b018cb511fcc05e2face6b58f582c52714b11368da6339fa022
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mLabel", array()), "html", null, true);
         echo "</label>
     <div class=\"col-lg-9 col-sm-7 col-md-8\">
-        <div class=\"radio\" ng-repeat=\"object in ";
+        <div class=\"radio\" ng-repeat='object in ";
         // line 6
-        echo $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mObject", array());
-        echo "\">
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mObject", array()), "html", null, true);
+        echo "'>
             <label>
                 <input type=\"radio\" name=\"";
         // line 8
@@ -84,7 +84,7 @@ class __TwigTemplate_67a4c556b018cb511fcc05e2face6b58f582c52714b11368da6339fa022
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$valid, 
+        echo ".\$valid  
          }\"></i>
         <small class=\"message-status-error\" ng-show=\"";
         // line 20
@@ -100,6 +100,10 @@ class __TwigTemplate_67a4c556b018cb511fcc05e2face6b58f582c52714b11368da6339fa022
         </small>
     </div>
 </div>
+";
+        // line 25
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mObject", array()), "html", null, true);
+        echo "
 
 ";
     }
@@ -116,6 +120,6 @@ class __TwigTemplate_67a4c556b018cb511fcc05e2face6b58f582c52714b11368da6339fa022
 
     public function getDebugInfo()
     {
-        return array (  91 => 20,  84 => 18,  74 => 17,  67 => 13,  62 => 11,  58 => 10,  54 => 9,  50 => 8,  45 => 6,  40 => 4,  34 => 3,  24 => 2,  19 => 1,);
+        return array (  105 => 25,  91 => 20,  84 => 18,  74 => 17,  67 => 13,  62 => 11,  58 => 10,  54 => 9,  50 => 8,  45 => 6,  40 => 4,  34 => 3,  24 => 2,  19 => 1,);
     }
 }

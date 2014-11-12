@@ -26,13 +26,17 @@ class __TwigTemplate_64f534e1bd47fe9307f7d13fd7f4eb991f6673557979d6f481d8556cf01
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty , 
+        echo ".\$dirty, 
 \t\t'has-success': ";
         // line 3
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$valid }\">
+        echo ".\$valid && ";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
+        echo ".";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
+        echo ".\$dirty }\">
     <label for=\"";
         // line 4
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mId", array()), "html", null, true);
@@ -91,7 +95,11 @@ class __TwigTemplate_64f534e1bd47fe9307f7d13fd7f4eb991f6673557979d6f481d8556cf01
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$valid, 
+        echo ".\$valid  && ";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
+        echo ".";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
+        echo ".\$dirty
          }\"></i>
         <small class=\"message-status-error\" ng-show=\"";
         // line 21
@@ -170,6 +178,6 @@ class __TwigTemplate_64f534e1bd47fe9307f7d13fd7f4eb991f6673557979d6f481d8556cf01
 
     public function getDebugInfo()
     {
-        return array (  153 => 31,  143 => 30,  138 => 28,  128 => 27,  123 => 25,  113 => 24,  108 => 22,  98 => 21,  91 => 19,  81 => 18,  74 => 14,  70 => 13,  66 => 12,  62 => 11,  58 => 10,  54 => 9,  50 => 8,  46 => 7,  38 => 4,  32 => 3,  22 => 2,  19 => 1,);
+        return array (  161 => 31,  151 => 30,  146 => 28,  136 => 27,  131 => 25,  121 => 24,  116 => 22,  106 => 21,  95 => 19,  85 => 18,  78 => 14,  74 => 13,  70 => 12,  66 => 11,  62 => 10,  58 => 9,  54 => 8,  50 => 7,  42 => 4,  32 => 3,  22 => 2,  19 => 1,);
     }
 }

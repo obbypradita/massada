@@ -1,4 +1,4 @@
-1415731905s:9896:"a:5:{s:5:"mtime";i:1415724407;s:7:"content";s:4870:"title = "Administration - Sites"
+1415810695s:13484:"a:5:{s:5:"mtime";i:1415747475;s:7:"content";s:6664:"title = "Administration - Sites"
 url = "/administration/sites"
 layout = "default"
 hidden = "0"
@@ -74,6 +74,68 @@ function onAjaxTest()
         </div>
 
         <h2 class="sub-header">Sites List</h2>
+        <hr/>
+        <form class="form-inline">
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
+                    <span class="fa fa-plus"></span>
+                    Add New Site
+                </a>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
+                <i class="form-control-feedback fa fa-search"></i>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
+                    <span class="fa fa-gear"></span>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="refresh()">
+                    <span class="fa fa-refresh"></span>
+                </button>
+            </div>
+        </form>
+        <hr/>
+        
+        
+        
+        <h1 id="confirmation">Sebentar...</h1>
+        <div id="myDiv"></div>
+        
+        <div class="table-responsive"  id="siteTable">
+           <table  class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th><a href="" ng-click="sortField = 'id';              reverse = !reverse" >#</a></th>
+                        <th><a href="" ng-click="sortField = 'name';            reverse = !reverse" >Site Name</a></th>
+                        <th><a href="" ng-click="sortField = 'owner';           reverse = !reverse" >Building Owner</a></th>
+                        <th><a href="" ng-click="sortField = 'project_type';    reverse = !reverse" >Project Type</a></th>
+                        <th><a href="" ng-click="sortField = 'locations.name';  reverse = !reverse" >Location</a></th>
+                        <th><a href="" ng-click="sortField = 'address';         reverse = !reverse" >Address</a></th>
+                        <th><a href="" ng-click="sortField = 'photo';           reverse = !reverse" >Photo</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
+                        <td>{{ '{{ st.id }}' }}</td>
+                        <td>{{ '{{ st.name }}' }}</td>
+                        <td>{{ '{{ st.owner }}' }}</td>
+                        <td>{{ '{{ st.project_type }}' }}</td>
+                        <td>{{ '{{ st.locations.name }}' }}</td>
+                        <td>{{ '{{ st.address }}' }}</td>
+                        <td>{{ '{{ st.photo }}' }}</td>
+                        <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
+                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr/>
         <form class="form-inline">
             <div class="form-group">
                 <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
@@ -100,43 +162,9 @@ function onAjaxTest()
             
         </form>
         <hr/>
-        
-        
-        
-        <h1 id="confirmation">ganti lah</h1>
-        <div id="myDiv"></div>
-        
-        <div class="table-responsive"  id="siteTable">
-           <table  class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Site Name</th>
-                        <th>Building Owner</th>
-                        <th>Project Type</th>
-                        <th>Location</th>
-                        <th>Address</th>
-                        <th>Photo</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search ">
-                        <td>{{ '{{ st.id }}' }}</td>
-                        <td>{{ '{{ st.name }}' }}</td>
-                        <td>{{ '{{ st.owner }}' }}</td>
-                        <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
-                        <td>{{ '{{ st.address }}' }}</td>
-                        <td>{{ '{{ st.photo }}' }}</td>
-                        <td><a href="#">Update</a> | 
-                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:769:"
+</div>
+{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:769:"
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\Locations;
 function onInit() {
@@ -176,7 +204,7 @@ function onAjaxTest()
     // update MySQL here
     echo "Called";
 }
-";s:6:"markup";s:3985:"<div class="row">
+";s:6:"markup";s:5779:"<div class="row">
     {% partial 'administration/sidebar' %}
     <div class="col-sm-9 col-md-10">
         <h1 class="page-header">Sites</h1>
@@ -205,6 +233,68 @@ function onAjaxTest()
         </div>
 
         <h2 class="sub-header">Sites List</h2>
+        <hr/>
+        <form class="form-inline">
+            <div class="form-group">
+                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
+                    <span class="fa fa-plus"></span>
+                    Add New Site
+                </a>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
+                <i class="form-control-feedback fa fa-search"></i>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
+                    <span class="fa fa-gear"></span>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="refresh()">
+                    <span class="fa fa-refresh"></span>
+                </button>
+            </div>
+        </form>
+        <hr/>
+        
+        
+        
+        <h1 id="confirmation">Sebentar...</h1>
+        <div id="myDiv"></div>
+        
+        <div class="table-responsive"  id="siteTable">
+           <table  class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th><a href="" ng-click="sortField = 'id';              reverse = !reverse" >#</a></th>
+                        <th><a href="" ng-click="sortField = 'name';            reverse = !reverse" >Site Name</a></th>
+                        <th><a href="" ng-click="sortField = 'owner';           reverse = !reverse" >Building Owner</a></th>
+                        <th><a href="" ng-click="sortField = 'project_type';    reverse = !reverse" >Project Type</a></th>
+                        <th><a href="" ng-click="sortField = 'locations.name';  reverse = !reverse" >Location</a></th>
+                        <th><a href="" ng-click="sortField = 'address';         reverse = !reverse" >Address</a></th>
+                        <th><a href="" ng-click="sortField = 'photo';           reverse = !reverse" >Photo</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
+                        <td>{{ '{{ st.id }}' }}</td>
+                        <td>{{ '{{ st.name }}' }}</td>
+                        <td>{{ '{{ st.owner }}' }}</td>
+                        <td>{{ '{{ st.project_type }}' }}</td>
+                        <td>{{ '{{ st.locations.name }}' }}</td>
+                        <td>{{ '{{ st.address }}' }}</td>
+                        <td>{{ '{{ st.photo }}' }}</td>
+                        <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
+                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr/>
         <form class="form-inline">
             <div class="form-group">
                 <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
@@ -231,40 +321,6 @@ function onAjaxTest()
             
         </form>
         <hr/>
-        
-        
-        
-        <h1 id="confirmation">ganti lah</h1>
-        <div id="myDiv"></div>
-        
-        <div class="table-responsive"  id="siteTable">
-           <table  class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Site Name</th>
-                        <th>Building Owner</th>
-                        <th>Project Type</th>
-                        <th>Location</th>
-                        <th>Address</th>
-                        <th>Photo</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search ">
-                        <td>{{ '{{ st.id }}' }}</td>
-                        <td>{{ '{{ st.name }}' }}</td>
-                        <td>{{ '{{ st.owner }}' }}</td>
-                        <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
-                        <td>{{ '{{ st.address }}' }}</td>
-                        <td>{{ '{{ st.photo }}' }}</td>
-                        <td><a href="#">Update</a> | 
-                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>";}";
+</div>
+{% framework extras %}";}";

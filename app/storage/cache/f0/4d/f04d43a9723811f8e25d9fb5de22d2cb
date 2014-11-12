@@ -1,4 +1,4 @@
-1415731905s:9256:"a:5:{s:5:"mtime";i:1415619383;s:7:"content";s:4548:"title = "Main"
+1415810695s:9308:"a:5:{s:5:"mtime";i:1415746657;s:7:"content";s:4574:"title = "Main"
 url = "/home"
 layout = "default"
 hidden = "0"
@@ -126,7 +126,9 @@ hidden = "0"
         <p><a href="{{ 'ajax'|page }}" class="btn btn-lg btn-default">Continue to AJAX framework</a></p>
     </div>
 
-</div>";s:8:"settings";a:5:{s:5:"title";s:4:"Main";s:3:"url";s:5:"/home";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:4479:"<base href="/massada/default">
+</div>
+
+{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:4:"Main";s:3:"url";s:5:"/home";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:4505:"<base href="/massada/default">
 <div class="jumbotron">
     <div class="container">
         {% content "welcome.htm" %}
@@ -249,4 +251,6 @@ hidden = "0"
         <p><a href="{{ 'ajax'|page }}" class="btn btn-lg btn-default">Continue to AJAX framework</a></p>
     </div>
 
-</div>";}";
+</div>
+
+{% framework extras %}";}";

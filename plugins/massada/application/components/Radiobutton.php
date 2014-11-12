@@ -102,10 +102,13 @@ class Radiobutton extends ComponentBase
         $key    = explode(';', $this->property('mKey'));
         $value  = explode(';', $this->property('mValue'));
 
+        $delim = "";
         $cmb="[";
         foreach($key as $index=>$code) {
-            $cmb.="{key: '".$code."', value: '".$value[$index]."'},";
+            $cmb .= $delim . '{"key": "' . $code . '", "value": "' . $value[$index] . '"}';
+            $delim = ",";
         }
+        //$cmb = rtrim($cmb, ',');
         $cmb.="]";
         $this->mObject=$cmb;
     }

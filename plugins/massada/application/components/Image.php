@@ -97,9 +97,6 @@ class Image extends ComponentBase
         $this->mNameAvatar      = $this->property('nameAvatar');
         $this->mModel           = $this->property('model');
 
-
-
-
         $this->mRequired        = $this->property('req');
         $this->mRequired_msg    = $this->property('req_msg');
 

@@ -3,7 +3,7 @@
 	'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid }">
     <label for="modal-country-id" class="col-lg-3 col-sm-5 col-md-4 control-label">{{ __SELF__.mLabel }}</label>
     <div class="col-lg-9 col-sm-7 col-md-8">
-        <div class="radio" ng-repeat="object in {{ __SELF__.mObject|raw }}">
+        <div class="radio" ng-repeat='object in {{ __SELF__.mObject }}'>
             <label>
                 <input type="radio" name="{{ __SELF__.mName }}" 
                 id="{{ '{{ object.key }}' }}" 
@@ -15,11 +15,12 @@
         </div>
         <i ng-class="{ 
         	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
-        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid, 
+        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid  
          }"></i>
         <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
         	* dipilih coy <br/>
         </small>
     </div>
 </div>
+{{ __SELF__.mObject }}
 

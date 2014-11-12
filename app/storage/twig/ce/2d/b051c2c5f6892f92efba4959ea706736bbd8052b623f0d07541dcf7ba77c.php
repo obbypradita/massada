@@ -50,10 +50,11 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
         </div>
 
         <h2 class=\"sub-header\">Sites List</h2>
+        <hr/>
         <form class=\"form-inline\">
             <div class=\"form-group\">
                 <a type=\"button\" class=\"btn btn-primary\" href=\"";
-        // line 32
+        // line 33
         echo $this->env->getExtension('CMS')->pageFilter("administration-site-insert");
         echo "\" >
                     <span class=\"fa fa-plus\"></span>
@@ -76,31 +77,30 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                     <span class=\"fa fa-refresh\"></span>
                 </button>
             </div>
-            
         </form>
         <hr/>
         
         
         
-        <h1 id=\"confirmation\">ganti lah</h1>
+        <h1 id=\"confirmation\">Sebentar...</h1>
         <div id=\"myDiv\"></div>
         
         <div class=\"table-responsive\"  id=\"siteTable\">
            <table  class=\"table table-striped table-hover\">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Site Name</th>
-                        <th>Building Owner</th>
-                        <th>Project Type</th>
-                        <th>Location</th>
-                        <th>Address</th>
-                        <th>Photo</th>
+                        <th><a href=\"\" ng-click=\"sortField = 'id';              reverse = !reverse\" >#</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'name';            reverse = !reverse\" >Site Name</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'owner';           reverse = !reverse\" >Building Owner</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'project_type';    reverse = !reverse\" >Project Type</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'locations.name';  reverse = !reverse\" >Location</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'address';         reverse = !reverse\" >Address</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'photo';           reverse = !reverse\" >Photo</a></th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat=\"st in site.sites | filter:search \">
+                    <tr ng-repeat=\"st in site.sites | filter:search | orderBy:sortField:reverse\">
                         <td>";
         // line 78
         echo "{{ st.id }}";
@@ -129,7 +129,10 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
         // line 84
         echo "{{ st.photo }}";
         echo "</td>
-                        <td><a href=\"#\">Update</a> | 
+                        <td><a href=\"http://localhost:8080/massada/administration/site/update/";
+        // line 85
+        echo "{{ st.id }}";
+        echo "\">Update</a> | 
                             <a href=\"\" ng-click=\"onDelete(";
         // line 86
         echo "st.id";
@@ -138,8 +141,46 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                 </tbody>
             </table>
         </div>
+        <hr/>
+        <form class=\"form-inline\">
+            <div class=\"form-group\">
+                <a type=\"button\" class=\"btn btn-primary\" href=\"";
+        // line 94
+        echo $this->env->getExtension('CMS')->pageFilter("administration-site-insert");
+        echo "\" >
+                    <span class=\"fa fa-plus\"></span>
+                    Add New Site
+                </a>
+            </div>
+            <div class=\"form-group has-feedback\">
+                <input type=\"text\" class=\"form-control\" ng-model=\"search\" id=\"tb-search\" placeholder=\"Search something...\" >
+                <i class=\"form-control-feedback fa fa-search\"></i>
+            </div>
+
+            <div class=\"form-group\">
+                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#mmodal\">
+                    <span class=\"fa fa-gear\"></span>
+                </button>
+            </div>
+            
+            <div class=\"form-group\">
+                <button type=\"button\" class=\"btn btn-default\" ng-click=\"refresh()\">
+                    <span class=\"fa fa-refresh\"></span>
+                </button>
+            </div>
+            
+        </form>
+        <hr/>
     </div>
-</div>";
+</div>
+";
+        // line 120
+        echo '<script src="'. Request::getBasePath()
+                .'/modules/system/assets/js/framework.js"></script>'.PHP_EOL;
+        echo '<script src="'. Request::getBasePath()
+                    .'/modules/system/assets/js/framework.extras.js"></script>'.PHP_EOL;
+        echo '<link href="'. Request::getBasePath()
+                    .'/modules/system/assets/css/framework.extras.css" rel="stylesheet">'.PHP_EOL;
     }
 
     public function getTemplateName()
@@ -154,6 +195,6 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
 
     public function getDebugInfo()
     {
-        return array (  135 => 86,  130 => 84,  126 => 83,  122 => 82,  118 => 81,  114 => 80,  110 => 79,  106 => 78,  57 => 32,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  178 => 120,  149 => 94,  138 => 86,  134 => 85,  130 => 84,  126 => 83,  122 => 82,  118 => 81,  114 => 80,  110 => 79,  106 => 78,  58 => 33,  26 => 3,  22 => 2,  19 => 1,);
     }
 }

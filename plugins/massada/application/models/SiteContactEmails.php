@@ -29,7 +29,7 @@ class SiteContactEmails extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'sitecontacts' => ['Massada\Application\Models\SiteContacts']
+        'contacts' => ['Massada\Application\Models\SiteContacts']
     ];
     public $belongsToMany = [];
     public $morphTo = [];

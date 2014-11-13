@@ -1,4 +1,4 @@
-1415875492s:22270:"a:5:{s:5:"mtime";i:1415874889;s:7:"content";s:10682:"title = "Administration - Site - Update"
+1415886782s:26618:"a:5:{s:5:"mtime";i:1415886175;s:7:"content";s:12718:"title = "Administration - Site - Update"
 url = "/administration/site/update/:id"
 layout = "default"
 description = "Page for update site"
@@ -108,14 +108,56 @@ model = "site.sitePhoto"
 src = "sitePhoto"
 req = "true"
 req_msg = "Butuh foto neh"
+
+[mContact siteContact]
+id = "mTextbox"
+name = "mTextbox"
+label = "mTextbox"
+mModel = "site.contacts"
+base = "site.siteForm"
+mModelContact = "name"
+mReqContact = "true"
+mReqContact_msg = "needed"
+mMaxContact = "50"
+mMaxContact_msg = "50 max"
+mMinContact = "5"
+mMinContact_msg = "5 min"
+mExpContact = "/^[a-z A-Z,.]*/"
+mExpContact_msg = "Format nama salah"
+mTrimContact = "true"
+mModelPhone = "phone"
+mReqPhone = "true"
+mReqPhone_msg = "need"
+mMaxPhone = "16"
+mMaxPhone_msg = "16 max"
+mMinPhone = "10"
+mMinPhone_msg = "10 min"
+mExpPhone = "/^[0-9 ()-]*$/"
+mExpPhone_msg = "phone format invalid"
+mModelEmail = "email"
+mReqEmail = "true"
+mReqEmail_msg = "butuh"
+mMaxEmail = "50"
+mMaxEmail_msg = "50 max"
+mMinEmail = "10"
+mMinEmail_msg = "10 min"
+mExpEmail = "/^[a-zA-Z.@]*$/"
+mExpEmail_msg = "format salah"
+mTrimEmail = "true"
 ==
 <?php
 use Massada\Application\Models\Sites;
+use Massada\Application\Models\SiteContacts;
+use Massada\Application\Models\SiteContactPhones;
+use Massada\Application\Models\SiteContactEmails;
 use Massada\Application\Classes\Operation;
 function onSiteSelect() {
     $id = $this->param('id');
     //$site=[];
-    $site           = Sites::with('locations')->find($id);
+    $site = Sites::with('locations')
+                ->with('contacts', 'contacts.phones', 'contacts.emails')
+                ->find($id);
+
     if (!empty($site->photo))
     {
         $photoName      = $site->photo; 
@@ -128,16 +170,18 @@ function onSiteSelect() {
     
     
     $arr=[];
-    $arr['name']            = $site->name         ;   
-    $arr['owner']           = $site->owner        ;   
-    $arr['address']         = $site->address      ;       
-    $arr['project_type']    = $site->project_type ;           
-    $arr['phone']           = $site->phone        ;   
-    $arr['fax']             = $site->fax          ;   
-    $arr['locations_id']    = $site->locations_id ;
-    $arr['locations']       = $site->locations    ;
-    $arr['photo']           = $site->photo        ;   
-    $arr['avatar']          = $avatarUrl          ;   
+    $arr['name']                    = $site->name             ;   
+    $arr['owner']                   = $site->owner            ;   
+    $arr['address']                 = $site->address          ;       
+    $arr['project_type']            = $site->project_type     ;           
+    $arr['phone']                   = $site->phone            ;   
+    $arr['fax']                     = $site->fax              ;   
+    $arr['locations_id']            = $site->locations_id     ;
+    $arr['locations']               = $site->locations        ;
+    $arr['photo']                   = $site->photo            ;   
+    $arr['avatar']                  = $avatarUrl              ;   
+    $arr['contacts']                = $site->contacts         ;
+   
             
     $site = json_encode($arr);
     return $site;
@@ -158,7 +202,7 @@ function onSiteUpdate() {
     $site->locations_id = post('siteLocation')      ;
     
     
-    
+
     if (!empty(post('sitePhoto'))) {
         $photofordelete = $site->photo;
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/' . $photofordelete . '.png'));
@@ -180,13 +224,31 @@ function onSiteUpdate() {
         list(, $photo)      = explode(',', $photo);
         $photo = base64_decode($photo);
         file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
-
-        
-      
-        
     }
 
     $site->save();
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
+    
+    $contact = json_decode(post('siteContacts'));
+    foreach($contact as $key=>$value) {
+        $people = new SiteContacts;
+        $people->name = $value->name;
+        $people->sites_id = $site->id;
+        $people->save();
+        foreach($value->phones as $kphone=>$vphone) {
+            $phone = new SiteContactPhones;
+            $phone->phone = $vphone->phone;
+            $phone->site_contacts_id = $people->id;
+            $phone->save();
+        }
+        foreach($value->emails as $kemail=>$vemail) {
+            $email = new SiteContactEmails;
+            $email->email = $vemail->email;
+            $email->site_contacts_id = $people->id;
+            $email->save();
+        }
+    }
 }
 ?>
 ==
@@ -206,7 +268,6 @@ function onSiteUpdate() {
   <strong>Info!</strong>Watch this, but you may forget.  
 </div> 
 -->
-<button ng-click="ganti()">ganti</button>
 <div>
     <div class="row">
         {% partial 'administration/sidebar' %}
@@ -281,41 +342,51 @@ function onSiteUpdate() {
                     </div>
                 </div>
                 <hr/>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                                <span class="fa fa-undo"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default" ng-click="clear()">
-                                <span class="fa fa-eraser"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class="form-group">
-                            <button type="submit" name="submit" ng-disabled="site.siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                                <span class="fa fa-save"></span>
-                                Save
-                            </button>
-                        </div>
+                
+                {% component 'siteContact' %}
+                <hr/>
+                
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
+                            <span class="fa fa-undo"></span>
+                            Back
+                        </a>
                     </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" ng-click="clear()">
+                            <span class="fa fa-eraser"></span>
+                            Clear
+                        </button>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button type="submit" name="submit" ng-disabled="site.siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
+                            <span class="fa fa-save"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
                 <hr/>
             </form>
             
             
         </div>
     </div>
-</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Update";s:3:"url";s:31:"/administration/site/update/:id";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for update site";s:6:"hidden";s:1:"0";s:10:"components";a:8:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:13:"site.siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:8:{s:3:"mId";s:11:"siteProject";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:13:"site.siteForm";s:7:"mObject";s:12:"mRadiobutton";s:4:"mKey";s:3:"1;2";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:13:"site.siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:7:{s:2:"id";s:9:"sitePhoto";s:9:"namePhoto";s:9:"sitePhoto";s:10:"nameAvatar";s:10:"siteAvatar";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}}}s:4:"code";s:2991:"
+</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Update";s:3:"url";s:31:"/administration/site/update/:id";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for update site";s:6:"hidden";s:1:"0";s:10:"components";a:9:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:13:"site.siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:8:{s:3:"mId";s:11:"siteProject";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:13:"site.siteForm";s:7:"mObject";s:12:"mRadiobutton";s:4:"mKey";s:3:"1;2";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:13:"site.siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:7:{s:2:"id";s:9:"sitePhoto";s:9:"namePhoto";s:9:"sitePhoto";s:10:"nameAvatar";s:10:"siteAvatar";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}s:20:"mContact siteContact";a:34:{s:2:"id";s:8:"mTextbox";s:4:"name";s:8:"mTextbox";s:5:"label";s:8:"mTextbox";s:6:"mModel";s:13:"site.contacts";s:4:"base";s:13:"site.siteForm";s:13:"mModelContact";s:4:"name";s:11:"mReqContact";s:4:"true";s:15:"mReqContact_msg";s:6:"needed";s:11:"mMaxContact";s:2:"50";s:15:"mMaxContact_msg";s:6:"50 max";s:11:"mMinContact";s:1:"5";s:15:"mMinContact_msg";s:5:"5 min";s:11:"mExpContact";s:15:"/^[a-z A-Z,.]*/";s:15:"mExpContact_msg";s:17:"Format nama salah";s:12:"mTrimContact";s:4:"true";s:11:"mModelPhone";s:5:"phone";s:9:"mReqPhone";s:4:"true";s:13:"mReqPhone_msg";s:4:"need";s:9:"mMaxPhone";s:2:"16";s:13:"mMaxPhone_msg";s:6:"16 max";s:9:"mMinPhone";s:2:"10";s:13:"mMinPhone_msg";s:6:"10 min";s:9:"mExpPhone";s:14:"/^[0-9 ()-]*$/";s:13:"mExpPhone_msg";s:20:"phone format invalid";s:11:"mModelEmail";s:5:"email";s:9:"mReqEmail";s:4:"true";s:13:"mReqEmail_msg";s:5:"butuh";s:9:"mMaxEmail";s:2:"50";s:13:"mMaxEmail_msg";s:6:"50 max";s:9:"mMinEmail";s:2:"10";s:13:"mMinEmail_msg";s:6:"10 min";s:9:"mExpEmail";s:15:"/^[a-zA-Z.@]*$/";s:13:"mExpEmail_msg";s:12:"format salah";s:10:"mTrimEmail";s:4:"true";}}}s:4:"code";s:4192:"
 use Massada\Application\Models\Sites;
+use Massada\Application\Models\SiteContacts;
+use Massada\Application\Models\SiteContactPhones;
+use Massada\Application\Models\SiteContactEmails;
 use Massada\Application\Classes\Operation;
 function onSiteSelect() {
     $id = $this->param('id');
     //$site=[];
-    $site           = Sites::with('locations')->find($id);
+    $site = Sites::with('locations')
+                ->with('contacts', 'contacts.phones', 'contacts.emails')
+                ->find($id);
+
     if (!empty($site->photo))
     {
         $photoName      = $site->photo; 
@@ -328,16 +399,18 @@ function onSiteSelect() {
     
     
     $arr=[];
-    $arr['name']            = $site->name         ;   
-    $arr['owner']           = $site->owner        ;   
-    $arr['address']         = $site->address      ;       
-    $arr['project_type']    = $site->project_type ;           
-    $arr['phone']           = $site->phone        ;   
-    $arr['fax']             = $site->fax          ;   
-    $arr['locations_id']    = $site->locations_id ;
-    $arr['locations']       = $site->locations    ;
-    $arr['photo']           = $site->photo        ;   
-    $arr['avatar']          = $avatarUrl          ;   
+    $arr['name']                    = $site->name             ;   
+    $arr['owner']                   = $site->owner            ;   
+    $arr['address']                 = $site->address          ;       
+    $arr['project_type']            = $site->project_type     ;           
+    $arr['phone']                   = $site->phone            ;   
+    $arr['fax']                     = $site->fax              ;   
+    $arr['locations_id']            = $site->locations_id     ;
+    $arr['locations']               = $site->locations        ;
+    $arr['photo']                   = $site->photo            ;   
+    $arr['avatar']                  = $avatarUrl              ;   
+    $arr['contacts']                = $site->contacts         ;
+   
             
     $site = json_encode($arr);
     return $site;
@@ -358,7 +431,7 @@ function onSiteUpdate() {
     $site->locations_id = post('siteLocation')      ;
     
     
-    
+
     if (!empty(post('sitePhoto'))) {
         $photofordelete = $site->photo;
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/' . $photofordelete . '.png'));
@@ -380,15 +453,33 @@ function onSiteUpdate() {
         list(, $photo)      = explode(',', $photo);
         $photo = base64_decode($photo);
         file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
-
-        
-      
-        
     }
 
     $site->save();
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
+    
+    $contact = json_decode(post('siteContacts'));
+    foreach($contact as $key=>$value) {
+        $people = new SiteContacts;
+        $people->name = $value->name;
+        $people->sites_id = $site->id;
+        $people->save();
+        foreach($value->phones as $kphone=>$vphone) {
+            $phone = new SiteContactPhones;
+            $phone->phone = $vphone->phone;
+            $phone->site_contacts_id = $people->id;
+            $phone->save();
+        }
+        foreach($value->emails as $kemail=>$vemail) {
+            $email = new SiteContactEmails;
+            $email->email = $vemail->email;
+            $email->site_contacts_id = $people->id;
+            $email->save();
+        }
+    }
 }
-";s:6:"markup";s:5356:"<style>
+";s:6:"markup";s:5331:"<style>
 
     .alert-fixed {
         position: fixed;
@@ -404,7 +495,6 @@ function onSiteUpdate() {
   <strong>Info!</strong>Watch this, but you may forget.  
 </div> 
 -->
-<button ng-click="ganti()">ganti</button>
 <div>
     <div class="row">
         {% partial 'administration/sidebar' %}
@@ -479,28 +569,32 @@ function onSiteUpdate() {
                     </div>
                 </div>
                 <hr/>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                                <span class="fa fa-undo"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default" ng-click="clear()">
-                                <span class="fa fa-eraser"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class="form-group">
-                            <button type="submit" name="submit" ng-disabled="site.siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                                <span class="fa fa-save"></span>
-                                Save
-                            </button>
-                        </div>
+                
+                {% component 'siteContact' %}
+                <hr/>
+                
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
+                            <span class="fa fa-undo"></span>
+                            Back
+                        </a>
                     </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" ng-click="clear()">
+                            <span class="fa fa-eraser"></span>
+                            Clear
+                        </button>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button type="submit" name="submit" ng-disabled="site.siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
+                            <span class="fa fa-save"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
                 <hr/>
             </form>
             

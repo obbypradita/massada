@@ -20,7 +20,8 @@ class CreateSitesTable extends Migration
             $table->string('fax')->nullable();
             $table->string('photo')->nullable();
             $table->integer('locations_id')->unsigned();
-            //$table->foreign('locations_id')->references('id')->on('massada_application_locations');
+            $table->foreign('locations_id')->references('id')->on('massada_application_locations')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }

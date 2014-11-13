@@ -26,10 +26,12 @@ class SiteContacts extends Model
     /**
      * @var array Relations
      */
+
+    
     public $hasOne = [];
     public $hasMany = [
-        'sitecontactphones' => ['Massada\Application\Models\SiteContactPhones'],
-        'sitecontactemails' => ['Massada\Application\Models\SiteContactEmails']
+        'phones' => ['Massada\Application\Models\SiteContactPhones'],
+        'emails' => ['Massada\Application\Models\SiteContactEmails']
     ];
     public $belongsTo = [
         'sites' => ['Massada\Application\Models\Sites']

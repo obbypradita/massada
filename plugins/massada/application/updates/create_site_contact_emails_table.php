@@ -13,7 +13,9 @@ class CreateSiteContactEmailsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('email');
-            $table->integer('site_contacts_id');
+            $table->integer('site_contacts_id')->unsigned();;
+            $table->foreign('site_contacts_id')->references('id')->on('massada_application_site_contacts')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,13 +1,19 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Classes\Operation;class Cms5464894ed778f_191801366Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms5464b5661f6c4_975579693Class extends \Cms\Classes\PageCode
 {
+
+
+
 
 
 
 public function onSiteSelect() {
     $id = $this->param('id');
     //$site=[];
-    $site           = Sites::with('locations')->find($id);
+    $site = Sites::with('locations')
+                ->with('contacts', 'contacts.phones', 'contacts.emails')
+                ->find($id);
+
     if (!empty($site->photo))
     {
         $photoName      = $site->photo; 
@@ -20,16 +26,18 @@ public function onSiteSelect() {
     
     
     $arr=[];
-    $arr['name']            = $site->name         ;   
-    $arr['owner']           = $site->owner        ;   
-    $arr['address']         = $site->address      ;       
-    $arr['project_type']    = $site->project_type ;           
-    $arr['phone']           = $site->phone        ;   
-    $arr['fax']             = $site->fax          ;   
-    $arr['locations_id']    = $site->locations_id ;
-    $arr['locations']       = $site->locations    ;
-    $arr['photo']           = $site->photo        ;   
-    $arr['avatar']          = $avatarUrl          ;   
+    $arr['name']                    = $site->name             ;   
+    $arr['owner']                   = $site->owner            ;   
+    $arr['address']                 = $site->address          ;       
+    $arr['project_type']            = $site->project_type     ;           
+    $arr['phone']                   = $site->phone            ;   
+    $arr['fax']                     = $site->fax              ;   
+    $arr['locations_id']            = $site->locations_id     ;
+    $arr['locations']               = $site->locations        ;
+    $arr['photo']                   = $site->photo            ;   
+    $arr['avatar']                  = $avatarUrl              ;   
+    $arr['contacts']                = $site->contacts         ;
+   
             
     $site = json_encode($arr);
     return $site;
@@ -49,7 +57,7 @@ public function onSiteUpdate() {
     $site->locations_id = post('siteLocation')      ;
     
     
-    
+
     if (!empty(post('sitePhoto'))) {
         $photofordelete = $site->photo;
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/' . $photofordelete . '.png'));
@@ -71,13 +79,31 @@ public function onSiteUpdate() {
         list(, $photo)      = explode(',', $photo);
         $photo = base64_decode($photo);
         file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
-
-        
-      
-        
     }
 
     $site->save();
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
+    
+    $contact = json_decode(post('siteContacts'));
+    foreach($contact as $key=>$value) {
+        $people = new SiteContacts;
+        $people->name = $value->name;
+        $people->sites_id = $site->id;
+        $people->save();
+        foreach($value->phones as $kphone=>$vphone) {
+            $phone = new SiteContactPhones;
+            $phone->phone = $vphone->phone;
+            $phone->site_contacts_id = $people->id;
+            $phone->save();
+        }
+        foreach($value->emails as $kemail=>$vemail) {
+            $email = new SiteContactEmails;
+            $email->email = $vemail->email;
+            $email->site_contacts_id = $people->id;
+            $email->save();
+        }
+    }
 }
 
 }

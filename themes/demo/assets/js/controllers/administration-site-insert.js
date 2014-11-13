@@ -92,11 +92,6 @@ october.controllers['administration-site-insert'] = function ($scope, $request, 
     $scope.contacs = [];
 
     $scope.site.contacts  = [];
-
-
-
-
-    $scope.expr = '3*10|currency';
     
     $scope.addContact = function() {
         //$scope.contacs.push({index: index, name: "Iblis"}); 
@@ -105,18 +100,10 @@ october.controllers['administration-site-insert'] = function ($scope, $request, 
         $scope.site.contacts.splice(index, 0, {no: index, name: item,  phones: [], emails: []}); 
         console.log($scope.site.contacts);
     }
-    
-    $scope.insertContact = function (index, name) {
-
-    }
 
     $scope.removeContact = function(index) {
         $scope.site.contacts.splice(index, 1);
     }
-
-
-
-
 
     $scope.addPhone = function (index) {
         //$scope.phones.push({phone: "021"});
@@ -135,9 +122,6 @@ october.controllers['administration-site-insert'] = function ($scope, $request, 
         phones.phones.splice(id, 1);
         //console.log(index); 
     }
-
-
-
 
 
      $scope.addEmail = function (index) {

@@ -29,8 +29,15 @@ class Sites extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'sitecontacts' => ['Massada\Application\Models\SiteContacts']
+        'contacts' => ['Massada\Application\Models\SiteContacts'],
+
     ];
+
+    public $hasManyThrough = [
+        'phones' => ['Massada\Application\Models\SiteContactPhones', 'through' => 'Massada\Application\Models\SiteContacts'],
+        'emails' => ['Massada\Application\Models\SiteContactEmails', 'through' => 'Massada\Application\Models\SiteContacts']
+    ];
+
     public $belongsTo = [
         'locations' => ['Massada\Application\Models\Locations']
     ];

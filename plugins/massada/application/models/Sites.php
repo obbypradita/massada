@@ -13,6 +13,7 @@ class Sites extends Model
      */
     public $table = 'massada_application_sites';
 
+
     /**
      * @var array Guarded fields
      */
@@ -27,7 +28,9 @@ class Sites extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'sitecontacts' => ['Massada\Application\Models\SiteContacts']
+    ];
     public $belongsTo = [
         'locations' => ['Massada\Application\Models\Locations']
     ];
@@ -39,5 +42,15 @@ class Sites extends Model
         'avatar' => ['System\Models\File']
     ];
     public $attachMany = [];
+
+    public function afterDelete() {
+        $photofordelete = $this->photo;
+        array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/' . $photofordelete . '.png'));
+        array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/avatar/' . $photofordelete . '.png'));
+    }
+
+    public function afterUpdate() {
+        
+    }
 
 }

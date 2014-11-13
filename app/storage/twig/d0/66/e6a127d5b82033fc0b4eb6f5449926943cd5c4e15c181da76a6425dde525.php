@@ -69,33 +69,33 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
     
             <h2 class=\"sub-header\">Insert New Site</h2>
 
-            <form name=\"siteForm\" method=\"POST\" enctype=\"multipart/from-data\">
+            <form name=\"siteForm\" method=\"POST\" enctype=\"multipart/from-data\" novalidate>
                 <hr/>
-                    <div class=\"form-inline\">
-                        <div class=\"form-group\">
-                            <a type=\"button\" class=\"btn btn-default\" href=\"";
+                <div class=\"form-inline\">
+                    <div class=\"form-group\">
+                        <a type=\"button\" class=\"btn btn-default\" href=\"";
         // line 53
         echo $this->env->getExtension('CMS')->pageFilter("administration-sites");
         echo "\" >
-                                <span class=\"fa fa-undo\"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class=\"form-group\">
-                            <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
-                                <span class=\"fa fa-eraser\"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class=\"form-group\">
-                            <button type=\"submit\" name=\"submit\" ng-disabled=\"siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
-                                <span class=\"fa fa-save\"></span>
-                                Save
-                            </button>
-                        </div>
+                            <span class=\"fa fa-undo\"></span>
+                            Back
+                        </a>
                     </div>
+                    <div class=\"form-group\">
+                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
+                            <span class=\"fa fa-eraser\"></span>
+                            Clear
+                        </button>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class=\"form-group\">
+                        <button type=\"submit\" name=\"submit\" ng-disabled=\"siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
+                            <span class=\"fa fa-save\"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
                 <hr/>
                 <div class=\"container-fluid\">
                     <div class=\"col-md-4 col-sm-5\">
@@ -149,125 +149,49 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
                     </div>
                 </div>
                 <hr/>
-                    <div class=\"form-inline\">
-                        <div class=\"form-group\">
-                            <a type=\"button\" class=\"btn btn-default\" href=\"";
-        // line 94
+            
+            
+                <!-- contact -->
+                ";
+        // line 95
+        $context['__cms_component_params'] = [];
+        echo $this->env->getExtension('CMS')->componentFunction("siteContact"        , $context['__cms_component_params']        );
+        unset($context['__cms_component_params']);
+        // line 96
+        echo "              <!-- end contacts-->
+            </form>
+
+
+            <hr/>
+            <div class=\"form-inline\">
+                <div class=\"form-group\">
+                    <a type=\"button\" class=\"btn btn-default\" href=\"";
+        // line 103
         echo $this->env->getExtension('CMS')->pageFilter("administration-sites");
         echo "\" >
-                                <span class=\"fa fa-undo\"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class=\"form-group\">
-                            <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
-                                <span class=\"fa fa-eraser\"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class=\"form-group\">
-                            <button type=\"submit\" name=\"submit\" ng-disabled=\"siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
-                                <span class=\"fa fa-save\"></span>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                <hr/>
-            </form>
-            
-            <form>
-                <h2 class=\"sub-header\">Contact Person</h2>
-                <!-- contact menu toolbox-->
-                <hr/>
-                <div class=\"form-inline\">
-                    <div class=\"form-group\">
-                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
-                            <span class=\"fa fa-eraser\"></span>
-                            Delete All Contacts
-                        </button>
-                    </div>
-                    
-                    <!-- Submit -->
-                    <div class=\"form-group\">
-                        <button type=\"button\" ng-click=\"addContact()\" class=\"btn btn-primary\"> 
-                            <span class=\"fa fa-plus\"></span>
-                            Add Contacts
-                        </button>
-                    </div>
+                        <span class=\"fa fa-undo\"></span>
+                        Back
+                    </a>
                 </div>
-                <hr/>    
-
-                <!-- main fonctact name-->
-                <div class=\"form-horizontal\">
-                    <div ng-repeat=\"contact in contacs.phones track by \$index\">
-                        <div class=\"form-group\">
-                            <label for=\"\" class=\"col-sm-2 control-label\">Contact : ";
-        // line 143
-        echo "{{ \$index + 1 }}";
-        echo "</label>
-                            <div class=\"col-sm-10 controls\">
-                                <div class=\"input-group\">
-                                    <input type=\"text\" class=\"form-control\" ng-model=\"contact.name\">
-                                    <span class=\"input-group-btn\">
-                                        <button class=\"btn btn-danger\" ng-click=\"removeContact(\$index)\">X</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class=\"form-group\">
-                            <label for=\"\" class=\"col-sm-2 control-label\"></label>
-                            <div class=\"col-sm-10 controls\">
-                                <hr/>
-                                    <h4>Phone</h4>
-                                <hr/>
-                                <div class=\"form-horizontal\">
-                                    <div class=\"form-group\" ng-repeat=\"phone in contact.phones track by \$index\">
-                                        <label for=\"\" class=\"col-sm-2 control-label\">Phone : ";
-        // line 162
-        echo "{{ \$index + 1 }}";
-        echo "</label>
-                                        <div class=\"col-sm-10 controls\">
-                                            <div class=\"input-group\">
-                                                <input type=\"text\" class=\"form-control\" ng-model=\"phone.phone\">
-                                                <span class=\"input-group-btn\">
-                                                    <button class=\"btn btn-danger\" ng-click=\"removePhone(\$parent.\$index, \$index)\">X</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"addPhone(\$index)\">Add Phone</button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr/>
-                    </div>
+                <div class=\"form-group\">
+                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
+                        <span class=\"fa fa-eraser\"></span>
+                        Clear
+                    </button>
                 </div>
-
-                <!-- bottom contact menu tools-->
-                <hr/>
-                <div class=\"form-inline\">
-                    <div class=\"form-group\">
-                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear(\$index)\">
-                            <span class=\"fa fa-eraser\"></span>
-                            Delete All Contacts
-                        </button>
-                    </div>
-                    
-                    <div class=\"form-group\">
-                        <button type=\"button\" ng-click=\"addContact()\" class=\"btn btn-primary\"> 
-                            <span class=\"fa fa-plus\"></span>
-                            Add Contacts
-                        </button>
-                    </div>
+                
+                <!-- Submit -->
+                <div class=\"form-group\">
+                    <button type=\"submit\" name=\"submit\" ng-disabled=\"siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
+                        <span class=\"fa fa-save\"></span>
+                        Save
+                    </button>
                 </div>
-                <hr/>    
-            </form>
+            </div>
+            <hr/>
             ";
-        // line 199
-        echo "{{ contact }}";
+        // line 124
+        echo "{{ site.contacts }}";
         echo "
             
             
@@ -288,6 +212,6 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
 
     public function getDebugInfo()
     {
-        return array (  270 => 199,  230 => 162,  208 => 143,  156 => 94,  148 => 88,  143 => 87,  138 => 86,  133 => 85,  128 => 84,  123 => 83,  118 => 82,  114 => 81,  108 => 77,  104 => 76,  78 => 53,  44 => 21,  40 => 20,  19 => 1,);
+        return array (  194 => 124,  170 => 103,  161 => 96,  157 => 95,  148 => 88,  143 => 87,  138 => 86,  133 => 85,  128 => 84,  123 => 83,  118 => 82,  114 => 81,  108 => 77,  104 => 76,  78 => 53,  44 => 21,  40 => 20,  19 => 1,);
     }
 }

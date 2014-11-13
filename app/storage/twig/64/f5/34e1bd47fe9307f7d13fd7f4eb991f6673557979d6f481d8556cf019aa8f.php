@@ -73,7 +73,7 @@ class __TwigTemplate_64f534e1bd47fe9307f7d13fd7f4eb991f6673557979d6f481d8556cf01
         // line 13
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mMaxlength", array()), "html", null, true);
         echo "\"
-               required=\"";
+               ng-required=\"";
         // line 14
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mRequired", array()), "html", null, true);
         echo "\"

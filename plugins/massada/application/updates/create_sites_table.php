@@ -20,7 +20,7 @@ class CreateSitesTable extends Migration
             $table->string('fax')->nullable();
             $table->string('photo')->nullable();
             $table->integer('locations_id')->unsigned();
-            $table->foreign('locations_id')->references('id')->on('massada_application_locations');
+            //$table->foreign('locations_id')->references('id')->on('massada_application_locations');
             $table->timestamps();
         });
     }
@@ -28,6 +28,7 @@ class CreateSitesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('massada_application_sites');
+        //Schema::dropIfExists('massada_application_locations');
 
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/*.png'));
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/avatar/*.png'));

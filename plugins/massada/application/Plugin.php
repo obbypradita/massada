@@ -29,7 +29,8 @@ class Plugin extends PluginBase
             'Massada\Application\Components\Radiobutton'    => 'mRadiobutton',
             'Massada\Application\Components\Dropdown'       => 'mDropdown',
             'Massada\Application\Components\Textarea'       => 'mTextarea',
-            'Massada\Application\Components\Image'          => 'mImage'
+            'Massada\Application\Components\Image'          => 'mImage',
+            'Massada\Application\Components\Contact'        => 'mContact'
         ];
     }
 }

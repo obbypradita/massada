@@ -1,4 +1,4 @@
-1415810695s:2693:"a:2:{s:5:"mtime";i:1415731169;s:7:"content";s:2638:"<style>
+1415874688s:2681:"a:2:{s:5:"mtime";i:1415869754;s:7:"content";s:2626:"<style>
 	.avatar-view {
 	  display: block;
 	  height: 200px;
@@ -38,8 +38,8 @@
 	<div class="avatar-view" title="Change the avatar" data-toggle="modal" id="tae" data-target="#{{ __SELF__.modalLink }}"> 	
 		<img ng-src="{{ '{{ avatar }}' }}">
 	</div>
-	<input type="text" name="{{ __SELF__.mNamePhoto }}" ng-model="img" hidden>
-    <input type="text" name="{{ __SELF__.mNameAvatar }}" ng-model="avatar" hidden>
+	<input type="text" name="{{ __SELF__.mNamePhoto }}" ng-model="img" >
+    <input type="text" name="{{ __SELF__.mNameAvatar }}" ng-model="avatar" >
 
 </div>
 

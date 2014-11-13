@@ -1,4 +1,4 @@
-october.controllers['administration-site-update'] = function ($scope, $request, $parse) {
+october.controllers['administration-site-update'] = function ($scope, $request, $parse, $location) {
     $scope.site={};
     $scope.master={};
     //$scope.frm={};
@@ -13,25 +13,27 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
 	$request('onSiteSelect', { 
         success: function(data) {
             var temp = data.result;
-            console.log(temp)
+            console.log(temp);
             $scope.$apply(function () {
                 temp = $parse(temp)($scope);
-                $scope.site.siteName = temp.name,
-	            $scope.site.siteOwner = temp.owner,
-	            $scope.site.siteAddress = temp.address,
+                $scope.site.siteName        = temp.name,
+	            $scope.site.siteOwner       = temp.owner,
+	            $scope.site.siteAddress     = temp.address,
 	            $scope.site.siteProjectType = temp.project_type;
-	            $scope.site.sitePhone = temp.phone,
-	            $scope.site.siteFax = temp.fax,
-	            $scope.site.siteLocation = temp.locations_id
+	            $scope.site.sitePhone       = temp.phone,
+	            $scope.site.siteFax         = temp.fax,
+	            $scope.site.siteLocation    = temp.locations_id,
+	            $scope.img                  = temp.photo,
+	            $scope.avatar               = temp.avatar
             });
-
+            $scope.img = $scope.avatar;
             $scope.site.siteForm.$setPristine();
-        }
+        },
         
     });
     
-	$scope.img=''; //the original image
-	$scope.avatar = ''; //tje avatar image
+	//scope.img=''; //the original image
+	//scope.avatar = ''; //tje avatar image
 	$scope.capture = function() {
 	    $scope.avatar = $scope.img;
 	};
@@ -65,7 +67,9 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
 	        success: function() {
 	            alert('berhasil');
 	            $scope.clear();
+	            $location.path("/administration/sites");
 	        }
+	        
 	    });
 	    
 	};

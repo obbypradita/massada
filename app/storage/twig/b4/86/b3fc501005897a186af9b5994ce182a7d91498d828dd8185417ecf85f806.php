@@ -68,11 +68,11 @@ class __TwigTemplate_b486b3fc501005897a186af9b5994ce182a7d91498d828dd8185417ecf8
 \t<input type=\"text\" name=\"";
         // line 41
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mNamePhoto", array()), "html", null, true);
-        echo "\" ng-model=\"img\" hidden>
+        echo "\" ng-model=\"img\" >
     <input type=\"text\" name=\"";
         // line 42
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mNameAvatar", array()), "html", null, true);
-        echo "\" ng-model=\"avatar\" hidden>
+        echo "\" ng-model=\"avatar\" >
 
 </div>
 

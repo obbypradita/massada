@@ -19,7 +19,7 @@ class CreateLocationsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('massada_application_sites');
+        //Schema::dropIfExists('massada_application_sites');
         Schema::dropIfExists('massada_application_locations');
     }
 

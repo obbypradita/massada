@@ -42,8 +42,8 @@ mLabel = "Project Type :"
 model = "site.siteProjectType"
 base = "siteForm"
 mObject = "siteProjectType"
-mKey = "1;2;3"
-mValue = "Mpo;Reseller;Other"
+mKey = "1;2"
+mValue = "Multi Operator;Reseller"
 
 [mDropdown siteLocation]
 mId = "siteLocation"
@@ -108,9 +108,48 @@ model = "site.sitePhoto"
 src = "sitePhoto"
 req = "true"
 req_msg = "Butuh foto neh"
+
+[mContact siteContact]
+id = "mTextbox"
+name = "mTextbox"
+label = "mTextbox"
+mModel = "site.contacts"
+base = "siteForm"
+mModelContact = "name"
+mReqContact = "true"
+mReqContact_msg = "needed"
+mMaxContact = "50"
+mMaxContact_msg = "50 max"
+mMinContact = "5"
+mMinContact_msg = "5 min"
+mExpContact = "/^[a-z A-Z,.]*/"
+mExpContact_msg = "Format nama salah"
+mTrimContact = "true"
+mModelPhone = "phone"
+mReqPhone = "true"
+mReqPhone_msg = "need"
+mMaxPhone = "16"
+mMaxPhone_msg = "16 max"
+mMinPhone = "10"
+mMinPhone_msg = "10 min"
+mExpPhone = "/^[0-9 ()-]*$/"
+mExpPhone_msg = "phone format invalid"
+mModelEmail = "email"
+mReqEmail = "true"
+mReqEmail_msg = "butuh"
+mMaxEmail = "50"
+mMaxEmail_msg = "50 max"
+mMinEmail = "10"
+mMinEmail_msg = "10 min"
+mExpEmail = "/^[a-zA-Z.@]*$/"
+mExpEmail_msg = "format salah"
+mTrimEmail = "true"
 ==
 <?php
 use Massada\Application\Models\Sites;
+use Massada\Application\Models\SiteContacts;
+use Massada\Application\Models\SiteContactPhones;
+use Massada\Application\Models\SiteContactEmails;
 use Massada\Application\Classes\Operation;
 
 function onGetSites() {
@@ -122,34 +161,58 @@ function onGetSites() {
 
 function onInsertSite() {
     
-    $photo = post('sitePhoto');
-    $avtr = post('siteAvatar');
-    $rand = Operation::generateRandomString(10);
-    
+  
     $site = new Sites;
-    $site->name         = post('siteName');
-    $site->owner        = post('siteOwner');
-    $site->address      = post('siteAddress');
-    $site->project_type = post('siteProjectType');
-    $site->phone        = post('sitePhone');
-    $site->fax          = post('siteFax');
-    $site->photo        = $rand;//post('forpost');
-    $site->locations_id = post('siteLocation');
+    $site->name         = post('siteName')          ; /*"stName"          ; // */ 
+    $site->owner        = post('siteOwner')         ; /*"stOwner"         ; // */ 
+    $site->address      = post('siteAddress')       ; /*"stAddress"       ; // */ 
+    $site->project_type = post('siteProjectType')   ; /*"Multioperator"   ; // */ 
+    $site->phone        = post('sitePhone')         ; /*"022589948565"    ; // */ 
+    $site->fax          = post('siteFax')           ; /*"087958745856"    ; // */ 
+    $site->locations_id = post('siteLocation')      ; /*"1"               ; // */ 
+   
+    if (!empty(post('siteAvatar'))) {
+        $rand = Operation::generateRandomString(10);
+        $site->photo        = $rand                     ; /*$rand             ; // */ 
+        $photo              = post('sitePhoto')         ; /*"asal aja"        ; // */ 
+        $avtr               = post('siteAvatar')        ; /*"asal aja"        ; // */ 
+        
+        list($type, $avtr) = explode(';', $avtr);
+        list(, $avtr)      = explode(',', $avtr);
+        $avtr = base64_decode($avtr);
+        file_put_contents("uploads/public/images/site/avatar/$rand.png", $avtr);
+        
+        
+        // INSERT PHOTO
+        list($type, $photo) = explode(';', $photo);
+        list(, $photo)      = explode(',', $photo);
+        $photo = base64_decode($photo);
+        file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
+    }
+
     $site->save();
-    
-    
-    list($type, $avtr) = explode(';', $avtr);
-    list(, $avtr)      = explode(',', $avtr);
-    $avtr = base64_decode($avtr);
-    file_put_contents("uploads/public/images/site/avatar/$rand.png", $avtr);
-    
-    
-    // INSERT PHOTO
-    list($type, $photo) = explode(';', $photo);
-    list(, $photo)      = explode(',', $photo);
-    $photo = base64_decode($photo);
-    file_put_contents("uploads/public/images/site/original/$rand.png", $photo);
-    
+
+    $contact = json_decode(post('siteContacts'));
+
+    foreach($contact as $key=>$value) {
+        $people = new SiteContacts;
+        $people->name = $value->name;
+        $people->sites_id = $site->id;
+        $people->save();
+        foreach($value->phones as $kphone=>$vphone) {
+            $phone = new SiteContactPhones;
+            $phone->phone = $vphone->phone;
+            $phone->site_contacts_id = $people->id;
+            $phone->save();
+        }
+        foreach($value->emails as $kemail=>$vemail) {
+            $email = new SiteContactEmails;
+            $email->email = $vemail->email;
+            $email->site_contacts_id = $people->id;
+            $email->save();
+        }
+
+    }
     
         
 }
@@ -203,30 +266,30 @@ function onInsertSite() {
     
             <h2 class="sub-header">Insert New Site</h2>
 
-            <form name="siteForm" method="POST" enctype="multipart/from-data">
+            <form name="siteForm" method="POST" enctype="multipart/from-data" novalidate>
                 <hr/>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                                <span class="fa fa-undo"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default" ng-click="clear()">
-                                <span class="fa fa-eraser"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class="form-group">
-                            <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                                <span class="fa fa-save"></span>
-                                Save
-                            </button>
-                        </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
+                            <span class="fa fa-undo"></span>
+                            Back
+                        </a>
                     </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" ng-click="clear()">
+                            <span class="fa fa-eraser"></span>
+                            Clear
+                        </button>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
+                            <span class="fa fa-save"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
                 <hr/>
                 <div class="container-fluid">
                     <div class="col-md-4 col-sm-5">
@@ -246,114 +309,39 @@ function onInsertSite() {
                     </div>
                 </div>
                 <hr/>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                                <span class="fa fa-undo"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default" ng-click="clear()">
-                                <span class="fa fa-eraser"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class="form-group">
-                            <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                                <span class="fa fa-save"></span>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                <hr/>
-            </form>
             
-            <form>
-                <h2 class="sub-header">Contact Person</h2>
-                <!-- contact menu toolbox-->
-                <hr/>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-default" ng-click="clear()">
-                            <span class="fa fa-eraser"></span>
-                            Delete All Contacts
-                        </button>
-                    </div>
-                    
-                    <!-- Submit -->
-                    <div class="form-group">
-                        <button type="button" ng-click="addContact()" class="btn btn-primary"> 
-                            <span class="fa fa-plus"></span>
-                            Add Contacts
-                        </button>
-                    </div>
-                </div>
-                <hr/>    
-
-                <!-- main fonctact name-->
-                <div class="form-horizontal">
-                    <div ng-repeat="contact in contacs.phones track by $index">
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Contact : {{ '{{ $index + 1 }}' }}</label>
-                            <div class="col-sm-10 controls">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="contact.name">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-danger" ng-click="removeContact($index)">X</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label"></label>
-                            <div class="col-sm-10 controls">
-                                <hr/>
-                                    <h4>Phone</h4>
-                                <hr/>
-                                <div class="form-horizontal">
-                                    <div class="form-group" ng-repeat="phone in contact.phones track by $index">
-                                        <label for="" class="col-sm-2 control-label">Phone : {{ '{{ $index + 1 }}' }}</label>
-                                        <div class="col-sm-10 controls">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" ng-model="phone.phone">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-danger" ng-click="removePhone($parent.$index, $index)">X</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-default" ng-click="addPhone($index)">Add Phone</button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr/>
-                    </div>
-                </div>
-
-                <!-- bottom contact menu tools-->
-                <hr/>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-default" ng-click="clear($index)">
-                            <span class="fa fa-eraser"></span>
-                            Delete All Contacts
-                        </button>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="button" ng-click="addContact()" class="btn btn-primary"> 
-                            <span class="fa fa-plus"></span>
-                            Add Contacts
-                        </button>
-                    </div>
-                </div>
-                <hr/>    
+            
+                <!-- contact -->
+                {% component 'siteContact' %}
+              <!-- end contacts-->
             </form>
-            {{ '{{ contact }}' }}
+
+
+            <hr/>
+            <div class="form-inline">
+                <div class="form-group">
+                    <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
+                        <span class="fa fa-undo"></span>
+                        Back
+                    </a>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" ng-click="clear()">
+                        <span class="fa fa-eraser"></span>
+                        Clear
+                    </button>
+                </div>
+                
+                <!-- Submit -->
+                <div class="form-group">
+                    <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
+                        <span class="fa fa-save"></span>
+                        Save
+                    </button>
+                </div>
+            </div>
+            <hr/>
+            {{ '{{ site.contacts }}' }}
             
             
         </div>

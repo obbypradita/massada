@@ -34,66 +34,68 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
             <h2 class=\"sub-header\">Operator List</h2>
             <hr/>
             
+            
             ";
-        // line 9
+        // line 10
         $context['__cms_partial_params'] = [];
         $context['__cms_partial_params']['label'] = "Add New Operator"        ;
         $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-operator-insert")        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 10
-        echo "
-            <div class=\"table-responsive\"  id=\"siteTable\">
+        // line 11
+        echo "            
+            <h1 id=\"confirmation\">Sebentar...</h1>
+            <div class=\"table-responsive\"  id=\"operatorTable\">
             <table  class=\"table table-striped table-hover\">
                 <thead>
                     <tr>
-                        <th><a href=\"\" ng-click=\"sortField = 'id';              reverse = !reverse\" >#</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'name';            reverse = !reverse\" >Site Name</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'owner';           reverse = !reverse\" >Building Owner</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'project_type';    reverse = !reverse\" >Project Type</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'locations.name';  reverse = !reverse\" >Location</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'address';         reverse = !reverse\" >Address</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'photo';           reverse = !reverse\" >Photo</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'id'      ; reverse = !reverse\">#</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'name'    ; reverse = !reverse\">Brand Name</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'company' ; reverse = !reverse\">Company</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'address' ; reverse = !reverse\">Address</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'phone'   ; reverse = !reverse\">Phone</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'fax'     ; reverse = !reverse\">Fax</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'photo'   ; reverse = !reverse\">Photo</a></th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat=\"st in site.sites | filter:search | orderBy:sortField:reverse\">
-                        <td>";
-        // line 27
-        echo "{{ st.id }}";
-        echo "</td>
-                        <td>";
-        // line 28
-        echo "{{ st.name }}";
-        echo "</td>
+                    <tr ng-repeat=\"op in administration.operators | filter:search | orderBy:sortField:reverse\">
                         <td>";
         // line 29
-        echo "{{ st.owner }}";
+        echo "{{ op.id      }}";
         echo "</td>
                         <td>";
         // line 30
-        echo "{{ st.project_type }}";
+        echo "{{ op.name    }}";
         echo "</td>
                         <td>";
         // line 31
-        echo "{{ st.locations.name }}";
+        echo "{{ op.company }}";
         echo "</td>
                         <td>";
         // line 32
-        echo "{{ st.address }}";
+        echo "{{ op.address }}";
         echo "</td>
                         <td>";
         // line 33
-        echo "{{ st.photo }}";
+        echo "{{ op.phone   }}";
         echo "</td>
-                        <td><a href=\"http://localhost:8080/massada/administration/site/update/";
+                        <td>";
         // line 34
-        echo "{{ st.id }}";
+        echo "{{ op.fax     }}";
+        echo "</td>
+                        <td>";
+        // line 35
+        echo "{{ op.logo    }}";
+        echo "</td>
+                        <td><a href=\"http://localhost:8080/massada/administration/operator/update/";
+        // line 36
+        echo "{{ op.id }}";
         echo "\">Update</a> | 
                             <a href=\"\" ng-click=\"onDelete(";
-        // line 35
-        echo "st.id";
+        // line 37
+        echo "op.id";
         echo ")\">Delete</a></td>
                     </tr>
                 </tbody>
@@ -102,13 +104,13 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
             <hr/>
             
             ";
-        // line 42
+        // line 44
         $context['__cms_partial_params'] = [];
         $context['__cms_partial_params']['label'] = "Add New Operator"        ;
         $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-operator-insert")        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 43
+        // line 45
         echo "        
         </div>
     </div>";
@@ -126,6 +128,6 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
 
     public function getDebugInfo()
     {
-        return array (  112 => 43,  106 => 42,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  72 => 29,  68 => 28,  64 => 27,  45 => 10,  39 => 9,  33 => 5,  29 => 4,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  114 => 45,  108 => 44,  98 => 37,  94 => 36,  90 => 35,  86 => 34,  82 => 33,  78 => 32,  74 => 31,  70 => 30,  66 => 29,  46 => 11,  40 => 10,  33 => 5,  29 => 4,  26 => 3,  22 => 2,  19 => 1,);
     }
 }

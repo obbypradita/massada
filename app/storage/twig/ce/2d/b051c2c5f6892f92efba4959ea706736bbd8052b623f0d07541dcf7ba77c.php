@@ -64,7 +64,7 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat=\"st in site.sites | filter:search | orderBy:sortField:reverse\">
+                    <tr ng-repeat=\"st in administration.sites | filter:search | orderBy:sortField:reverse\">
                         <td>";
         // line 33
         echo "{{ st.id }}";

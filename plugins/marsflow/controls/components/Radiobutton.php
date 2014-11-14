@@ -1,4 +1,4 @@
-<?php namespace Massada\Application\Components;
+<?php namespace Marsflow\Controls\Components;
 
 use Cms\Classes\ComponentBase;
 

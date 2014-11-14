@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms54660a3dc9bf6_1470399585Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Locations;use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms546685021848d_1877791360Class extends \Cms\Classes\PageCode
 {
 
 
@@ -7,6 +7,19 @@ use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts
 
 
 
+
+public function onStart() {
+    $temp = "["; $delimiter="";
+    $cmb = Locations::get();
+    foreach($cmb as $key=>$value) {
+        $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
+        $delimiter=",";
+    }
+    $temp = rtrim($temp, ',');
+
+    $temp .= "]";
+    $this['mObject']=$temp;
+}
 public function onGetSites() {
     $temp = Sites::get();
     $temp = json_encode($temp);
@@ -67,8 +80,6 @@ public function onInsertSite() {
         }
 
     }
-    
-        
 }
 
 }

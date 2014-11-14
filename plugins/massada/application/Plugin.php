@@ -16,7 +16,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Massada Admin Application',
+            'name'        => 'Massada Admin Application Modeling',
             'description' => 'Application for backend administration',
             'author'      => 'massada',
             'icon'        => 'icon-leaf'
@@ -24,13 +24,6 @@ class Plugin extends PluginBase
     }
 
     public function registerComponents() {
-        return [
-            'Massada\Application\Components\Textbox'        => 'mTextbox',
-            'Massada\Application\Components\Radiobutton'    => 'mRadiobutton',
-            'Massada\Application\Components\Dropdown'       => 'mDropdown',
-            'Massada\Application\Components\Textarea'       => 'mTextarea',
-            'Massada\Application\Components\Image'          => 'mImage',
-            'Massada\Application\Components\Contact'        => 'mContact'
-        ];
+        return [];
     }
 }

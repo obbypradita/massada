@@ -4,9 +4,18 @@
 - create_sites_table.php
 
 1.0.2: 
-- First version of application
+- Adding contact to sites
 - create_site_contacts_table.php
 - create_site_contact_phones_table.php
 - create_site_contact_emails_table.php
-- seed_all_tables.php
+- seeds_locations_sites.php
+
+1.0.3:
+- Adding Operator table
+- create_operators_table.php
+- create_operator_contacts_table.php
+- create_operator_contact_phones_table.php
+- create_operator_contact_emails_table.php
+- seeds_operators.php
+
 

@@ -11,7 +11,8 @@ class SiteContactPhones extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'massada_application_site_contact_phones';
+    public $table      = 'ms_siteContactPhones';
+
 
     /**
      * @var array Guarded fields
@@ -21,7 +22,7 @@ class SiteContactPhones extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['phone'];
+    protected $fillable = ['phone', 'siteContacts_id'];
 
     /**
      * @var array Relations

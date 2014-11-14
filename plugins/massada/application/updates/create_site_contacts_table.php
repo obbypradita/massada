@@ -8,13 +8,13 @@ class CreateSiteContactsTable extends Migration
 
     public function up()
     {
-        Schema::create('massada_application_site_contacts', function($table)
+        Schema::create('ms_siteContacts', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->integer('sites_id')->unsigned();
-            $table->foreign('sites_id')->references('id')->on('massada_application_sites')
+            $table->integer('sites_id')->unsigned()->index();
+            $table->foreign('sites_id')->references('id')->on('ms_sites')
                   ->onDelete('cascade');
             $table->timestamps();
         });
@@ -22,7 +22,7 @@ class CreateSiteContactsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('massada_application_site_contacts');
+        Schema::dropIfExists('ms_siteContacts');
     }
 
 }

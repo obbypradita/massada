@@ -11,7 +11,8 @@ class SiteContacts extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'massada_application_site_contacts';
+    public $table      = 'ms_siteContacts';
+
 
     /**
      * @var array Guarded fields
@@ -21,7 +22,7 @@ class SiteContacts extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'siteContacts_id'];
 
     /**
      * @var array Relations
@@ -30,11 +31,11 @@ class SiteContacts extends Model
     
     public $hasOne = [];
     public $hasMany = [
-        'phones' => ['Massada\Application\Models\SiteContactPhones'],
-        'emails' => ['Massada\Application\Models\SiteContactEmails']
+        'phones' => ['Massada\Application\Models\SiteContactPhones' ],
+        'emails' => ['Massada\Application\Models\SiteContactEmails' ]
     ];
     public $belongsTo = [
-        'sites' => ['Massada\Application\Models\Sites']
+        'sites' => ['Massada\Application\Models\Sites' ]
     ];
     public $belongsToMany = [];
     public $morphTo = [];

@@ -146,11 +146,25 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
+use Massada\Application\Models\Locations;
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\SiteContactPhones;
 use Massada\Application\Models\SiteContactEmails;
 use Massada\Application\Classes\Operation;
+
+function onStart() {
+    $temp = "["; $delimiter="";
+    $cmb = Locations::get();
+    foreach($cmb as $key=>$value) {
+        $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
+        $delimiter=",";
+    }
+    $temp = rtrim($temp, ',');
+
+    $temp .= "]";
+    $this['mObject']=$temp;
+}
 
 function onGetSites() {
     $temp = Sites::get();
@@ -213,8 +227,6 @@ function onInsertSite() {
         }
 
     }
-    
-        
 }
 ?>
 ==
@@ -241,7 +253,7 @@ function onInsertSite() {
                             {% component 'siteName' %}
                             {% component 'siteOwner' %}
                             {% component 'siteProjectType' %}
-                            {% component 'siteLocation' %}
+                            {% component 'siteLocation' mObject = mObject %}
                             {% component 'siteAddress' %}
                             {% component 'sitePhone' %}
                             {% component 'siteFax' %}
@@ -260,7 +272,7 @@ function onInsertSite() {
             {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
             
             
-            
+            {{ mObject }}
         </div>
     </div>
 </div>

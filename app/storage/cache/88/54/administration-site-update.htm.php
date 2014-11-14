@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms5466091d713cd_1286321074Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Locations;use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms54668912c70d9_1255083413Class extends \Cms\Classes\PageCode
 {
 
 
@@ -7,11 +7,28 @@ use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts
 
 
 
+
+public function onStart() {
+    $temp = "["; $delimiter="";
+    $cmb = Locations::get();
+    foreach($cmb as $key=>$value) {
+        $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
+        $delimiter=",";
+    }
+    $temp = rtrim($temp, ',');
+
+    $temp .= "]";
+    $this['mObject']=$temp;
+}
 public function onSiteSelect() {
+
+    
     $id = $this->param('id');
     //$site=[];
     $site = Sites::with('locations')
-                ->with('contacts', 'contacts.phones', 'contacts.emails')
+                ->with('contacts')
+                ->with('contacts.emails')
+                ->with('contacts.phones')
                 ->find($id);
 
     if (!empty($site->photo))

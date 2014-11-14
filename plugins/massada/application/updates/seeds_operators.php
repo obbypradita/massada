@@ -1,89 +1,69 @@
 <?php namespace Massada\Application\Updates;
 
 use October\Rain\Database\Updates\Seeder;
-use Massada\Application\Models\Locations;
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\SiteContactEmails;
-use Massada\Application\Models\SiteContactPhones;
+use Massada\Application\Models\Operators;
+use Massada\Application\Models\OperatorContacts;
+use Massada\Application\Models\OperatorContactEmails;
+use Massada\Application\Models\OperatorContactPhones;
 
-class SeedAllTables extends Seeder
+class SeedsOperators extends Seeder
 {
 
       public function run()
       {
-            Locations::insert([
-                  ['name' => 'Jakarta'],
-                  ['name' => 'Bali'],
-                  ['name' => 'Bandung'],
-                  ['name' => 'Tangrang'],
-                  ['name' => 'Bogor'],
-                  ['name' => 'Manado'],
-                  ['name' => 'Lombok'],
-                  ['name' => 'Semarang'],
-            ]);
 
-            $jk = Locations::whereId('1')->first();
-            $jk->sites()->createMany([
+            Operators::insert([
                   [
-                        'name'           => 'Carrfour', 
-                        'owner'          => 'PT. CARFOUR INDONESIA', 
-                        'address'        => 'Jakarta 1', 
-                        'project_type'   => 'Multi Oeprator', 
+                        'name'           => 'Telkomsel', 
+                        'company'        => 'PT. CARFOUR INDONESIA', 
+                        'address'        => 'Jakarta 1',  
                         'phone'          => '02578945895458', 
                         'fax'            => '02578945895458', 
-                        'photo'          => 'tidak ada'
+                        'logo'           => 'tidak ada'
                   ],
 
                   [
-                        'name'            => 'Four Season', 
-                        'owner'           => 'PT. FS INDONESIA', 
+                        'name'            => 'XL', 
+                        'company'         => 'PT. FS INDONESIA', 
                         'address'         => 'Jakarta 2', 
-                        'project_type'    => 'Multi Operator', 
-                        'phone'           => 'Multi Operator', 
+                        'phone'           => '05468454568666', 
                         'fax'             => '02578945895458', 
-                        'photo'           => 'belum di upload'
+                        'logo'            => 'belum di upload'
                   ],
 
                   [
                         'name'            => 'Santika', 
-                        'owner'           => 'PT. KOMPAS INDONESIA', 
+                        'company'         => 'PT. KOMPAS INDONESIA', 
                         'address'         => 'Jakarta 3', 
-                        'project_type'    => 'Reseller', 
                         'phone'           => '02589789654789', 
                         'fax'             => '02578945895458', 
-                        'photo'           => 'gagal di upload'
+                        'logo'            => 'gagal di upload'
                   ],
-            ]);
 
-            
-            $bl = Locations::whereId('2')->first();
-            $bl->sites()->createMany([
                   [
                         'name'            => 'Adhijaya', 
-                        'owner'           => 'Siapa saja boleh',
-                        'address'         => 'Bali 1', 
-                        'project_type'    => 'Multioperator', 
+                        'company'         => 'Siapa saja boleh',
+                        'address'         => 'Bali 1',  
                         'phone'           => '02589789654789', 
                         'fax'             => '02578945895458', 
-                        'photo'           => 'sedang di upload'
+                        'logo'            => 'sedang di upload'
                   ],
             ]);
 
-            $contacts1 = Sites::whereId('1')->first();
+            $contacts1 = Operators::whereId('1')->first();
             $contacts1->contacts()->createMany([
                   [ 'name'      => 'Stevan' ],
                   [ 'name'      => 'Aji' ],
                   [ 'name'      => 'Area' ],
             ]);
 
-            $contacts2 = Sites::whereId('2')->first();
+            $contacts2 = Operators::whereId('2')->first();
             $contacts2->contacts()->createMany([
                   [ 'name'      => 'Obby' ],
                   [ 'name'      => 'Pradita' ],
             ]);
 
-            $pe1 = SiteContacts::whereId('1')->first();
+            $pe1 = OperatorContacts::whereId('1')->first();
             $pe1->phones()->createMany([
                   [ 'phone' => '021589878654' ],
             ]);
@@ -93,7 +73,7 @@ class SeedAllTables extends Seeder
                   [ 'email' => 'steve@gmail.co' ],
             ]);
 
-            $pe2 = SiteContacts::whereId('2')->first();
+            $pe2 = OperatorContacts::whereId('2')->first();
             $pe2->phones()->createMany([
                   [ 'phone' => '021589878654' ],
                   [ 'phone' => '987569856548' ],
@@ -102,7 +82,7 @@ class SeedAllTables extends Seeder
                   [ 'email' => 'ajiesam@live.com' ],
             ]);
 
-            $pe3 = SiteContacts::whereId('3')->first();
+            $pe3 = OperatorContacts::whereId('3')->first();
             $pe3->phones()->createMany([
                   [ 'phone' => '029878548987' ],
             ]);
@@ -110,7 +90,7 @@ class SeedAllTables extends Seeder
                   [ 'email' => 'areanoutik@plasa.com' ],
             ]);
 
-            $pe4 = SiteContacts::whereId('4')->first();
+            $pe4 = OperatorContacts::whereId('4')->first();
             $pe4->phones()->createMany([
                   [ 'phone' => '021589878654' ],
                   [ 'phone' => '867675678656' ],
@@ -121,7 +101,7 @@ class SeedAllTables extends Seeder
                   [ 'email' => 'oby@yahoo.com' ],
             ]);
 
-            $pe5 = SiteContacts::whereId('5')->first();
+            $pe5 = OperatorContacts::whereId('5')->first();
             $pe5->phones()->createMany([
                   [ 'phone' => '021589878654' ],
             ]);

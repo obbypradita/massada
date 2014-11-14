@@ -11,7 +11,8 @@ class Sites extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'massada_application_sites';
+    public $table = 'ms_sites';
+
 
 
     /**
@@ -32,11 +33,12 @@ class Sites extends Model
         'contacts' => ['Massada\Application\Models\SiteContacts'],
 
     ];
-
+    /*
     public $hasManyThrough = [
         'phones' => ['Massada\Application\Models\SiteContactPhones', 'through' => 'Massada\Application\Models\SiteContacts'],
         'emails' => ['Massada\Application\Models\SiteContactEmails', 'through' => 'Massada\Application\Models\SiteContacts']
     ];
+    */
 
     public $belongsTo = [
         'locations' => ['Massada\Application\Models\Locations']
@@ -53,7 +55,7 @@ class Sites extends Model
     public function afterDelete() {
         $photofordelete = $this->photo;
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/' . $photofordelete . '.png'));
-        array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/avatar/' . $photofordelete . '.png'));
+        array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/avatar/'   . $photofordelete . '.png'));
     }
 
     public function afterUpdate() {

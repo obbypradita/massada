@@ -1,7 +1,7 @@
-<?php namespace Massada\Application\Components;
+<?php namespace Marsflow\Controls\Components;
 
 use Cms\Classes\ComponentBase;
-use Massada\Application\Classes\Operation;
+use Marsflow\Controls\Classes\Operation;
 
 
 class Image extends ComponentBase

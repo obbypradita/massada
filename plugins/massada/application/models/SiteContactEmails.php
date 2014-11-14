@@ -11,7 +11,7 @@ class SiteContactEmails extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'massada_application_site_contact_emails';
+    public $table      = 'ms_siteContactEmails';
 
     /**
      * @var array Guarded fields
@@ -21,7 +21,7 @@ class SiteContactEmails extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['email'];
+    protected $fillable = ['email', 'siteContacts_id'];
 
     /**
      * @var array Relations

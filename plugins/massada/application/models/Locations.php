@@ -11,7 +11,8 @@ class Locations extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'massada_application_locations';
+    public $table = 'ms_locations';
+
 
     /**
      * @var array Guarded fields

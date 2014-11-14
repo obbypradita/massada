@@ -7,9 +7,6 @@ hidden = "0"
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\Locations;
-function onInit() {
-    
-}
 
 function onDeleteSite() {
     $siteId = post('siteId');
@@ -18,34 +15,14 @@ function onDeleteSite() {
     
     $contact = SiteContacts::where('sites_id', '=', $site->id);
     $contact->delete();
-    
-    array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
 }
-
-function onStart() {
-    $temp = Sites::get();
-    $temp = json_encode($temp);
-}
-
-
 
 function onSelectSite() {
     $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
 
     return $temp;
-}
-
-function onGetLocation() {
-    $temp = Locations::all()->toJson();
-    echo $temp;
-}
-
-function onAjaxTest()
-{
-    // update MySQL here
-    echo "Called";
 }
 ?>
 ==
@@ -80,7 +57,7 @@ function onAjaxTest()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
+                    <tr ng-repeat="st in administration.sites | filter:search | orderBy:sortField:reverse">
                         <td>{{ '{{ st.id }}' }}</td>
                         <td>{{ '{{ st.name }}' }}</td>
                         <td>{{ '{{ st.owner }}' }}</td>

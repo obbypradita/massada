@@ -8,7 +8,7 @@ class CreateSitesTable extends Migration
 
     public function up()
     {
-        Schema::create('massada_application_sites', function($table)
+        Schema::create('ms_sites', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -19,8 +19,8 @@ class CreateSitesTable extends Migration
             $table->string('phone');
             $table->string('fax')->nullable();
             $table->string('photo')->nullable();
-            $table->integer('locations_id')->unsigned();
-            $table->foreign('locations_id')->references('id')->on('massada_application_locations')
+            $table->integer('locations_id')->unsigned()->index();
+            $table->foreign('locations_id')->references('id')->on('ms_locations')
                   ->onDelete('cascade');
             $table->timestamps();
         });
@@ -28,7 +28,7 @@ class CreateSitesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('massada_application_sites');
+        Schema::dropIfExists('ms_sites');
         //Schema::dropIfExists('massada_application_locations');
 
         array_map('unlink', glob('C:/xampp/htdocs/massada/uploads/public/images/site/original/*.png'));

@@ -8,7 +8,7 @@ class CreateLocationsTable extends Migration
 
     public function up()
     {
-        Schema::create('massada_application_locations', function($table)
+        Schema::create('ms_locations', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -19,11 +19,11 @@ class CreateLocationsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('massada_application_site_contact_emails');
-        Schema::dropIfExists('massada_application_site_contact_phones');
-        Schema::dropIfExists('massada_application_site_contacts');
-        Schema::dropIfExists('massada_application_sites');
-        Schema::dropIfExists('massada_application_locations');
+        Schema::dropIfExists('ms_siteContactEmails');
+        Schema::dropIfExists('ms_siteContactPhones');
+        Schema::dropIfExists('ms_siteContacts');
+        Schema::dropIfExists('ms_sites');
+        Schema::dropIfExists('ms_locations');
     }
 
 }

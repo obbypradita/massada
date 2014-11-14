@@ -1,7 +1,6 @@
-<?php namespace Massada\Application\Components;
+<?php namespace Marsflow\Controls\Components;
 
 use Cms\Classes\ComponentBase;
-use Massada\Application\Models\Locations;
 
 class Dropdown extends ComponentBase
 {
@@ -91,6 +90,12 @@ class Dropdown extends ComponentBase
         ];
     }
 
+
+
+    public function onRun() {
+        $this->mObject = $this->page['mObject'];
+    }
+
     public function onRender() {
         $this->mId      = $this->property('mId');
         $this->mName    = $this->property('mName');
@@ -98,17 +103,6 @@ class Dropdown extends ComponentBase
         $this->mModel   = $this->property('model');
         $this->mBase    = $this->property('base');
         
-
-        $temp = "[";
-        $cmb = Locations::get();
-        foreach($cmb as $key=>$value) {
-            $temp .= "{key: '" . $value->id . "', value: '" . $value->name . "'}, ";
-        }
-        $temp = rtrim($temp, ',');
-
-        $temp .= "]";
-        $this->mObject=$temp;
-
         $this->mRequired        = $this->property('req');
         $this->mRequired_msg    = $this->property('req_msg');
     }

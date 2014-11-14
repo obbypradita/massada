@@ -1,16 +1,15 @@
 october.controllers['administration-sites'] = function ($scope, $request, $parse) {
-    $scope.site={};
+    $scope.administration={};
     $('#confirmation').hide();
 
     $scope.sortField='id';
-    //$scope.reverse=true;
-    
+
     $request('onSelectSite', { 
         success: function(data) {
             //console.log(data)
             var temp = data.result;
             $scope.$apply(function () {
-                $scope.site.sites = $parse(temp)($scope);
+                $scope.administration.sites = $parse(temp)($scope);
             });
         }
         
@@ -22,7 +21,7 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
             success: function(data) {
                 var temp = data.result;
                 $scope.$apply(function () {
-                     $scope.site.sites = $parse(temp)($scope);
+                     $scope.administration.sites = $parse(temp)($scope);
                 });
                 $('#confirmation').hide();
             }

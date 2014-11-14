@@ -76,6 +76,7 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
         // line 24
         echo "                            ";
         $context['__cms_component_params'] = [];
+        $context['__cms_component_params']['mObject'] = (isset($context["mObject"]) ? $context["mObject"] : null)        ;
         echo $this->env->getExtension('CMS')->componentFunction("siteLocation"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
         // line 25
@@ -121,7 +122,10 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
         // line 41
         echo "            
             
-            
+            ";
+        // line 43
+        echo twig_escape_filter($this->env, (isset($context["mObject"]) ? $context["mObject"] : null), "html", null, true);
+        echo "
         </div>
     </div>
 </div>";
@@ -139,6 +143,6 @@ class __TwigTemplate_d066e6a127d5b82033fc0b4eb6f5449926943cd5c4e15c181da76a6425d
 
     public function getDebugInfo()
     {
-        return array (  122 => 41,  116 => 40,  110 => 36,  106 => 35,  97 => 28,  92 => 27,  87 => 26,  82 => 25,  77 => 24,  72 => 23,  67 => 22,  63 => 21,  57 => 17,  53 => 16,  48 => 13,  42 => 12,  35 => 7,  31 => 6,  27 => 4,  23 => 3,  19 => 1,);
+        return array (  127 => 43,  123 => 41,  117 => 40,  111 => 36,  107 => 35,  98 => 28,  93 => 27,  88 => 26,  83 => 25,  77 => 24,  72 => 23,  67 => 22,  63 => 21,  57 => 17,  53 => 16,  48 => 13,  42 => 12,  35 => 7,  31 => 6,  27 => 4,  23 => 3,  19 => 1,);
     }
 }

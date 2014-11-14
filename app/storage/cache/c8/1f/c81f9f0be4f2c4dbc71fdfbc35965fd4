@@ -1,7 +1,26 @@
-1415976396s:5414:"a:5:{s:5:"mtime";i:1415973665;s:7:"content";s:2626:"title = "Administration - Operators"
+1416008484s:6418:"a:5:{s:5:"mtime";i:1416004836;s:7:"content";s:3131:"title = "Administration - Operators"
 url = "/administration/operators"
 layout = "default"
 hidden = "0"
+==
+<?php
+use Massada\Application\Models\Operators;
+use Massada\Application\Models\OperatorContacts;
+
+function onDeleteOperator() {
+    $operatorId = post('operatorId');
+    $operator = Operators::find($operatorId);
+    $operatorLogo=$operator->logo;
+    
+    $contact = OperatorContacts::where('operators_id', '=', $operator->id);
+    $contact->delete();
+    $operator->delete();
+}
+
+function onSelectOperator() {
+    return json_encode(Operators::get());
+}
+?>
 ==
 <div class="row">
         {% partial 'sidebar/administration' %}
@@ -11,33 +30,35 @@ hidden = "0"
             <h2 class="sub-header">Operator List</h2>
             <hr/>
             
+            
             {% partial 'tools/list' label='Add New Operator' addLinks='administration-operator-insert'|page %}
-
-            <div class="table-responsive"  id="siteTable">
+            
+            <h1 id="confirmation">Sebentar...</h1>
+            <div class="table-responsive"  id="operatorTable">
             <table  class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th><a href="" ng-click="sortField = 'id';              reverse = !reverse" >#</a></th>
-                        <th><a href="" ng-click="sortField = 'name';            reverse = !reverse" >Site Name</a></th>
-                        <th><a href="" ng-click="sortField = 'owner';           reverse = !reverse" >Building Owner</a></th>
-                        <th><a href="" ng-click="sortField = 'project_type';    reverse = !reverse" >Project Type</a></th>
-                        <th><a href="" ng-click="sortField = 'locations.name';  reverse = !reverse" >Location</a></th>
-                        <th><a href="" ng-click="sortField = 'address';         reverse = !reverse" >Address</a></th>
-                        <th><a href="" ng-click="sortField = 'photo';           reverse = !reverse" >Photo</a></th>
+                        <th><a href="" ng-click="sortField = 'id'      ; reverse = !reverse">#</a></th>
+                        <th><a href="" ng-click="sortField = 'name'    ; reverse = !reverse">Brand Name</a></th>
+                        <th><a href="" ng-click="sortField = 'company' ; reverse = !reverse">Company</a></th>
+                        <th><a href="" ng-click="sortField = 'address' ; reverse = !reverse">Address</a></th>
+                        <th><a href="" ng-click="sortField = 'phone'   ; reverse = !reverse">Phone</a></th>
+                        <th><a href="" ng-click="sortField = 'fax'     ; reverse = !reverse">Fax</a></th>
+                        <th><a href="" ng-click="sortField = 'photo'   ; reverse = !reverse">Photo</a></th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
-                        <td>{{ '{{ st.id }}' }}</td>
-                        <td>{{ '{{ st.name }}' }}</td>
-                        <td>{{ '{{ st.owner }}' }}</td>
-                        <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
-                        <td>{{ '{{ st.address }}' }}</td>
-                        <td>{{ '{{ st.photo }}' }}</td>
-                        <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
-                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
+                    <tr ng-repeat="op in administration.operators | filter:search | orderBy:sortField:reverse">
+                        <td>{{ '{{ op.id      }}' }}</td>
+                        <td>{{ '{{ op.name    }}' }}</td>
+                        <td>{{ '{{ op.company }}' }}</td>
+                        <td>{{ '{{ op.address }}' }}</td>
+                        <td>{{ '{{ op.phone   }}' }}</td>
+                        <td>{{ '{{ op.fax     }}' }}</td>
+                        <td>{{ '{{ op.logo    }}' }}</td>
+                        <td><a href="http://localhost:8080/massada/administration/operator/update/{{ '{{ op.id }}'  }}">Update</a> | 
+                            <a href="" ng-click="onDelete({{ 'op.id' }})">Delete</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +68,24 @@ hidden = "0"
             {% partial 'tools/list' label='Add New Operator' addLinks='administration-operator-insert'|page %}
         
         </div>
-    </div>";s:8:"settings";a:5:{s:5:"title";s:26:"Administration - Operators";s:3:"url";s:25:"/administration/operators";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:2515:"<div class="row">
+    </div>";s:8:"settings";a:5:{s:5:"title";s:26:"Administration - Operators";s:3:"url";s:25:"/administration/operators";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:466:"
+use Massada\Application\Models\Operators;
+use Massada\Application\Models\OperatorContacts;
+
+function onDeleteOperator() {
+    $operatorId = post('operatorId');
+    $operator = Operators::find($operatorId);
+    $operatorLogo=$operator->logo;
+    
+    $contact = OperatorContacts::where('operators_id', '=', $operator->id);
+    $contact->delete();
+    $operator->delete();
+}
+
+function onSelectOperator() {
+    return json_encode(Operators::get());
+}
+";s:6:"markup";s:2541:"<div class="row">
         {% partial 'sidebar/administration' %}
         <div class="col-sm-9 col-md-10">
             {% partial 'header/operators' %}
@@ -55,33 +93,35 @@ hidden = "0"
             <h2 class="sub-header">Operator List</h2>
             <hr/>
             
+            
             {% partial 'tools/list' label='Add New Operator' addLinks='administration-operator-insert'|page %}
-
-            <div class="table-responsive"  id="siteTable">
+            
+            <h1 id="confirmation">Sebentar...</h1>
+            <div class="table-responsive"  id="operatorTable">
             <table  class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th><a href="" ng-click="sortField = 'id';              reverse = !reverse" >#</a></th>
-                        <th><a href="" ng-click="sortField = 'name';            reverse = !reverse" >Site Name</a></th>
-                        <th><a href="" ng-click="sortField = 'owner';           reverse = !reverse" >Building Owner</a></th>
-                        <th><a href="" ng-click="sortField = 'project_type';    reverse = !reverse" >Project Type</a></th>
-                        <th><a href="" ng-click="sortField = 'locations.name';  reverse = !reverse" >Location</a></th>
-                        <th><a href="" ng-click="sortField = 'address';         reverse = !reverse" >Address</a></th>
-                        <th><a href="" ng-click="sortField = 'photo';           reverse = !reverse" >Photo</a></th>
+                        <th><a href="" ng-click="sortField = 'id'      ; reverse = !reverse">#</a></th>
+                        <th><a href="" ng-click="sortField = 'name'    ; reverse = !reverse">Brand Name</a></th>
+                        <th><a href="" ng-click="sortField = 'company' ; reverse = !reverse">Company</a></th>
+                        <th><a href="" ng-click="sortField = 'address' ; reverse = !reverse">Address</a></th>
+                        <th><a href="" ng-click="sortField = 'phone'   ; reverse = !reverse">Phone</a></th>
+                        <th><a href="" ng-click="sortField = 'fax'     ; reverse = !reverse">Fax</a></th>
+                        <th><a href="" ng-click="sortField = 'photo'   ; reverse = !reverse">Photo</a></th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
-                        <td>{{ '{{ st.id }}' }}</td>
-                        <td>{{ '{{ st.name }}' }}</td>
-                        <td>{{ '{{ st.owner }}' }}</td>
-                        <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
-                        <td>{{ '{{ st.address }}' }}</td>
-                        <td>{{ '{{ st.photo }}' }}</td>
-                        <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
-                            <a href="" ng-click="onDelete({{ 'st.id' }})">Delete</a></td>
+                    <tr ng-repeat="op in administration.operators | filter:search | orderBy:sortField:reverse">
+                        <td>{{ '{{ op.id      }}' }}</td>
+                        <td>{{ '{{ op.name    }}' }}</td>
+                        <td>{{ '{{ op.company }}' }}</td>
+                        <td>{{ '{{ op.address }}' }}</td>
+                        <td>{{ '{{ op.phone   }}' }}</td>
+                        <td>{{ '{{ op.fax     }}' }}</td>
+                        <td>{{ '{{ op.logo    }}' }}</td>
+                        <td><a href="http://localhost:8080/massada/administration/operator/update/{{ '{{ op.id }}'  }}">Update</a> | 
+                            <a href="" ng-click="onDelete({{ 'op.id' }})">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

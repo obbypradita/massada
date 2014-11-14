@@ -91,6 +91,7 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
         // line 39
         echo "                        ";
         $context['__cms_component_params'] = [];
+        $context['__cms_component_params']['myObject'] = (isset($context["myObject"]) ? $context["myObject"] : null)        ;
         echo $this->env->getExtension('CMS')->componentFunction("siteLocation"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
         // line 40
@@ -132,7 +133,7 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
         // line 52
         echo "        </form>
         
-        
+    
     </div>
 </div>";
     }
@@ -149,6 +150,6 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
 
     public function getDebugInfo()
     {
-        return array (  133 => 52,  127 => 51,  123 => 49,  119 => 48,  112 => 43,  107 => 42,  102 => 41,  97 => 40,  92 => 39,  87 => 38,  82 => 37,  78 => 36,  73 => 33,  69 => 32,  63 => 28,  57 => 27,  50 => 22,  46 => 21,  43 => 20,  39 => 19,  19 => 1,);
+        return array (  134 => 52,  128 => 51,  124 => 49,  120 => 48,  113 => 43,  108 => 42,  103 => 41,  98 => 40,  92 => 39,  87 => 38,  82 => 37,  78 => 36,  73 => 33,  69 => 32,  63 => 28,  57 => 27,  50 => 22,  46 => 21,  43 => 20,  39 => 19,  19 => 1,);
     }
 }

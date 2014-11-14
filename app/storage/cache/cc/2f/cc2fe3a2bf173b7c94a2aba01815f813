@@ -1,4 +1,4 @@
-1415976396s:7316:"a:5:{s:5:"mtime";i:1415973619;s:7:"content";s:3580:"title = "Administration - Sites"
+1416008484s:6530:"a:5:{s:5:"mtime";i:1416004841;s:7:"content";s:3187:"title = "Administration - Sites"
 url = "/administration/sites"
 layout = "default"
 hidden = "0"
@@ -7,9 +7,6 @@ hidden = "0"
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\Locations;
-function onInit() {
-    
-}
 
 function onDeleteSite() {
     $siteId = post('siteId');
@@ -18,34 +15,14 @@ function onDeleteSite() {
     
     $contact = SiteContacts::where('sites_id', '=', $site->id);
     $contact->delete();
-    
-    array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
 }
-
-function onStart() {
-    $temp = Sites::get();
-    $temp = json_encode($temp);
-}
-
-
 
 function onSelectSite() {
     $temp = Sites::with('locations')->get();
     $temp = json_encode($temp);
 
     return $temp;
-}
-
-function onGetLocation() {
-    $temp = Locations::all()->toJson();
-    echo $temp;
-}
-
-function onAjaxTest()
-{
-    // update MySQL here
-    echo "Called";
 }
 ?>
 ==
@@ -80,7 +57,7 @@ function onAjaxTest()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
+                    <tr ng-repeat="st in administration.sites | filter:search | orderBy:sortField:reverse">
                         <td>{{ '{{ st.id }}' }}</td>
                         <td>{{ '{{ st.name }}' }}</td>
                         <td>{{ '{{ st.owner }}' }}</td>
@@ -98,13 +75,10 @@ function onAjaxTest()
         {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
     </div>
 </div>
-{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:911:"
+{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:508:"
 use Massada\Application\Models\Sites;
 use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\Locations;
-function onInit() {
-    
-}
 
 function onDeleteSite() {
     $siteId = post('siteId');
@@ -113,17 +87,8 @@ function onDeleteSite() {
     
     $contact = SiteContacts::where('sites_id', '=', $site->id);
     $contact->delete();
-    
-    array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
 }
-
-function onStart() {
-    $temp = Sites::get();
-    $temp = json_encode($temp);
-}
-
-
 
 function onSelectSite() {
     $temp = Sites::with('locations')->get();
@@ -131,18 +96,7 @@ function onSelectSite() {
 
     return $temp;
 }
-
-function onGetLocation() {
-    $temp = Locations::all()->toJson();
-    echo $temp;
-}
-
-function onAjaxTest()
-{
-    // update MySQL here
-    echo "Called";
-}
-";s:6:"markup";s:2553:"<div class="row">
+";s:6:"markup";s:2563:"<div class="row">
     {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
     
@@ -173,7 +127,7 @@ function onAjaxTest()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="st in site.sites | filter:search | orderBy:sortField:reverse">
+                    <tr ng-repeat="st in administration.sites | filter:search | orderBy:sortField:reverse">
                         <td>{{ '{{ st.id }}' }}</td>
                         <td>{{ '{{ st.name }}' }}</td>
                         <td>{{ '{{ st.owner }}' }}</td>

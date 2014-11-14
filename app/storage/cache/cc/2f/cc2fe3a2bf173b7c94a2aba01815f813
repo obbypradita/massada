@@ -1,10 +1,11 @@
-1415886871s:13484:"a:5:{s:5:"mtime";i:1415747475;s:7:"content";s:6664:"title = "Administration - Sites"
+1415976396s:7316:"a:5:{s:5:"mtime";i:1415973619;s:7:"content";s:3580:"title = "Administration - Sites"
 url = "/administration/sites"
 layout = "default"
 hidden = "0"
 ==
 <?php
 use Massada\Application\Models\Sites;
+use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\Locations;
 function onInit() {
     
@@ -14,6 +15,9 @@ function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
+    
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
     
     array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
@@ -46,60 +50,15 @@ function onAjaxTest()
 ?>
 ==
 <div class="row">
-    {% partial 'administration/sidebar' %}
+    {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
-        <h1 class="page-header">Sites</h1>
-
-        <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-        </div>
+    
+        {% partial 'header/sites' %}
 
         <h2 class="sub-header">Sites List</h2>
         <hr/>
-        <form class="form-inline">
-            <div class="form-group">
-                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
-                    <span class="fa fa-plus"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
-                <i class="form-control-feedback fa fa-search"></i>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
-                    <span class="fa fa-gear"></span>
-                </button>
-            </div>
-            
-            <div class="form-group">
-                <button type="button" class="btn btn-default" ng-click="refresh()">
-                    <span class="fa fa-refresh"></span>
-                </button>
-            </div>
-        </form>
-        <hr/>
+        
+        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
         
         
         
@@ -136,36 +95,12 @@ function onAjaxTest()
             </table>
         </div>
         <hr/>
-        <form class="form-inline">
-            <div class="form-group">
-                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
-                    <span class="fa fa-plus"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
-                <i class="form-control-feedback fa fa-search"></i>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
-                    <span class="fa fa-gear"></span>
-                </button>
-            </div>
-            
-            <div class="form-group">
-                <button type="button" class="btn btn-default" ng-click="refresh()">
-                    <span class="fa fa-refresh"></span>
-                </button>
-            </div>
-            
-        </form>
-        <hr/>
+        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
     </div>
 </div>
-{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:769:"
+{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:911:"
 use Massada\Application\Models\Sites;
+use Massada\Application\Models\SiteContacts;
 use Massada\Application\Models\Locations;
 function onInit() {
     
@@ -175,6 +110,9 @@ function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
+    
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
     
     array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();
@@ -204,61 +142,16 @@ function onAjaxTest()
     // update MySQL here
     echo "Called";
 }
-";s:6:"markup";s:5779:"<div class="row">
-    {% partial 'administration/sidebar' %}
+";s:6:"markup";s:2553:"<div class="row">
+    {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
-        <h1 class="page-header">Sites</h1>
-
-        <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                <h4>Label</h4>
-                <span class="text-muted">Something else</span>
-            </div>
-        </div>
+    
+        {% partial 'header/sites' %}
 
         <h2 class="sub-header">Sites List</h2>
         <hr/>
-        <form class="form-inline">
-            <div class="form-group">
-                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
-                    <span class="fa fa-plus"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
-                <i class="form-control-feedback fa fa-search"></i>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
-                    <span class="fa fa-gear"></span>
-                </button>
-            </div>
-            
-            <div class="form-group">
-                <button type="button" class="btn btn-default" ng-click="refresh()">
-                    <span class="fa fa-refresh"></span>
-                </button>
-            </div>
-        </form>
-        <hr/>
+        
+        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
         
         
         
@@ -295,32 +188,7 @@ function onAjaxTest()
             </table>
         </div>
         <hr/>
-        <form class="form-inline">
-            <div class="form-group">
-                <a type="button" class="btn btn-primary" href="{{ 'administration-site-insert'|page }}" >
-                    <span class="fa fa-plus"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
-                <i class="form-control-feedback fa fa-search"></i>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
-                    <span class="fa fa-gear"></span>
-                </button>
-            </div>
-            
-            <div class="form-group">
-                <button type="button" class="btn btn-default" ng-click="refresh()">
-                    <span class="fa fa-refresh"></span>
-                </button>
-            </div>
-            
-        </form>
-        <hr/>
+        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
     </div>
 </div>
 {% framework extras %}";}";

@@ -1,0 +1,50 @@
+1415976396s:1890:"a:5:{s:5:"mtime";i:1415973546;s:7:"content";s:880:"==
+<form class="form-inline">
+    <div class="form-group">
+        <a type="button" class="btn btn-primary" href="{{ addLinks }}" >
+            <span class="fa fa-plus"></span>
+            {{ label }}
+        </a>
+    </div>
+    <div class="form-group has-feedback">
+        <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
+        <i class="form-control-feedback fa fa-search"></i>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
+            <span class="fa fa-gear"></span>
+        </button>
+    </div>
+    
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="refresh()">
+            <span class="fa fa-refresh"></span>
+        </button>
+    </div>
+</form>
+<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:876:"<form class="form-inline">
+    <div class="form-group">
+        <a type="button" class="btn btn-primary" href="{{ addLinks }}" >
+            <span class="fa fa-plus"></span>
+            {{ label }}
+        </a>
+    </div>
+    <div class="form-group has-feedback">
+        <input type="text" class="form-control" ng-model="search" id="tb-search" placeholder="Search something..." >
+        <i class="form-control-feedback fa fa-search"></i>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#mmodal">
+            <span class="fa fa-gear"></span>
+        </button>
+    </div>
+    
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="refresh()">
+            <span class="fa fa-refresh"></span>
+        </button>
+    </div>
+</form>
+<hr/>";}";

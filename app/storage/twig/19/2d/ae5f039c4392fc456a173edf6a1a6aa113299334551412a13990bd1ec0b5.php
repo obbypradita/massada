@@ -20,70 +20,96 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
         ";
         // line 2
         $context['__cms_partial_params'] = [];
-        echo $this->env->getExtension('CMS')->partialFunction("administration/sidebar"        , $context['__cms_partial_params']        );
+        echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
         // line 3
         echo "        <div class=\"col-sm-9 col-md-10\">
-            <h1 class=\"page-header\">Operators</h1>
-
-            <div class=\"row placeholders\">
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-            </div>
+            ";
+        // line 4
+        $context['__cms_partial_params'] = [];
+        echo $this->env->getExtension('CMS')->partialFunction("header/operators"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 5
+        echo "            
+            <h2 class=\"sub-header\">Operator List</h2>
+            <hr/>
             
             ";
-        // line 29
-        $context['__cms_component_params'] = [];
-        echo $this->env->getExtension('CMS')->componentFunction("sitePhoto"        , $context['__cms_component_params']        );
-        unset($context['__cms_component_params']);
-        // line 30
-        echo "            <input type=\"text\" ng-model=\"site.mysite\">
-            ";
-        // line 31
-        echo "{{ site.mysite }}";
+        // line 9
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['label'] = "Add New Operator"        ;
+        $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-operator-insert")        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 10
         echo "
-
-            <h2 class=\"sub-header\">Section title</h2>
-            <div class=\"table-responsive\">
-                <table class=\"table table-striped\">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>Lorem</td>
-                            <td>ipsum</td>
-                            <td>dolor</td>
-                            <td>sit</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class=\"table-responsive\"  id=\"siteTable\">
+            <table  class=\"table table-striped table-hover\">
+                <thead>
+                    <tr>
+                        <th><a href=\"\" ng-click=\"sortField = 'id';              reverse = !reverse\" >#</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'name';            reverse = !reverse\" >Site Name</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'owner';           reverse = !reverse\" >Building Owner</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'project_type';    reverse = !reverse\" >Project Type</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'locations.name';  reverse = !reverse\" >Location</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'address';         reverse = !reverse\" >Address</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'photo';           reverse = !reverse\" >Photo</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat=\"st in site.sites | filter:search | orderBy:sortField:reverse\">
+                        <td>";
+        // line 27
+        echo "{{ st.id }}";
+        echo "</td>
+                        <td>";
+        // line 28
+        echo "{{ st.name }}";
+        echo "</td>
+                        <td>";
+        // line 29
+        echo "{{ st.owner }}";
+        echo "</td>
+                        <td>";
+        // line 30
+        echo "{{ st.project_type }}";
+        echo "</td>
+                        <td>";
+        // line 31
+        echo "{{ st.locations.name }}";
+        echo "</td>
+                        <td>";
+        // line 32
+        echo "{{ st.address }}";
+        echo "</td>
+                        <td>";
+        // line 33
+        echo "{{ st.photo }}";
+        echo "</td>
+                        <td><a href=\"http://localhost:8080/massada/administration/site/update/";
+        // line 34
+        echo "{{ st.id }}";
+        echo "\">Update</a> | 
+                            <a href=\"\" ng-click=\"onDelete(";
+        // line 35
+        echo "st.id";
+        echo ")\">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
+            <hr/>
+            
+            ";
+        // line 42
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['label'] = "Add New Operator"        ;
+        $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-operator-insert")        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 43
+        echo "        
         </div>
     </div>";
     }
@@ -100,6 +126,6 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
 
     public function getDebugInfo()
     {
-        return array (  61 => 31,  58 => 30,  54 => 29,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  112 => 43,  106 => 42,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  72 => 29,  68 => 28,  64 => 27,  45 => 10,  39 => 9,  33 => 5,  29 => 4,  26 => 3,  22 => 2,  19 => 1,);
     }
 }

@@ -1,21 +1,7 @@
 october.controllers['administration-sites'] = function ($scope, $request, $parse) {
     $scope.site={};
     $('#confirmation').hide();
-    // on start
-    /*
-    $.request('onGetSites', {
-        success: function(data) {
-            var temp = data.result;
-            $scope.$apply(function () {
-                $scope.site.sites = $parse(temp)($scope);
-            });
-        }
-    });
-    */
-     //nanti diganti sama query coy
-    
-    
-    
+
     $scope.sortField='id';
     //$scope.reverse=true;
     
@@ -29,22 +15,7 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
         }
         
     });
-    //var a = $parse(b.responseText)($scope);
-    //$scope.site.sites = b;
-    //console.log(b);
-    
-    
-    
-    
-    
-    
-  
-  
-  
-  
-  
-  
-  
+
     $scope.refresh = function() {
         $request('onSelectSite', {
             loading : $('#confirmation').show(),
@@ -68,23 +39,4 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
         });
     };
     
-    
-    $scope.ajax1 = function ()
-    {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        } else {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                document.getElementById("myDiv").innerHTML=xmlhttp.responseURL;
-                console.log(xmlhttp);
-                //alert('zentot');
-            }
-        }
-        xmlhttp.open("GET","http://localhost:8080/massada/administration/sites?onGetSites",true);
-        xmlhttp.send();
-    }
 }

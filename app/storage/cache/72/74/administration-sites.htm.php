@@ -1,6 +1,7 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\Locations;class Cms54629796ecea6_1228407969Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\Locations;class Cms54660af5f0d88_1068974016Class extends \Cms\Classes\PageCode
 {
+
 
 
 
@@ -11,6 +12,9 @@ public function onDeleteSite() {
     $siteId = post('siteId');
     $site = Sites::find($siteId);
     $sitePhoto=$site->photo;
+    
+    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact->delete();
     
     array_map('unlink', glob("C:/xampp/htdocs/massada/uploads/public/images/site/avatar/$sitePhoto.png"));
     $site->delete();

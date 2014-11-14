@@ -4,8 +4,8 @@ layout = "default"
 hidden = "0"
 ==
 <div class="row" ng-controller="administration">
-        {% partial 'administration/sidebar' %}
-        <input type="text" ng-model="data.zentot">
+        {% partial 'sidebar/administration' %}
+
         <div class="col-sm-9 col-md-10">
             <h1 class="page-header">Administration</h1>
 
@@ -33,31 +33,6 @@ hidden = "0"
             </div>
 
             <h2 class="sub-header">Section title</h2>
-            <div class="table-responsive" ng-controller="adminchild">
-            <input type="text" ng-model="data.zentot">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Site Name</th>
-                            <th>Owner</th>
-                            <th>Location</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem</td>
-                            <td>ipsum</td>
-                            <td>dolor</td>
-                            <td>sit</td>
-                            <td><a href="#">Update</a> | <a href="#">Delete</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            
         </div>
     </div>

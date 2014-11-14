@@ -1,4 +1,4 @@
-1415886871s:23270:"a:5:{s:5:"mtime";i:1415882977;s:7:"content";s:11048:"title = "Administration - Site - Insert"
+1415976396s:16067:"a:5:{s:5:"mtime";i:1415973429;s:7:"content";s:7447:"title = "Administration - Site - Insert"
 url = "/administration/site/insert"
 layout = "default"
 description = "Page for insert site"
@@ -218,79 +218,19 @@ function onInsertSite() {
 }
 ?>
 ==
-<style>
-
-    .alert-fixed {
-        position: fixed;
-        width: 100%;
-        z-index: 10;
-    }
-</style>
-
-<!--S
-<div id = "alert_placeholder"></div>
-<div class="alert alert-info flash fade-in alert-fixed">  
-  <a class="close" data-dismiss="alert">×</a>  
-  <strong>Info!</strong>Watch this, but you may forget.  
-</div> 
--->
-
 <div>
     <div class="row">
-        {% partial 'administration/sidebar' %}
+        {% partial 'sidebar/administration' %}
         <div class="col-sm-9 col-md-10">
-            <h1 class="page-header">Sites</h1>
-    
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-            </div>
+            
+            {% partial 'header/sites' %}
     
             <h2 class="sub-header">Insert New Site</h2>
 
             <form name="siteForm" method="POST" enctype="multipart/from-data" novalidate>
                 <hr/>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                            <span class="fa fa-undo"></span>
-                            Back
-                        </a>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-default" ng-click="clear()">
-                            <span class="fa fa-eraser"></span>
-                            Clear
-                        </button>
-                    </div>
-                    
-                    <!-- Submit -->
-                    <div class="form-group">
-                        <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                            <span class="fa fa-save"></span>
-                            Save
-                        </button>
-                    </div>
-                </div>
-                <hr/>
+                {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
+                
                 <div class="container-fluid">
                     <div class="col-md-4 col-sm-5">
                         {% component 'sitePhoto' %}
@@ -316,32 +256,9 @@ function onInsertSite() {
               <!-- end contacts-->
             </form>
 
-
             <hr/>
-            <div class="form-inline">
-                <div class="form-group">
-                    <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                        <span class="fa fa-undo"></span>
-                        Back
-                    </a>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-default" ng-click="clear()">
-                        <span class="fa fa-eraser"></span>
-                        Clear
-                    </button>
-                </div>
-                
-                <!-- Submit -->
-                <div class="form-group">
-                    <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                        <span class="fa fa-save"></span>
-                        Save
-                    </button>
-                </div>
-            </div>
-            <hr/>
-            {{ '{{ site.contacts }}' }}
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
+            
             
             
         </div>
@@ -417,79 +334,19 @@ function onInsertSite() {
     
         
 }
-";s:6:"markup";s:5252:"<style>
-
-    .alert-fixed {
-        position: fixed;
-        width: 100%;
-        z-index: 10;
-    }
-</style>
-
-<!--S
-<div id = "alert_placeholder"></div>
-<div class="alert alert-info flash fade-in alert-fixed">  
-  <a class="close" data-dismiss="alert">×</a>  
-  <strong>Info!</strong>Watch this, but you may forget.  
-</div> 
--->
-
-<div>
+";s:6:"markup";s:1651:"<div>
     <div class="row">
-        {% partial 'administration/sidebar' %}
+        {% partial 'sidebar/administration' %}
         <div class="col-sm-9 col-md-10">
-            <h1 class="page-header">Sites</h1>
-    
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-            </div>
+            
+            {% partial 'header/sites' %}
     
             <h2 class="sub-header">Insert New Site</h2>
 
             <form name="siteForm" method="POST" enctype="multipart/from-data" novalidate>
                 <hr/>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                            <span class="fa fa-undo"></span>
-                            Back
-                        </a>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-default" ng-click="clear()">
-                            <span class="fa fa-eraser"></span>
-                            Clear
-                        </button>
-                    </div>
-                    
-                    <!-- Submit -->
-                    <div class="form-group">
-                        <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                            <span class="fa fa-save"></span>
-                            Save
-                        </button>
-                    </div>
-                </div>
-                <hr/>
+                {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
+                
                 <div class="container-fluid">
                     <div class="col-md-4 col-sm-5">
                         {% component 'sitePhoto' %}
@@ -515,32 +372,9 @@ function onInsertSite() {
               <!-- end contacts-->
             </form>
 
-
             <hr/>
-            <div class="form-inline">
-                <div class="form-group">
-                    <a type="button" class="btn btn-default" href="{{ 'administration-sites'|page }}" >
-                        <span class="fa fa-undo"></span>
-                        Back
-                    </a>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-default" ng-click="clear()">
-                        <span class="fa fa-eraser"></span>
-                        Clear
-                    </button>
-                </div>
-                
-                <!-- Submit -->
-                <div class="form-group">
-                    <button type="submit" name="submit" ng-disabled="siteForm.$invalid" ng-click="save()" class="btn btn-primary"> 
-                        <span class="fa fa-save"></span>
-                        Save
-                    </button>
-                </div>
-            </div>
-            <hr/>
-            {{ '{{ site.contacts }}' }}
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
+            
             
             
         </div>

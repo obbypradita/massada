@@ -3,9 +3,10 @@ url = "/accounting"
 layout = "default"
 hidden = "0"
 ==
-<div class="jumbotron">
-    <div class="container">
-        <h1>Page not found</h1>
-        <p>Biji peler</p>
+<div class="row">
+    {% partial 'sidebar/accounting' %}
+    <div class="col-sm-9 col-md-10">
+    
+        {% partial 'header/accounting' %}
     </div>
 </div>

@@ -20,4 +20,10 @@ app.directive('capitalize', function() {
      }
    };
 });
+
+app.service('testService', function() {
+    this.sayHello = function() {
+        console.log("asu tenan")
+    };
+});
    

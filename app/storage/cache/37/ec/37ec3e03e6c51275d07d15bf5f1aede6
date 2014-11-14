@@ -1,16 +1,18 @@
-1415886871s:586:"a:5:{s:5:"mtime";i:1415617594;s:7:"content";s:213:"title = "Accounting"
+1415976396s:650:"a:5:{s:5:"mtime";i:1415965046;s:7:"content";s:245:"title = "Accounting"
 url = "/accounting"
 layout = "default"
 hidden = "0"
 ==
-<div class="jumbotron">
-    <div class="container">
-        <h1>Page not found</h1>
-        <p>Biji peler</p>
+<div class="row">
+    {% partial 'sidebar/accounting' %}
+    <div class="col-sm-9 col-md-10">
+    
+        {% partial 'header/accounting' %}
     </div>
-</div>";s:8:"settings";a:5:{s:5:"title";s:10:"Accounting";s:3:"url";s:11:"/accounting";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:132:"<div class="jumbotron">
-    <div class="container">
-        <h1>Page not found</h1>
-        <p>Biji peler</p>
+</div>";s:8:"settings";a:5:{s:5:"title";s:10:"Accounting";s:3:"url";s:11:"/accounting";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:164:"<div class="row">
+    {% partial 'sidebar/accounting' %}
+    <div class="col-sm-9 col-md-10">
+    
+        {% partial 'header/accounting' %}
     </div>
 </div>";}";

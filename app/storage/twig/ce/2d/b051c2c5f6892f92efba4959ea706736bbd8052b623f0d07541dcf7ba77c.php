@@ -20,66 +20,30 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
     ";
         // line 2
         $context['__cms_partial_params'] = [];
-        echo $this->env->getExtension('CMS')->partialFunction("administration/sidebar"        , $context['__cms_partial_params']        );
+        echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
         // line 3
         echo "    <div class=\"col-sm-9 col-md-10\">
-        <h1 class=\"page-header\">Sites</h1>
-
-        <div class=\"row placeholders\">
-            <div class=\"col-xs-6 col-sm-3 placeholder\">
-                <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                <h4>Label</h4>
-                <span class=\"text-muted\">Something else</span>
-            </div>
-            <div class=\"col-xs-6 col-sm-3 placeholder\">
-                <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                <h4>Label</h4>
-                <span class=\"text-muted\">Something else</span>
-            </div>
-            <div class=\"col-xs-6 col-sm-3 placeholder\">
-                <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                <h4>Label</h4>
-                <span class=\"text-muted\">Something else</span>
-            </div>
-            <div class=\"col-xs-6 col-sm-3 placeholder\">
-                <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                <h4>Label</h4>
-                <span class=\"text-muted\">Something else</span>
-            </div>
-        </div>
-
+    
+        ";
+        // line 5
+        $context['__cms_partial_params'] = [];
+        echo $this->env->getExtension('CMS')->partialFunction("header/sites"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 6
+        echo "
         <h2 class=\"sub-header\">Sites List</h2>
         <hr/>
-        <form class=\"form-inline\">
-            <div class=\"form-group\">
-                <a type=\"button\" class=\"btn btn-primary\" href=\"";
-        // line 33
-        echo $this->env->getExtension('CMS')->pageFilter("administration-site-insert");
-        echo "\" >
-                    <span class=\"fa fa-plus\"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class=\"form-group has-feedback\">
-                <input type=\"text\" class=\"form-control\" ng-model=\"search\" id=\"tb-search\" placeholder=\"Search something...\" >
-                <i class=\"form-control-feedback fa fa-search\"></i>
-            </div>
-
-            <div class=\"form-group\">
-                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#mmodal\">
-                    <span class=\"fa fa-gear\"></span>
-                </button>
-            </div>
-            
-            <div class=\"form-group\">
-                <button type=\"button\" class=\"btn btn-default\" ng-click=\"refresh()\">
-                    <span class=\"fa fa-refresh\"></span>
-                </button>
-            </div>
-        </form>
-        <hr/>
         
+        ";
+        // line 10
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['label'] = "Add New Sites"        ;
+        $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-site-insert")        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 11
+        echo "        
         
         
         <h1 id=\"confirmation\">Sebentar...</h1>
@@ -102,39 +66,39 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                 <tbody>
                     <tr ng-repeat=\"st in site.sites | filter:search | orderBy:sortField:reverse\">
                         <td>";
-        // line 78
+        // line 33
         echo "{{ st.id }}";
         echo "</td>
                         <td>";
-        // line 79
+        // line 34
         echo "{{ st.name }}";
         echo "</td>
                         <td>";
-        // line 80
+        // line 35
         echo "{{ st.owner }}";
         echo "</td>
                         <td>";
-        // line 81
+        // line 36
         echo "{{ st.project_type }}";
         echo "</td>
                         <td>";
-        // line 82
+        // line 37
         echo "{{ st.locations.name }}";
         echo "</td>
                         <td>";
-        // line 83
+        // line 38
         echo "{{ st.address }}";
         echo "</td>
                         <td>";
-        // line 84
+        // line 39
         echo "{{ st.photo }}";
         echo "</td>
                         <td><a href=\"http://localhost:8080/massada/administration/site/update/";
-        // line 85
+        // line 40
         echo "{{ st.id }}";
         echo "\">Update</a> | 
                             <a href=\"\" ng-click=\"onDelete(";
-        // line 86
+        // line 41
         echo "st.id";
         echo ")\">Delete</a></td>
                     </tr>
@@ -142,39 +106,18 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
             </table>
         </div>
         <hr/>
-        <form class=\"form-inline\">
-            <div class=\"form-group\">
-                <a type=\"button\" class=\"btn btn-primary\" href=\"";
-        // line 94
-        echo $this->env->getExtension('CMS')->pageFilter("administration-site-insert");
-        echo "\" >
-                    <span class=\"fa fa-plus\"></span>
-                    Add New Site
-                </a>
-            </div>
-            <div class=\"form-group has-feedback\">
-                <input type=\"text\" class=\"form-control\" ng-model=\"search\" id=\"tb-search\" placeholder=\"Search something...\" >
-                <i class=\"form-control-feedback fa fa-search\"></i>
-            </div>
-
-            <div class=\"form-group\">
-                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#mmodal\">
-                    <span class=\"fa fa-gear\"></span>
-                </button>
-            </div>
-            
-            <div class=\"form-group\">
-                <button type=\"button\" class=\"btn btn-default\" ng-click=\"refresh()\">
-                    <span class=\"fa fa-refresh\"></span>
-                </button>
-            </div>
-            
-        </form>
-        <hr/>
-    </div>
+        ";
+        // line 47
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['label'] = "Add New Sites"        ;
+        $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-site-insert")        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 48
+        echo "    </div>
 </div>
 ";
-        // line 120
+        // line 50
         echo '<script src="'. Request::getBasePath()
                 .'/modules/system/assets/js/framework.js"></script>'.PHP_EOL;
         echo '<script src="'. Request::getBasePath()
@@ -195,6 +138,6 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
 
     public function getDebugInfo()
     {
-        return array (  178 => 120,  149 => 94,  138 => 86,  134 => 85,  130 => 84,  126 => 83,  122 => 82,  118 => 81,  114 => 80,  110 => 79,  106 => 78,  58 => 33,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  121 => 50,  117 => 48,  111 => 47,  102 => 41,  98 => 40,  94 => 39,  90 => 38,  86 => 37,  82 => 36,  78 => 35,  74 => 34,  70 => 33,  46 => 11,  40 => 10,  34 => 6,  30 => 5,  26 => 3,  22 => 2,  19 => 1,);
     }
 }

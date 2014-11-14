@@ -1,5 +1,18 @@
-1415886871s:295:"a:5:{s:5:"mtime";i:1415617807;s:7:"content";s:69:"title = "Legal"
+1415976396s:608:"a:5:{s:5:"mtime";i:1415964858;s:7:"content";s:225:"title = "Legal"
 url = "/legal"
 layout = "default"
 hidden = "0"
-==";s:8:"settings";a:5:{s:5:"title";s:5:"Legal";s:3:"url";s:6:"/legal";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:0:"";}";
+==
+<div class="row">
+    {% partial 'sidebar/legal' %}
+    <div class="col-sm-9 col-md-10">
+    
+        {% partial 'header/legal' %}
+    </div>
+</div>";s:8:"settings";a:5:{s:5:"title";s:5:"Legal";s:3:"url";s:6:"/legal";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:154:"<div class="row">
+    {% partial 'sidebar/legal' %}
+    <div class="col-sm-9 col-md-10">
+    
+        {% partial 'header/legal' %}
+    </div>
+</div>";}";

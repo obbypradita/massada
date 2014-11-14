@@ -1,0 +1,44 @@
+1415973749s:1542:"a:5:{s:5:"mtime";i:1415972766;s:7:"content";s:706:"==
+<div class="form-inline">
+    <div class="form-group">
+        <a type="button" class="btn btn-default" href="{{ link }}" >
+            <span class="fa fa-undo"></span>
+            Back
+        </a>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="clear()">
+            <span class="fa fa-eraser"></span>
+            Clear
+        </button>
+    </div>
+    <!-- Submit -->
+    <div class="form-group">
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+            <span class="fa fa-save"></span>
+            Save
+        </button>
+    </div>
+</div>
+<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:702:"<div class="form-inline">
+    <div class="form-group">
+        <a type="button" class="btn btn-default" href="{{ link }}" >
+            <span class="fa fa-undo"></span>
+            Back
+        </a>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="clear()">
+            <span class="fa fa-eraser"></span>
+            Clear
+        </button>
+    </div>
+    <!-- Submit -->
+    <div class="form-group">
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+            <span class="fa fa-save"></span>
+            Save
+        </button>
+    </div>
+</div>
+<hr/>";}";

@@ -32,161 +32,107 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
   <strong>Info!</strong>Watch this, but you may forget.  
 </div> 
 -->
-<div>
-    <div class=\"row\">
-        ";
+
+<div class=\"row\">
+    ";
         // line 19
         $context['__cms_partial_params'] = [];
-        echo $this->env->getExtension('CMS')->partialFunction("administration/sidebar"        , $context['__cms_partial_params']        );
+        echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
         // line 20
-        echo "        <div class=\"col-sm-9 col-md-10\">
-            <h1 class=\"page-header\">Sites</h1>
-    
-            <div class=\"row placeholders\">
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/sky\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-                <div class=\"col-xs-6 col-sm-3 placeholder\">
-                    <img data-src=\"holder.js/200x200/auto/vine\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\">
-                    <h4>Label</h4>
-                    <span class=\"text-muted\">Something else</span>
-                </div>
-            </div>
-    
-            <h2 class=\"sub-header\">Insert New Site</h2>
-
-            <form name=\"site.siteForm\" method=\"POST\" enctype=\"multipart/from-data\">
-                <hr/>
-                    <div class=\"form-inline\">
-                        <div class=\"form-group\">
-                            <a type=\"button\" class=\"btn btn-default\" href=\"";
-        // line 52
-        echo $this->env->getExtension('CMS')->pageFilter("administration-sites");
-        echo "\" >
-                                <span class=\"fa fa-undo\"></span>
-                                Back
-                            </a>
-                        </div>
-                        <div class=\"form-group\">
-                            <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
-                                <span class=\"fa fa-eraser\"></span>
-                                Clear
-                            </button>
-                        </div>
-                        
-                        <!-- Submit -->
-                        <div class=\"form-group\">
-                            <button type=\"submit\" name=\"submit\" ng-disabled=\"site.siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
-                                <span class=\"fa fa-save\"></span>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                <hr/>
-                <div class=\"container-fluid\">
-                    <div class=\"col-md-4 col-sm-5\">
-                        ";
-        // line 75
+        echo "    <div class=\"col-sm-9 col-md-10\">
+        ";
+        // line 21
+        $context['__cms_partial_params'] = [];
+        echo $this->env->getExtension('CMS')->partialFunction("header/sites"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 22
+        echo "
+        <h2 class=\"sub-header\">Update Site</h2>
+        <hr/>
+        
+        <form name=\"site.siteForm\" method=\"POST\" enctype=\"multipart/from-data\" novalidate>
+            ";
+        // line 27
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['link'] = $this->env->getExtension('CMS')->pageFilter("administration-sites")        ;
+        $context['__cms_partial_params']['base'] = "site.siteForm"        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/form"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 28
+        echo "            <hr/>
+            
+            <div class=\"container-fluid\">
+                <div class=\"col-md-4 col-sm-5\">
+                    ";
+        // line 32
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("sitePhoto"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 76
-        echo "                    </div>
-                    <div class=\"col-md-8 col-sm-7\">
-                        <div class=\"form-horizontal\">
-                            
-                            ";
-        // line 80
+        // line 33
+        echo "                </div>
+                <div class=\"col-md-8 col-sm-7\">
+                    <div class=\"form-horizontal\">
+                        ";
+        // line 36
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteName"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 81
-        echo "                            ";
+        // line 37
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteOwner"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 82
-        echo "                            ";
+        // line 38
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteProjectType"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 83
-        echo "                            ";
+        // line 39
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteLocation"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 84
-        echo "                            ";
+        // line 40
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteAddress"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 85
-        echo "                            ";
+        // line 41
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("sitePhone"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 86
-        echo "                            ";
+        // line 42
+        echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteFax"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 87
-        echo "                        </div>
-                    </div>
+        // line 43
+        echo "                    </div>
                 </div>
-                <hr/>
-                
-                ";
-        // line 92
+            </div>
+            <hr/>
+            
+            ";
+        // line 48
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteContact"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 93
-        echo "                <hr/>
-                
-                <div class=\"form-inline\">
-                    <div class=\"form-group\">
-                        <a type=\"button\" class=\"btn btn-default\" href=\"";
-        // line 97
-        echo $this->env->getExtension('CMS')->pageFilter("administration-sites");
-        echo "\" >
-                            <span class=\"fa fa-undo\"></span>
-                            Back
-                        </a>
-                    </div>
-                    <div class=\"form-group\">
-                        <button type=\"button\" class=\"btn btn-default\" ng-click=\"clear()\">
-                            <span class=\"fa fa-eraser\"></span>
-                            Clear
-                        </button>
-                    </div>
-                    
-                    <!-- Submit -->
-                    <div class=\"form-group\">
-                        <button type=\"submit\" name=\"submit\" ng-disabled=\"site.siteForm.\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
-                            <span class=\"fa fa-save\"></span>
-                            Save
-                        </button>
-                    </div>
-                </div>
-                <hr/>
-            </form>
+        // line 49
+        echo "            <hr/>
             
-            
-        </div>
+            ";
+        // line 51
+        $context['__cms_partial_params'] = [];
+        $context['__cms_partial_params']['link'] = $this->env->getExtension('CMS')->pageFilter("administration-sites")        ;
+        $context['__cms_partial_params']['base'] = "site.siteForm"        ;
+        echo $this->env->getExtension('CMS')->partialFunction("tools/form"        , $context['__cms_partial_params']        );
+        unset($context['__cms_partial_params']);
+        // line 52
+        echo "        </form>
+        
+        
     </div>
 </div>";
     }
@@ -203,6 +149,6 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
 
     public function getDebugInfo()
     {
-        return array (  164 => 97,  158 => 93,  154 => 92,  147 => 87,  142 => 86,  137 => 85,  132 => 84,  127 => 83,  122 => 82,  117 => 81,  113 => 80,  107 => 76,  103 => 75,  77 => 52,  43 => 20,  39 => 19,  19 => 1,);
+        return array (  133 => 52,  127 => 51,  123 => 49,  119 => 48,  112 => 43,  107 => 42,  102 => 41,  97 => 40,  92 => 39,  87 => 38,  82 => 37,  78 => 36,  73 => 33,  69 => 32,  63 => 28,  57 => 27,  50 => 22,  46 => 21,  43 => 20,  39 => 19,  19 => 1,);
     }
 }

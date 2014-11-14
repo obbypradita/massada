@@ -1,0 +1,23 @@
+==
+<div class="form-inline">
+    <div class="form-group">
+        <a type="button" class="btn btn-default" href="{{ link }}" >
+            <span class="fa fa-undo"></span>
+            Back
+        </a>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="clear()">
+            <span class="fa fa-eraser"></span>
+            Clear
+        </button>
+    </div>
+    <!-- Submit -->
+    <div class="form-group">
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+            <span class="fa fa-save"></span>
+            Save
+        </button>
+    </div>
+</div>
+<hr/>

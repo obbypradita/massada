@@ -16,22 +16,35 @@ class __TwigTemplate_00be34959cd4105eb4c73bdcc289089581d54884154b86c7b6e384e0ed2
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<div class=\"col-sm-3 col-md-2 nopadding\">
+        echo "<style>
+    .left-sidebar {
+        background-color: #222;
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+        background-color:#ffc;
+    }
+    .left-sideba-wrap {
+        overflow: hidden; 
+    }
+    
+</style>
+
+<div class=\"col-sm-3 col-md-2 nopadding\">
     <ul class=\"nav nav-sidebar\">
         <li class=\"active\"><a href=\"";
-        // line 3
+        // line 16
         echo $this->env->getExtension('CMS')->pageFilter("administration");
         echo "\">Overview</a></li>
         <li><a href=\"";
-        // line 4
+        // line 17
         echo $this->env->getExtension('CMS')->pageFilter("administration-sites");
         echo "\">Sites</a></li>
         <li><a href=\"";
-        // line 5
+        // line 18
         echo $this->env->getExtension('CMS')->pageFilter("administration-operators");
         echo "\">Operators</a></li>
         <li><a href=\"";
-        // line 6
+        // line 19
         echo $this->env->getExtension('CMS')->pageFilter("users");
         echo "\">Contact Person</a></li>
     </ul>
@@ -50,6 +63,6 @@ class __TwigTemplate_00be34959cd4105eb4c73bdcc289089581d54884154b86c7b6e384e0ed2
 
     public function getDebugInfo()
     {
-        return array (  35 => 6,  31 => 5,  27 => 4,  23 => 3,  19 => 1,);
+        return array (  48 => 19,  44 => 18,  40 => 17,  36 => 16,  19 => 1,);
     }
 }

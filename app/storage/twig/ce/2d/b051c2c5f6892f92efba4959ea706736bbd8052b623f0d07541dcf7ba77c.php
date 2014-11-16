@@ -46,20 +46,20 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
         echo "        
         
         
-        <h1 id=\"confirmation\">Sebentar...</h1>
+
         <div id=\"myDiv\"></div>
         
         <div class=\"table-responsive\"  id=\"siteTable\">
            <table  class=\"table table-striped table-hover\">
                 <thead>
                     <tr>
-                        <th><a href=\"\" ng-click=\"sortField = 'id';              reverse = !reverse\" >#</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'name';            reverse = !reverse\" >Site Name</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'owner';           reverse = !reverse\" >Building Owner</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'project_type';    reverse = !reverse\" >Project Type</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'locations.name';  reverse = !reverse\" >Location</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'address';         reverse = !reverse\" >Address</a></th>
-                        <th><a href=\"\" ng-click=\"sortField = 'photo';           reverse = !reverse\" >Photo</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'id'             ; reverse = !reverse\" >#</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'name'           ; reverse = !reverse\" >Site Name</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'owner'          ; reverse = !reverse\" >Building Owner</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'project_type'   ; reverse = !reverse\" >Project Type</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'locations.name' ; reverse = !reverse\" >Location</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'address'        ; reverse = !reverse\" >Address</a></th>
+                        <th><a href=\"\" ng-click=\"sortField = 'photo'          ; reverse = !reverse\" >Photo</a></th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -67,7 +67,7 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                     <tr ng-repeat=\"st in administration.sites | filter:search | orderBy:sortField:reverse\">
                         <td>";
         // line 33
-        echo "{{ st.id }}";
+        echo "{{ \$index + 1}}";
         echo "</td>
                         <td>";
         // line 34

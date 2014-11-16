@@ -1,4 +1,4 @@
-1416008112s:1890:"a:5:{s:5:"mtime";i:1415973546;s:7:"content";s:880:"==
+1416107248s:2168:"a:5:{s:5:"mtime";i:1416106637;s:7:"content";s:1018:"==
 <form class="form-inline">
     <div class="form-group">
         <a type="button" class="btn btn-primary" href="{{ addLinks }}" >
@@ -22,8 +22,12 @@
             <span class="fa fa-refresh"></span>
         </button>
     </div>
+    
+     <div class="form-group">
+        <img class="loading-icon" ng-src="{{ 'assets/images/loading.gif' | theme }}"/>
+     </div>
 </form>
-<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:876:"<form class="form-inline">
+<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:1014:"<form class="form-inline">
     <div class="form-group">
         <a type="button" class="btn btn-primary" href="{{ addLinks }}" >
             <span class="fa fa-plus"></span>
@@ -46,5 +50,9 @@
             <span class="fa fa-refresh"></span>
         </button>
     </div>
+    
+     <div class="form-group">
+        <img class="loading-icon" ng-src="{{ 'assets/images/loading.gif' | theme }}"/>
+     </div>
 </form>
 <hr/>";}";

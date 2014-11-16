@@ -45,6 +45,13 @@ class __TwigTemplate_ca9bfb5778f66aa82b9456ef31859df6306ad85a81e084e1b513ab037a8
             <span class=\"fa fa-refresh\"></span>
         </button>
     </div>
+    
+     <div class=\"form-group\">
+        <img class=\"loading-icon\" ng-src=\"";
+        // line 26
+        echo $this->env->getExtension('CMS')->themeFilter("assets/images/loading.gif");
+        echo "\"/>
+     </div>
 </form>
 <hr/>";
     }
@@ -61,6 +68,6 @@ class __TwigTemplate_ca9bfb5778f66aa82b9456ef31859df6306ad85a81e084e1b513ab037a8
 
     public function getDebugInfo()
     {
-        return array (  28 => 5,  23 => 3,  19 => 1,);
+        return array (  52 => 26,  28 => 5,  23 => 3,  19 => 1,);
     }
 }

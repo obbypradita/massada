@@ -17,7 +17,7 @@ class __TwigTemplate_945b41bf5ecb201a253cc906afb87fd7ad3f4ffeed23a93761261b3b871
     {
         // line 1
         echo "<div class=\"row\">
-    ";
+     ";
         // line 2
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("sidebar/users"        , $context['__cms_partial_params']        );

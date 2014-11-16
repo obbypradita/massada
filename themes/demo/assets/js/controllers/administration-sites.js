@@ -1,29 +1,16 @@
 october.controllers['administration-sites'] = function ($scope, $request, $parse) {
     $scope.administration={};
-    $('#confirmation').hide();
-
     $scope.sortField='id';
-
-    $request('onSelectSite', { 
-        success: function(data) {
-            //console.log(data)
-            var temp = data.result;
-            $scope.$apply(function () {
-                $scope.administration.sites = $parse(temp)($scope);
-            });
-        }
-        
-    });
 
     $scope.refresh = function() {
         $request('onSelectSite', {
-            loading : $('#confirmation').show(),
+            loading : $('.loading-icon').show(),
             success: function(data) {
                 var temp = data.result;
                 $scope.$apply(function () {
                      $scope.administration.sites = $parse(temp)($scope);
                 });
-                $('#confirmation').hide();
+                $('.loading-icon').hide();
             }
         });
     };
@@ -31,11 +18,13 @@ october.controllers['administration-sites'] = function ($scope, $request, $parse
     $scope.onDelete = function(id) {
         $request('onDeleteSite', {
             data    : { siteId: id},
-            loading : $('#confirmation').hide(),
+            loading : $('.loading-icon').show(),
             success : function() {
                 $scope.refresh();
             }
         });
     };
+    
+    $scope.refresh();
     
 }

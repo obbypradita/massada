@@ -1,4 +1,4 @@
-1416008484s:6418:"a:5:{s:5:"mtime";i:1416004836;s:7:"content";s:3131:"title = "Administration - Operators"
+1416107615s:6340:"a:5:{s:5:"mtime";i:1416106400;s:7:"content";s:3092:"title = "Administration - Operators"
 url = "/administration/operators"
 layout = "default"
 hidden = "0"
@@ -33,7 +33,7 @@ function onSelectOperator() {
             
             {% partial 'tools/list' label='Add New Operator' addLinks='administration-operator-insert'|page %}
             
-            <h1 id="confirmation">Sebentar...</h1>
+           
             <div class="table-responsive"  id="operatorTable">
             <table  class="table table-striped table-hover">
                 <thead>
@@ -85,7 +85,7 @@ function onDeleteOperator() {
 function onSelectOperator() {
     return json_encode(Operators::get());
 }
-";s:6:"markup";s:2541:"<div class="row">
+";s:6:"markup";s:2502:"<div class="row">
         {% partial 'sidebar/administration' %}
         <div class="col-sm-9 col-md-10">
             {% partial 'header/operators' %}
@@ -96,7 +96,7 @@ function onSelectOperator() {
             
             {% partial 'tools/list' label='Add New Operator' addLinks='administration-operator-insert'|page %}
             
-            <h1 id="confirmation">Sebentar...</h1>
+           
             <div class="table-responsive"  id="operatorTable">
             <table  class="table table-striped table-hover">
                 <thead>

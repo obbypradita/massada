@@ -1,28 +1,18 @@
 october.controllers['administration-operators'] = function ($scope, $request, $parse) {
     $scope.administration={};
-    $('#confirmation').hide();
-
     $scope.sortField='id';
 
-    $request('onSelectOperator', { 
-        success: function(data) {
-            var temp = data.result;
-            $scope.$apply(function () {
-                $scope.administration.operators = $parse(temp)($scope);
-            });
-        }
-        
-    });
+
 
     $scope.refresh = function() {
         $request('onSelectOperator', {
-            loading : $('#confirmation').show(),
+            loading : $('.loading-icon').show(),
             success: function(data) {
                 var temp = data.result;
                 $scope.$apply(function () {
                      $scope.administration.operators = $parse(temp)($scope);
                 });
-                $('#confirmation').hide();
+                $('.loading-icon').hide();
             }
         });
     };
@@ -30,10 +20,12 @@ october.controllers['administration-operators'] = function ($scope, $request, $p
     $scope.onDelete = function(id) {
         $request('onDeleteOperator', {
             data    : { operatorId: id},
-            loading : $('#confirmation').hide(),
+            loading : $('.loading-icon').hide(),
             success : function() {
                 $scope.refresh();
             }
         });
     };
+    
+    $scope.refresh();
 }

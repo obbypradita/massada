@@ -44,7 +44,7 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
         unset($context['__cms_partial_params']);
         // line 11
         echo "            
-            <h1 id=\"confirmation\">Sebentar...</h1>
+           
             <div class=\"table-responsive\"  id=\"operatorTable\">
             <table  class=\"table table-striped table-hover\">
                 <thead>

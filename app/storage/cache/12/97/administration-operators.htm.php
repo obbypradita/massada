@@ -1,20 +1,20 @@
 <?php 
-use Massada\Application\Models\Operators;use Massada\Application\Models\OperatorContacts;class Cms546811b1dfd3a_1816212652Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Operator;use Massada\Application\Models\OperatorContact;class Cms5469b0b468e5c_389645682Class extends \Cms\Classes\PageCode
 {
 
 
 
 public function onDeleteOperator() {
     $operatorId = post('operatorId');
-    $operator = Operators::find($operatorId);
+    $operator = Operator::find($operatorId);
     $operatorLogo=$operator->logo;
     
-    $contact = OperatorContacts::where('operators_id', '=', $operator->id);
+    $contact = OperatorContact::where('operator_id', '=', $operator->id);
     $contact->delete();
     $operator->delete();
 }
 public function onSelectOperator() {
-    return json_encode(Operators::get());
+    return json_encode(Operator::get());
 }
 
 }

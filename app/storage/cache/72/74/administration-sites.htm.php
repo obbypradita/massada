@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\Locations;class Cms5468133d249a4_1384938850Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Site;use Massada\Application\Models\SiteContact;use Massada\Application\Models\Location;class Cms5469b043d0a78_2120361135Class extends \Cms\Classes\PageCode
 {
 
 
@@ -7,15 +7,15 @@ use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts
 
 public function onDeleteSite() {
     $siteId = post('siteId');
-    $site = Sites::find($siteId);
+    $site = Site::find($siteId);
     $sitePhoto=$site->photo;
     
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     $site->delete();
 }
 public function onSelectSite() {
-    $temp = Sites::with('locations')->get();
+    $temp = Site::with('location')->get();
     $temp = json_encode($temp);
 
     return $temp;

@@ -1,4 +1,4 @@
-1416107218s:19891:"a:5:{s:5:"mtime";i:1416006099;s:7:"content";s:9355:"title = "Administration - Site - Update"
+1416213933s:19561:"a:5:{s:5:"mtime";i:1416178136;s:7:"content";s:9194:"title = "Administration - Site - Update"
 url = "/administration/site/update/:id"
 layout = "default"
 description = "Page for update site"
@@ -9,7 +9,7 @@ id = "siteName"
 name = "siteName"
 label = "Name :"
 model = "site.siteName"
-base = "site.siteForm"
+base = "siteForm"
 req = "true"
 req_msg = "Name Required"
 max = "50"
@@ -24,7 +24,7 @@ id = "siteOwner"
 name = "siteOwner"
 label = "Owner :"
 model = "site.siteOwner"
-base = "site.siteForm"
+base = "siteForm"
 capitalize = "true"
 req = "true"
 req_msg = "Owner Required"
@@ -40,7 +40,7 @@ mId = "siteProject"
 mName = "siteProjectType"
 mLabel = "Project Type :"
 model = "site.siteProjectType"
-base = "site.siteForm"
+base = "siteForm"
 mObject = "mRadiobutton"
 mKey = "1;2"
 mValue = "Multi Operator;Reseller"
@@ -50,7 +50,7 @@ mId = "siteLocation"
 mName = "siteLocation"
 mLabel = "Location :"
 model = "site.siteLocation"
-base = "site.siteForm"
+base = "siteForm"
 req = "true"
 req_msg = "select location pls"
 
@@ -59,7 +59,7 @@ id = "siteAddress"
 name = "siteAddress"
 label = "Address :"
 model = "site.siteAddress"
-base = "site.siteForm"
+base = "siteForm"
 rws = "2"
 req = "true"
 req_msg = "Address Needed"
@@ -75,7 +75,7 @@ id = "sitePhone"
 name = "sitePhone"
 label = "Phone :"
 model = "site.sitePhone"
-base = "site.siteForm"
+base = "siteForm"
 req = "true"
 req_msg = "Phone required"
 max = "14"
@@ -90,7 +90,7 @@ id = "siteFax"
 name = "siteFax"
 label = "Fax :"
 model = "site.siteFax"
-base = "site.siteForm"
+base = "siteForm"
 req = "true"
 req_msg = "Fax required"
 max = "14"
@@ -113,8 +113,8 @@ req_msg = "Butuh foto neh"
 id = "mTextbox"
 name = "mTextbox"
 label = "mTextbox"
-mModel = "site.contacts"
-base = "site.siteForm"
+mModel = "site.contact"
+base = "siteForm"
 mModelContact = "name"
 mReqContact = "true"
 mReqContact_msg = "needed"
@@ -146,17 +146,17 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
-use Massada\Application\Models\Locations;
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\SiteContactPhones;
-use Massada\Application\Models\SiteContactEmails;
+use Massada\Application\Models\Location;
+use Massada\Application\Models\Site;
+use Massada\Application\Models\SiteContact;
+use Massada\Application\Models\SiteContactPhone;
+use Massada\Application\Models\SiteContactEmail;
 use Massada\Application\Classes\Operation;
 
 
 function onStart() {
     $temp = "["; $delimiter="";
-    $cmb = Locations::get();
+    $cmb = Location::get();
     foreach($cmb as $key=>$value) {
         $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
         $delimiter=",";
@@ -169,17 +169,10 @@ function onStart() {
 
 function onSiteSelect() {
 
-    
     $id = $this->param('id');
-    //$site=[];
-    $site = Sites::with('locations')
-                ->with('contacts')
-                ->with('contacts.emails')
-                ->with('contacts.phones')
-                ->find($id);
+    $site = Site::with('location', 'contact' , 'contact.phone' , 'contact.email')->find($id);
 
-    if (!empty($site->photo))
-    {
+    if (!empty($site->photo)) {
         $photoName      = $site->photo; 
         $photoUrl       = "http://localhost:8080/massada/uploads/public/images/site/original/". $photoName . ".png";
         $site->photo    = $photoUrl; //base64_encode($photoUrl);
@@ -196,11 +189,11 @@ function onSiteSelect() {
     $arr['project_type']            = $site->project_type     ;           
     $arr['phone']                   = $site->phone            ;   
     $arr['fax']                     = $site->fax              ;   
-    $arr['locations_id']            = $site->locations_id     ;
-    $arr['locations']               = $site->locations        ;
+    $arr['location_id']             = $site->location_id      ;
+    $arr['location']                = $site->location         ;
     $arr['photo']                   = $site->photo            ;   
     $arr['avatar']                  = $avatarUrl              ;   
-    $arr['contacts']                = $site->contacts         ;
+    $arr['contact']                 = $site->contact          ;
    
             
     $site = json_encode($arr);
@@ -212,14 +205,14 @@ function onSiteUpdate() {
     
     
     $id = $this->param('id');
-    $site = Sites::find($id);
+    $site = Site::find($id);
     $site->name         = post('siteName')          ;
     $site->owner        = post('siteOwner')         ;
     $site->address      = post('siteAddress')       ;
     $site->project_type = post('siteProjectType')   ;
     $site->phone        = post('sitePhone')         ;
     $site->fax          = post('siteFax')           ;
-    $site->locations_id = post('siteLocation')      ;
+    $site->location_id  = post('siteLocation')      ;
     
     
 
@@ -247,25 +240,25 @@ function onSiteUpdate() {
     }
 
     $site->save();
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     
-    $contact = json_decode(post('siteContacts'));
+    $contact = json_decode(post('siteContact'));
     foreach($contact as $key=>$value) {
-        $people = new SiteContacts;
+        $people = new SiteContact;
         $people->name = $value->name;
-        $people->sites_id = $site->id;
+        $people->site_id = $site->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new SiteContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new SiteContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->site_contacts_id = $people->id;
+            $phone->site_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new SiteContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new SiteContactEmail;
             $email->email = $vemail->email;
-            $email->site_contacts_id = $people->id;
+            $email->site_contact_id = $people->id;
             $email->save();
         }
     }
@@ -282,6 +275,7 @@ function onSiteUpdate() {
 </style>
 
 <div class="row">
+<alert></alert>
     {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
         {% partial 'header/sites' %}
@@ -289,8 +283,8 @@ function onSiteUpdate() {
         <h2 class="sub-header">Update Site</h2>
         <hr/>
         
-        <form name="site.siteForm" method="POST" enctype="multipart/from-data" novalidate>
-            {% partial 'tools/form' link='administration-sites'|page base='site.siteForm' %}
+        <form name="siteForm" method="POST" enctype="multipart/from-data" ng-submit="save()" novalidate>
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
       
             
             <div class="container-fluid">
@@ -314,23 +308,23 @@ function onSiteUpdate() {
             {% component 'siteContact' %}
             <hr/>
             
-            {% partial 'tools/form' link='administration-sites'|page base='site.siteForm' %}
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
         </form>
         
     
     </div>
-</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Update";s:3:"url";s:31:"/administration/site/update/:id";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for update site";s:6:"hidden";s:1:"0";s:10:"components";a:9:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:13:"site.siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:8:{s:3:"mId";s:11:"siteProject";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:13:"site.siteForm";s:7:"mObject";s:12:"mRadiobutton";s:4:"mKey";s:3:"1;2";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:13:"site.siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:13:"site.siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:7:{s:2:"id";s:9:"sitePhoto";s:9:"namePhoto";s:9:"sitePhoto";s:10:"nameAvatar";s:10:"siteAvatar";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}s:20:"mContact siteContact";a:34:{s:2:"id";s:8:"mTextbox";s:4:"name";s:8:"mTextbox";s:5:"label";s:8:"mTextbox";s:6:"mModel";s:13:"site.contacts";s:4:"base";s:13:"site.siteForm";s:13:"mModelContact";s:4:"name";s:11:"mReqContact";s:4:"true";s:15:"mReqContact_msg";s:6:"needed";s:11:"mMaxContact";s:2:"50";s:15:"mMaxContact_msg";s:6:"50 max";s:11:"mMinContact";s:1:"5";s:15:"mMinContact_msg";s:5:"5 min";s:11:"mExpContact";s:15:"/^[a-z A-Z,.]*/";s:15:"mExpContact_msg";s:17:"Format nama salah";s:12:"mTrimContact";s:4:"true";s:11:"mModelPhone";s:5:"phone";s:9:"mReqPhone";s:4:"true";s:13:"mReqPhone_msg";s:4:"need";s:9:"mMaxPhone";s:2:"16";s:13:"mMaxPhone_msg";s:6:"16 max";s:9:"mMinPhone";s:2:"10";s:13:"mMinPhone_msg";s:6:"10 min";s:9:"mExpPhone";s:14:"/^[0-9 ()-]*$/";s:13:"mExpPhone_msg";s:20:"phone format invalid";s:11:"mModelEmail";s:5:"email";s:9:"mReqEmail";s:4:"true";s:13:"mReqEmail_msg";s:5:"butuh";s:9:"mMaxEmail";s:2:"50";s:13:"mMaxEmail_msg";s:6:"50 max";s:9:"mMinEmail";s:2:"10";s:13:"mMinEmail_msg";s:6:"10 min";s:9:"mExpEmail";s:15:"/^[a-zA-Z.@]*$/";s:13:"mExpEmail_msg";s:12:"format salah";s:10:"mTrimEmail";s:4:"true";}}}s:4:"code";s:4629:"
-use Massada\Application\Models\Locations;
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\SiteContactPhones;
-use Massada\Application\Models\SiteContactEmails;
+</div>";s:8:"settings";a:6:{s:5:"title";s:30:"Administration - Site - Update";s:3:"url";s:31:"/administration/site/update/:id";s:6:"layout";s:7:"default";s:11:"description";s:20:"Page for update site";s:6:"hidden";s:1:"0";s:10:"components";a:9:{s:17:"mTextbox siteName";a:13:{s:2:"id";s:8:"siteName";s:4:"name";s:8:"siteName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"site.siteName";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:18:"mTextbox siteOwner";a:14:{s:2:"id";s:9:"siteOwner";s:4:"name";s:9:"siteOwner";s:5:"label";s:7:"Owner :";s:5:"model";s:14:"site.siteOwner";s:4:"base";s:8:"siteForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:28:"mRadiobutton siteProjectType";a:8:{s:3:"mId";s:11:"siteProject";s:5:"mName";s:15:"siteProjectType";s:6:"mLabel";s:14:"Project Type :";s:5:"model";s:20:"site.siteProjectType";s:4:"base";s:8:"siteForm";s:7:"mObject";s:12:"mRadiobutton";s:4:"mKey";s:3:"1;2";s:6:"mValue";s:23:"Multi Operator;Reseller";}s:22:"mDropdown siteLocation";a:7:{s:3:"mId";s:12:"siteLocation";s:5:"mName";s:12:"siteLocation";s:6:"mLabel";s:10:"Location :";s:5:"model";s:17:"site.siteLocation";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:19:"select location pls";}s:21:"mTextarea siteAddress";a:14:{s:2:"id";s:11:"siteAddress";s:4:"name";s:11:"siteAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"site.siteAddress";s:4:"base";s:8:"siteForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:18:"mTextbox sitePhone";a:13:{s:2:"id";s:9:"sitePhone";s:4:"name";s:9:"sitePhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"site.sitePhone";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:16:"mTextbox siteFax";a:13:{s:2:"id";s:7:"siteFax";s:4:"name";s:7:"siteFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"site.siteFax";s:4:"base";s:8:"siteForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:16:"mImage sitePhoto";a:7:{s:2:"id";s:9:"sitePhoto";s:9:"namePhoto";s:9:"sitePhoto";s:10:"nameAvatar";s:10:"siteAvatar";s:5:"model";s:14:"site.sitePhoto";s:3:"src";s:9:"sitePhoto";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}s:20:"mContact siteContact";a:34:{s:2:"id";s:8:"mTextbox";s:4:"name";s:8:"mTextbox";s:5:"label";s:8:"mTextbox";s:6:"mModel";s:12:"site.contact";s:4:"base";s:8:"siteForm";s:13:"mModelContact";s:4:"name";s:11:"mReqContact";s:4:"true";s:15:"mReqContact_msg";s:6:"needed";s:11:"mMaxContact";s:2:"50";s:15:"mMaxContact_msg";s:6:"50 max";s:11:"mMinContact";s:1:"5";s:15:"mMinContact_msg";s:5:"5 min";s:11:"mExpContact";s:15:"/^[a-z A-Z,.]*/";s:15:"mExpContact_msg";s:17:"Format nama salah";s:12:"mTrimContact";s:4:"true";s:11:"mModelPhone";s:5:"phone";s:9:"mReqPhone";s:4:"true";s:13:"mReqPhone_msg";s:4:"need";s:9:"mMaxPhone";s:2:"16";s:13:"mMaxPhone_msg";s:6:"16 max";s:9:"mMinPhone";s:2:"10";s:13:"mMinPhone_msg";s:6:"10 min";s:9:"mExpPhone";s:14:"/^[0-9 ()-]*$/";s:13:"mExpPhone_msg";s:20:"phone format invalid";s:11:"mModelEmail";s:5:"email";s:9:"mReqEmail";s:4:"true";s:13:"mReqEmail_msg";s:5:"butuh";s:9:"mMaxEmail";s:2:"50";s:13:"mMaxEmail_msg";s:6:"50 max";s:9:"mMinEmail";s:2:"10";s:13:"mMinEmail_msg";s:6:"10 min";s:9:"mExpEmail";s:15:"/^[a-zA-Z.@]*$/";s:13:"mExpEmail_msg";s:12:"format salah";s:10:"mTrimEmail";s:4:"true";}}}s:4:"code";s:4488:"
+use Massada\Application\Models\Location;
+use Massada\Application\Models\Site;
+use Massada\Application\Models\SiteContact;
+use Massada\Application\Models\SiteContactPhone;
+use Massada\Application\Models\SiteContactEmail;
 use Massada\Application\Classes\Operation;
 
 
 function onStart() {
     $temp = "["; $delimiter="";
-    $cmb = Locations::get();
+    $cmb = Location::get();
     foreach($cmb as $key=>$value) {
         $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
         $delimiter=",";
@@ -343,17 +337,10 @@ function onStart() {
 
 function onSiteSelect() {
 
-    
     $id = $this->param('id');
-    //$site=[];
-    $site = Sites::with('locations')
-                ->with('contacts')
-                ->with('contacts.emails')
-                ->with('contacts.phones')
-                ->find($id);
+    $site = Site::with('location', 'contact' , 'contact.phone' , 'contact.email')->find($id);
 
-    if (!empty($site->photo))
-    {
+    if (!empty($site->photo)) {
         $photoName      = $site->photo; 
         $photoUrl       = "http://localhost:8080/massada/uploads/public/images/site/original/". $photoName . ".png";
         $site->photo    = $photoUrl; //base64_encode($photoUrl);
@@ -370,11 +357,11 @@ function onSiteSelect() {
     $arr['project_type']            = $site->project_type     ;           
     $arr['phone']                   = $site->phone            ;   
     $arr['fax']                     = $site->fax              ;   
-    $arr['locations_id']            = $site->locations_id     ;
-    $arr['locations']               = $site->locations        ;
+    $arr['location_id']             = $site->location_id      ;
+    $arr['location']                = $site->location         ;
     $arr['photo']                   = $site->photo            ;   
     $arr['avatar']                  = $avatarUrl              ;   
-    $arr['contacts']                = $site->contacts         ;
+    $arr['contact']                 = $site->contact          ;
    
             
     $site = json_encode($arr);
@@ -386,14 +373,14 @@ function onSiteUpdate() {
     
     
     $id = $this->param('id');
-    $site = Sites::find($id);
+    $site = Site::find($id);
     $site->name         = post('siteName')          ;
     $site->owner        = post('siteOwner')         ;
     $site->address      = post('siteAddress')       ;
     $site->project_type = post('siteProjectType')   ;
     $site->phone        = post('sitePhone')         ;
     $site->fax          = post('siteFax')           ;
-    $site->locations_id = post('siteLocation')      ;
+    $site->location_id  = post('siteLocation')      ;
     
     
 
@@ -421,30 +408,30 @@ function onSiteUpdate() {
     }
 
     $site->save();
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     
-    $contact = json_decode(post('siteContacts'));
+    $contact = json_decode(post('siteContact'));
     foreach($contact as $key=>$value) {
-        $people = new SiteContacts;
+        $people = new SiteContact;
         $people->name = $value->name;
-        $people->sites_id = $site->id;
+        $people->site_id = $site->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new SiteContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new SiteContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->site_contacts_id = $people->id;
+            $phone->site_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new SiteContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new SiteContactEmail;
             $email->email = $vemail->email;
-            $email->site_contacts_id = $people->id;
+            $email->site_contact_id = $people->id;
             $email->save();
         }
     }
 }
-";s:6:"markup";s:1531:"<style>
+";s:6:"markup";s:1552:"<style>
 
     .alert-fixed {
         position: fixed;
@@ -454,6 +441,7 @@ function onSiteUpdate() {
 </style>
 
 <div class="row">
+<alert></alert>
     {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
         {% partial 'header/sites' %}
@@ -461,8 +449,8 @@ function onSiteUpdate() {
         <h2 class="sub-header">Update Site</h2>
         <hr/>
         
-        <form name="site.siteForm" method="POST" enctype="multipart/from-data" novalidate>
-            {% partial 'tools/form' link='administration-sites'|page base='site.siteForm' %}
+        <form name="siteForm" method="POST" enctype="multipart/from-data" ng-submit="save()" novalidate>
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
       
             
             <div class="container-fluid">
@@ -486,7 +474,7 @@ function onSiteUpdate() {
             {% component 'siteContact' %}
             <hr/>
             
-            {% partial 'tools/form' link='administration-sites'|page base='site.siteForm' %}
+            {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
         </form>
         
     

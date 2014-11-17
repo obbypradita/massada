@@ -16,8 +16,8 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<div class=\"form-group has-feedback ng-pristine\" ng-class=\"{ 
-\t\t'has-error': ";
+        echo "<div class=\"form-group has-feedback\" ng-class=\"{ 
+\t\t'has-error'   : ";
         // line 2
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
@@ -26,13 +26,13 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty, 
-\t\t'has-success': ";
+        echo ".\$dirty , 
+\t\t'has-success' : ";
         // line 3
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$valid && ";
+        echo ".\$valid   && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
@@ -89,28 +89,28 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty, 
-        \t'form-control-feedback glyphicon glyphicon-ok': ";
+        echo ".\$dirty  , 
+        \t'form-control-feedback glyphicon glyphicon-ok'    : ";
         // line 19
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$valid  && ";
+        echo ".\$valid   && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty
+        echo ".\$dirty 
          }\"></i>
         <small class=\"message-status-error\" ng-show=\"";
         // line 21
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$error.required && ";
+        echo ".\$error.required     && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty\">
+        echo ".\$dirty   \">
         \t* ";
         // line 22
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mRequired_msg", array()), "html", null, true);
@@ -121,11 +121,11 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$error.minlength && ";
+        echo ".\$error.minlength    && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty\">
+        echo ".\$dirty   \">
         \t* ";
         // line 25
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mMinlength_msg", array()), "html", null, true);
@@ -136,11 +136,11 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$error.maxlength && ";
+        echo ".\$error.maxlength    && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty\">
+        echo ".\$dirty \">
         \t* ";
         // line 28
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mMaxlength_msg", array()), "html", null, true);
@@ -151,11 +151,11 @@ class __TwigTemplate_711ca350b4a6a65aca9abbb460c6d5402811a15c9fb41d80bbc8cb1d342
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$error.pattern && ";
+        echo ".\$error.pattern      && ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mBase", array()), "html", null, true);
         echo ".";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mName", array()), "html", null, true);
-        echo ".\$dirty\">
+        echo ".\$dirty   \">
         \t* ";
         // line 31
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["__SELF__"]) ? $context["__SELF__"] : null), "mExpression_msg", array()), "html", null, true);

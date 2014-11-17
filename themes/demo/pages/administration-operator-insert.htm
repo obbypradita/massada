@@ -126,10 +126,10 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
-use Massada\Application\Models\Operators;
-use Massada\Application\Models\OperatorContacts;
-use Massada\Application\Models\OperatorContactPhones;
-use Massada\Application\Models\OperatorContactEmails;
+use Massada\Application\Models\Operator;
+use Massada\Application\Models\OperatorContact;
+use Massada\Application\Models\OperatorContactPhone;
+use Massada\Application\Models\OperatorContactEmail;
 use Massada\Application\Classes\Operation;
 
 function onStart() {
@@ -137,16 +137,14 @@ function onStart() {
 }
 
 function onSelectOperator() {
-    $temp = Operators::get();
+    $temp = Operator::get();
     $temp = json_encode($temp);
 
     return $temp;
 }
 
 function onInsertOperator() {
-    
-  
-    $operator = new Operators;
+    $operator = new Operator;
     $operator->name         = post('operatorName')          ; /*"stName"          ; // */ 
     $operator->company      = post('operatorCompany')       ; /*"stOwner"         ; // */ 
     $operator->address      = post('operatorAddress')       ; /*"stAddress"       ; // */ 
@@ -177,20 +175,20 @@ function onInsertOperator() {
     $contact = json_decode(post('operatorContacts'));
 
     foreach($contact as $key=>$value) {
-        $people = new OperatorContacts;
+        $people = new OperatorContact;
         $people->name = $value->name;
-        $people->operators_id = $operator->id;
+        $people->operator_id = $operator->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new OperatorContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new OperatorContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->operator_contacts_id = $people->id;
+            $phone->operator_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new OperatorContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new OperatorContactEmail;
             $email->email = $vemail->email;
-            $email->operator_contacts_id = $people->id;
+            $email->operator_contact_id = $people->id;
             $email->save();
         }
 
@@ -198,47 +196,46 @@ function onInsertOperator() {
 }
 ?>
 ==
-<div>
-    <div class="row">
-        {% partial 'sidebar/administration' %}
-        <div class="col-sm-9 col-md-10">
-            
-            {% partial 'header/operators' %}
-    
-            <h2 class="sub-header">Insert New Operator</h2>
+<alert></alert>
+<div class="row">
+    {% partial 'sidebar/administration' %}
+    <div class="col-sm-9 col-md-10">
+        
+        {% partial 'header/operators' %}
 
-            <form name="operatorForm" method="POST" enctype="multipart/from-data" novalidate>
-                <hr/>
-                {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
-                
-                <div class="container-fluid">
-                    <div class="col-md-4 col-sm-5">
-                        {% component 'operatorLogo' %}
-                    </div>
-                    <div class="col-md-8 col-sm-7">
-                        <div class="form-horizontal">
-                            
-                            {% component 'operatorName' %}
-                            {% component 'operatorCompany' %}
-                            {% component 'operatorAddress' %}
-                            {% component 'operatorPhone' %}
-                            {% component 'operatorFax' %}
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-            
-            
-                <!-- contact -->
-                {% component 'operatorContact' %}
-              <!-- end contacts-->
-            </form>
+        <h2 class="sub-header">Insert New Operator</h2>
 
+        <form name="operatorForm" method="POST" ng-submit="save()" enctype="multipart/from-data" novalidate>
             <hr/>
             {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
             
-            
-            {{ mObject }}
-        </div>
+            <div class="container-fluid">
+                <div class="col-md-4 col-sm-5">
+                    {% component 'operatorLogo' %}
+                </div>
+                <div class="col-md-8 col-sm-7">
+                    <div class="form-horizontal">
+                        
+                        {% component 'operatorName' %}
+                        {% component 'operatorCompany' %}
+                        {% component 'operatorAddress' %}
+                        {% component 'operatorPhone' %}
+                        {% component 'operatorFax' %}
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        
+        
+            <!-- contact -->
+            {% component 'operatorContact' %}
+          <!-- end contacts-->
+        </form>
+
+        <hr/>
+        {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
+        
+        
+        {{ mObject }}
     </div>
 </div>

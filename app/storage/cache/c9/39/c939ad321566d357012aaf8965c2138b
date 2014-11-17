@@ -1,4 +1,4 @@
-1416107218s:9139:"a:5:{s:5:"mtime";i:1415962252;s:7:"content";s:4492:"description = "Default layout"
+1416213933s:9075:"a:5:{s:5:"mtime";i:1416196612;s:7:"content";s:4460:"description = "Default layout"
 
 [appLayout]
 idParam = ":slug"
@@ -10,9 +10,7 @@ idParam = ":slug"
         <title>October CMS - {{ this.page.title }}</title>
         <meta name="author" content="October CMS">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="{{ 'assets/images/massadaTransp.png'|theme }}" />
-       
-       
+
         <script src="{{ [
             'assets/js/angular.min.js',
             'assets/js/angular-animate.min.js',
@@ -31,6 +29,8 @@ idParam = ":slug"
             'assets/css/bootstrap.min.css',
             'assets/css/font-awesome.min.css',
             'assets/css/ng-img-crop.css',
+            'assets/css/animate.css',
+            'assets/css/ng-animation.css',
             'assets/css/massada.css'
         ]|theme }}" rel="stylesheet">
 
@@ -107,16 +107,14 @@ idParam = ":slug"
         {% scripts %}
 
     </body>
-</html>";s:8:"settings";a:2:{s:11:"description";s:14:"Default layout";s:10:"components";a:1:{s:9:"appLayout";a:1:{s:7:"idParam";s:5:":slug";}}}s:4:"code";N;s:6:"markup";s:4422:"<!DOCTYPE html>
+</html>";s:8:"settings";a:2:{s:11:"description";s:14:"Default layout";s:10:"components";a:1:{s:9:"appLayout";a:1:{s:7:"idParam";s:5:":slug";}}}s:4:"code";N;s:6:"markup";s:4390:"<!DOCTYPE html>
 <html ng-app="appLayout">
     <head>
         <base href="/massada/main"></base>
         <title>October CMS - {{ this.page.title }}</title>
         <meta name="author" content="October CMS">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="{{ 'assets/images/massadaTransp.png'|theme }}" />
-       
-       
+
         <script src="{{ [
             'assets/js/angular.min.js',
             'assets/js/angular-animate.min.js',
@@ -135,6 +133,8 @@ idParam = ":slug"
             'assets/css/bootstrap.min.css',
             'assets/css/font-awesome.min.css',
             'assets/css/ng-img-crop.css',
+            'assets/css/animate.css',
+            'assets/css/ng-animation.css',
             'assets/css/massada.css'
         ]|theme }}" rel="stylesheet">
 

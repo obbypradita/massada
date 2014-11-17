@@ -93,7 +93,7 @@ req_msg = "Butuh foto neh"
 id = "mTextbox"
 name = "mTextbox"
 label = "mTextbox"
-mModel = "operator.contacts"
+mModel = "operator.contact"
 base = "operatorForm"
 mModelContact = "name"
 mReqContact = "true"
@@ -126,10 +126,10 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
-use Massada\Application\Models\Operators;
-use Massada\Application\Models\OperatorContacts;
-use Massada\Application\Models\OperatorContactPhones;
-use Massada\Application\Models\OperatorContactEmails;
+use Massada\Application\Models\Operator;
+use Massada\Application\Models\OperatorContact;
+use Massada\Application\Models\OperatorContactPhone;
+use Massada\Application\Models\OperatorContactEmail;
 use Massada\Application\Classes\Operation;
 
 
@@ -140,9 +140,9 @@ function onSelectOperator() {
     
     $id = $this->param('id');
     //$operator=[];
-    $operator = Operators::with('contacts')
-                ->with('contacts.emails')
-                ->with('contacts.phones')
+    $operator = Operator::with('contact')
+                ->with('contact.email')
+                ->with('contact.phone')
                 ->find($id);
 
     if (!empty($operator->logo))
@@ -164,7 +164,7 @@ function onSelectOperator() {
     $arr['fax']                     = $operator->fax       ;   
     $arr['logo']                    = $operator->logo      ;   
     $arr['avatar']                  = $avatarUrl           ;   
-    $arr['contacts']                = $operator->contacts  ;
+    $arr['contact']                 = $operator->contact   ;
    
             
     $operator = json_encode($arr);
@@ -176,7 +176,7 @@ function onUpdateOperator() {
     
     
     $id = $this->param('id');
-    $operator = Operators::find($id);
+    $operator = Operator::find($id);
     $operator->name         = post('operatorName')          ;
     $operator->company      = post('operatorCompany')       ;
     $operator->address      = post('operatorAddress')       ;
@@ -209,25 +209,25 @@ function onUpdateOperator() {
     }
 
     $operator->save();
-    $contact = OperatorContacts::where('operators_id', '=', $operator->id);
+    $contact = OperatorContact::where('operator_id', '=', $operator->id);
     $contact->delete();
     
-    $contact = json_decode(post('operatorContacts'));
+    $contact = json_decode(post('operatorContact'));
     foreach($contact as $key=>$value) {
-        $people = new OperatorContacts;
+        $people = new OperatorContact;
         $people->name = $value->name;
-        $people->operators_id = $operator->id;
+        $people->operator_id = $operator->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new OperatorContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new OperatorContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->operator_contacts_id = $people->id;
+            $phone->operator_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new OperatorContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new OperatorContactEmail;
             $email->email = $vemail->email;
-            $email->operator_contacts_id = $people->id;
+            $email->operator_contact_id = $people->id;
             $email->save();
         }
     }

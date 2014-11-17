@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Locations;use Massada\Application\Models\Sites;use Massada\Application\Models\SiteContacts;use Massada\Application\Models\SiteContactPhones;use Massada\Application\Models\SiteContactEmails;use Massada\Application\Classes\Operation;class Cms54668912c70d9_1255083413Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Location;use Massada\Application\Models\Site;use Massada\Application\Models\SiteContact;use Massada\Application\Models\SiteContactPhone;use Massada\Application\Models\SiteContactEmail;use Massada\Application\Classes\Operation;class Cms5469b04a42f6e_2059848709Class extends \Cms\Classes\PageCode
 {
 
 
@@ -10,7 +10,7 @@ use Massada\Application\Models\Locations;use Massada\Application\Models\Sites;us
 
 public function onStart() {
     $temp = "["; $delimiter="";
-    $cmb = Locations::get();
+    $cmb = Location::get();
     foreach($cmb as $key=>$value) {
         $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
         $delimiter=",";
@@ -22,17 +22,10 @@ public function onStart() {
 }
 public function onSiteSelect() {
 
-    
     $id = $this->param('id');
-    //$site=[];
-    $site = Sites::with('locations')
-                ->with('contacts')
-                ->with('contacts.emails')
-                ->with('contacts.phones')
-                ->find($id);
+    $site = Site::with('location', 'contact' , 'contact.phone' , 'contact.email')->find($id);
 
-    if (!empty($site->photo))
-    {
+    if (!empty($site->photo)) {
         $photoName      = $site->photo; 
         $photoUrl       = "http://localhost:8080/massada/uploads/public/images/site/original/". $photoName . ".png";
         $site->photo    = $photoUrl; //base64_encode($photoUrl);
@@ -49,11 +42,11 @@ public function onSiteSelect() {
     $arr['project_type']            = $site->project_type     ;           
     $arr['phone']                   = $site->phone            ;   
     $arr['fax']                     = $site->fax              ;   
-    $arr['locations_id']            = $site->locations_id     ;
-    $arr['locations']               = $site->locations        ;
+    $arr['location_id']             = $site->location_id      ;
+    $arr['location']                = $site->location         ;
     $arr['photo']                   = $site->photo            ;   
     $arr['avatar']                  = $avatarUrl              ;   
-    $arr['contacts']                = $site->contacts         ;
+    $arr['contact']                 = $site->contact          ;
    
             
     $site = json_encode($arr);
@@ -64,14 +57,14 @@ public function onSiteUpdate() {
     
     
     $id = $this->param('id');
-    $site = Sites::find($id);
+    $site = Site::find($id);
     $site->name         = post('siteName')          ;
     $site->owner        = post('siteOwner')         ;
     $site->address      = post('siteAddress')       ;
     $site->project_type = post('siteProjectType')   ;
     $site->phone        = post('sitePhone')         ;
     $site->fax          = post('siteFax')           ;
-    $site->locations_id = post('siteLocation')      ;
+    $site->location_id  = post('siteLocation')      ;
     
     
 
@@ -99,25 +92,25 @@ public function onSiteUpdate() {
     }
 
     $site->save();
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     
-    $contact = json_decode(post('siteContacts'));
+    $contact = json_decode(post('siteContact'));
     foreach($contact as $key=>$value) {
-        $people = new SiteContacts;
+        $people = new SiteContact;
         $people->name = $value->name;
-        $people->sites_id = $site->id;
+        $people->site_id = $site->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new SiteContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new SiteContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->site_contacts_id = $people->id;
+            $phone->site_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new SiteContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new SiteContactEmail;
             $email->email = $vemail->email;
-            $email->site_contacts_id = $people->id;
+            $email->site_contact_id = $people->id;
             $email->save();
         }
     }

@@ -10,8 +10,8 @@ class __TwigTemplate_aa7051bbfb68b87fd3446c2ebf3c9a1f4e374cb15347589bdd63a1b5071
         $this->parent = false;
 
         $this->blocks = array(
-            '__internal_8aa846ea9ad93521481a71ac3bf3b70d8d33508a39e589156fb5f2ed0aaa3f72' => array($this, 'block___internal_8aa846ea9ad93521481a71ac3bf3b70d8d33508a39e589156fb5f2ed0aaa3f72'),
-            '__internal_9f59d7bb53d7a71917306d2409d5d9f1361d2fb6733ac3136aab85d8e9088c43' => array($this, 'block___internal_9f59d7bb53d7a71917306d2409d5d9f1361d2fb6733ac3136aab85d8e9088c43'),
+            '__internal_1571b933aaf101f91eb443a8c930249c361abc70d87e6bddfb0dad2f0bae7c03' => array($this, 'block___internal_1571b933aaf101f91eb443a8c930249c361abc70d87e6bddfb0dad2f0bae7c03'),
+            '__internal_49a33c0cbdbfa554bb729546b3282bb448fdfca675400473ab9005b4f11a446e' => array($this, 'block___internal_49a33c0cbdbfa554bb729546b3282bb448fdfca675400473ab9005b4f11a446e'),
         );
     }
 
@@ -124,14 +124,14 @@ class __TwigTemplate_aa7051bbfb68b87fd3446c2ebf3c9a1f4e374cb15347589bdd63a1b5071
             Layout file:
             <pre>";
         // line 93
-        echo twig_escape_filter($this->env, (string) $this->renderBlock("__internal_8aa846ea9ad93521481a71ac3bf3b70d8d33508a39e589156fb5f2ed0aaa3f72", $context, $blocks));
+        echo twig_escape_filter($this->env, (string) $this->renderBlock("__internal_1571b933aaf101f91eb443a8c930249c361abc70d87e6bddfb0dad2f0bae7c03", $context, $blocks));
         echo "</pre>
         </div>
         <div class=\"col-md-6\">
             Page file:
             <pre>";
         // line 97
-        echo twig_escape_filter($this->env, (string) $this->renderBlock("__internal_9f59d7bb53d7a71917306d2409d5d9f1361d2fb6733ac3136aab85d8e9088c43", $context, $blocks));
+        echo twig_escape_filter($this->env, (string) $this->renderBlock("__internal_49a33c0cbdbfa554bb729546b3282bb448fdfca675400473ab9005b4f11a446e", $context, $blocks));
         echo "</pre>
         </div>
     </div>
@@ -174,13 +174,13 @@ class __TwigTemplate_aa7051bbfb68b87fd3446c2ebf3c9a1f4e374cb15347589bdd63a1b5071
     }
 
     // line 93
-    public function block___internal_8aa846ea9ad93521481a71ac3bf3b70d8d33508a39e589156fb5f2ed0aaa3f72($context, array $blocks = array())
+    public function block___internal_1571b933aaf101f91eb443a8c930249c361abc70d87e6bddfb0dad2f0bae7c03($context, array $blocks = array())
     {
         echo $this->env->getExtension('CMS')->contentFunction("placeholder/layout.txt"        );
     }
 
     // line 97
-    public function block___internal_9f59d7bb53d7a71917306d2409d5d9f1361d2fb6733ac3136aab85d8e9088c43($context, array $blocks = array())
+    public function block___internal_49a33c0cbdbfa554bb729546b3282bb448fdfca675400473ab9005b4f11a446e($context, array $blocks = array())
     {
         echo $this->env->getExtension('CMS')->contentFunction("placeholder/page.txt"        );
     }

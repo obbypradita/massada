@@ -20,7 +20,7 @@ class Layout extends ComponentBase
     /**
      * @var array List of dependencies for the application module.
      */
-    public $dependencies = ['ngRoute', 'ngAnimate', 'ngSanitize', 'ocServices', 'ngImgCrop'];
+    public $dependencies = ['ngRoute', 'ngAnimate', 'ngSanitize', 'ocServices', 'ngImgCrop', 'massada'];
 
     /**
      * @var string A JavaScript array for each dependency.

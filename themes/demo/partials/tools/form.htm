@@ -12,12 +12,21 @@
             Clear
         </button>
     </div>
+    
+    <div class="form-group">
+        <button type="button" ng-click="validate()" class="btn btn-default"> 
+            <span class="fa fa-save"></span>
+            Validate
+        </button>
+    </div>
+    
     <!-- Submit -->
     <div class="form-group">
-        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" class="btn btn-primary"> 
             <span class="fa fa-save"></span>
             Save
         </button>
     </div>
+    
 </div>
 <hr/>

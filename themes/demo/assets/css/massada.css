@@ -14,3 +14,12 @@
 .message-status-error {
 	color: #a94442;
 }
+
+#alert-message {
+    position:fixed;
+    z-index:2; 
+    top: 82px;
+    left: 25%;
+    right: 25%;
+    width:auto;
+}

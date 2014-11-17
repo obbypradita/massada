@@ -1,6 +1,6 @@
-1416107254s:2297:"a:2:{s:5:"mtime";i:1415815715;s:7:"content";s:2242:"<div class="form-group has-feedback ng-pristine" ng-class="{ 
-		'has-error': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
-		'has-success': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty }">
+1416213933s:2325:"a:2:{s:5:"mtime";i:1416148932;s:7:"content";s:2270:"<div class="form-group has-feedback" ng-class="{ 
+		'has-error'   : {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty , 
+		'has-success' : {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid   && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty }">
     <label for="{{ __SELF__.mId }}" class="col-lg-3 col-sm-5 col-md-4 control-label">{{ __SELF__.mLabel }}</label>
     <div class="col-lg-9 col-sm-7 col-md-8">
         <input type="text" class="form-control" 
@@ -15,19 +15,19 @@
                
                />
         <i ng-class="{ 
-        	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty, 
-        	'form-control-feedback glyphicon glyphicon-ok': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid  && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty
+        	'form-control-feedback glyphicon glyphicon-remove': {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$invalid && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty  , 
+        	'form-control-feedback glyphicon glyphicon-ok'    : {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$valid   && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty 
          }"></i>
-        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.required     && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty   ">
         	* {{ __SELF__.mRequired_msg }} <br/>
         </small>
-        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.minlength && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.minlength    && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty   ">
         	* {{ __SELF__.mMinlength_msg }} <br/>
     	</small>
-    	<small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.maxlength && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+    	<small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.maxlength    && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty ">
         	* {{ __SELF__.mMaxlength_msg }}  <br/>
     	</small>
-        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.pattern && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty">
+        <small class="message-status-error" ng-show="{{ __SELF__.mBase }}.{{ __SELF__.mName }}.$error.pattern      && {{ __SELF__.mBase }}.{{ __SELF__.mName }}.$dirty   ">
         	* {{ __SELF__.mExpression_msg }}  <br/>
     	</small>
     </div>

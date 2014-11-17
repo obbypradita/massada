@@ -1,21 +1,21 @@
 1.0.1: 
 - First version of application
-- create_locations_table.php
-- create_sites_table.php
+- create_location_table.php
+- create_site_table.php
 
 1.0.2: 
 - Adding contact to sites
-- create_site_contacts_table.php
-- create_site_contact_phones_table.php
-- create_site_contact_emails_table.php
-- seeds_locations_sites.php
+- create_site_contact_table.php
+- create_site_contact_phone_table.php
+- create_site_contact_email_table.php
+- seeds_location_site.php
 
 1.0.3:
 - Adding Operator table
-- create_operators_table.php
-- create_operator_contacts_table.php
-- create_operator_contact_phones_table.php
-- create_operator_contact_emails_table.php
-- seeds_operators.php
+- create_operator_table.php
+- create_operator_contact_table.php
+- create_operator_contact_phone_table.php
+- create_operator_contact_email_table.php
+- seeds_operator.php
 
 

@@ -1,8 +1,8 @@
-october.controllers['administration-operator-update'] = function ($scope, $request, $parse, $location) {
+october.controllers['administration-operator-update'] = function ($scope, $request, $parse, $location, alertFlash) {
     $scope.operator={};
     $scope.master={};
 
-    $scope.operator.contacts=[];
+    $scope.operator.contact=[];
 
 	$request('onSelectOperator', { 
         success: function(data) {
@@ -17,7 +17,7 @@ october.controllers['administration-operator-update'] = function ($scope, $reque
 	            $scope.operator.fax         = temp.fax,
 	            $scope.img                  = temp.logo,
 	            $scope.avatar               = temp.avatar,
-	            $scope.operator.contacts    = temp.contacts
+	            $scope.operator.contact     = temp.contact
             });
             $scope.img = $scope.avatar;
             $scope.operatorForm.$setPristine();
@@ -53,7 +53,7 @@ october.controllers['administration-operator-update'] = function ($scope, $reque
 	            operatorFax         : $scope.operator.fax,
 	            operatorLogo        : $scope.operator.logo,
 	            operatorAvatar      : $scope.avatar,
-	            operatorContacts    : angular.toJson($scope.operator.contacts)
+	            operatorContact    : angular.toJson($scope.operator.contact)
 	        },
 	        success: function() {
 	            alert('berhasil');
@@ -79,6 +79,22 @@ october.controllers['administration-operator-update'] = function ($scope, $reque
         $scope.operatorForm.$setPristine();
     }
     
+    $scope.validate = function() {
+        $scope.formOperator.name.$dirty=true;  
+        $scope.formOperator.company.$dirty=true;
+        $scope.formOperator.address.$dirty=true;
+        $scope.formOperator.phone.$dirty=true;  
+        $scope.formOperator.fax.$dirty=true;    
+        
+        for (feild in $scope.operatorForm) {
+             if (feild[0] != '$' && $scope.operatorForm[feild].$pristine) {
+                  $scope.operatorForm[feild].$setViewValue(
+                      $scope.operatorForm[feild].$modelValue
+                  );
+             }
+         }
+        
+    }
     
     
     
@@ -88,37 +104,38 @@ october.controllers['administration-operator-update'] = function ($scope, $reque
     
     
     
-    $scope.contacs = [];
+    
+    $scope.contact = [];
 
-    $scope.operator.contacts  = [];
+    $scope.operator.contact  = [];
     
     $scope.addContact = function() {
         //$scope.contacs.push({index: index, name: "Iblis"}); 
-        var index = $scope.operator.contacts.length + 1;
+        var index = $scope.operator.contact.length + 1;
         var item = new Object('');
-        $scope.operator.contacts.splice(index, 0, {no: index, name: item,  phones: [], emails: []}); 
-        console.log($scope.operator.contacts);
+        $scope.operator.contact.splice(index, 0, {no: index, name: item,  phone: [], email: []}); 
+        console.log($scope.operator.contact);
     }
 
     $scope.removeContact = function(index) {
-        $scope.operator.contacts.splice(index, 1);
+        $scope.operator.contact.splice(index, 1);
     }
 
     $scope.addPhone = function (index) {
         //$scope.phones.push({phone: "021"});
         var phones = [];
-        phones = $scope.operator.contacts[index];
-        var index = phones.phones.length + 1;
+        phones = $scope.operator.contact[index];
+        var index = phones.phone.length + 1;
         var item = new Object('');
-        phones.phones.splice(index, 0, {no: index, phone: item});
+        phones.phone.splice(index, 0, {no: index, phone: item});
         console.log(phones); 
     }
 
     $scope.removePhone = function (index, id) {
         var phones = [];
-        phones = $scope.operator.contacts[index];
-        console.log(phones.phones[id]); 
-        phones.phones.splice(id, 1);
+        phones = $scope.operator.contact[index];
+        console.log(phones.phone[id]); 
+        phones.phone.splice(id, 1);
         //console.log(index); 
     }
 
@@ -126,18 +143,18 @@ october.controllers['administration-operator-update'] = function ($scope, $reque
      $scope.addEmail = function (index) {
         //$scope.phones.push({phone: "021"});
         var emails = [];
-        emails = $scope.operator.contacts[index];
-        var index = emails.emails.length + 1;
+        emails = $scope.operator.contact[index];
+        var index = emails.email.length + 1;
         var item = new Object('');
-        emails.emails.splice(index, 0, {no: index, email: item});
+        emails.email.splice(index, 0, {no: index, email: item});
         console.log(emails); 
     }
 
     $scope.removeEmail = function (index, id) {
         var emails = [];
-        emails = $scope.operator.contacts[index];
-        console.log(emails.emails[id]); 
-        emails.emails.splice(id, 1);
+        emails = $scope.operator.contact[index];
+        console.log(emails.email[id]); 
+        emails.email.splice(id, 1);
         //console.log(index); 
     }
 

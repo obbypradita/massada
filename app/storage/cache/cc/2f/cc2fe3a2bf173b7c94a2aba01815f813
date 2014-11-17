@@ -1,25 +1,25 @@
-1416107413s:6446:"a:5:{s:5:"mtime";i:1416106811;s:7:"content";s:3145:"title = "Administration - Sites"
+1416213933s:7900:"a:5:{s:5:"mtime";i:1416197038;s:7:"content";s:3872:"title = "Administration - Site"
 url = "/administration/sites"
 layout = "default"
 hidden = "0"
 ==
 <?php
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\Locations;
+use Massada\Application\Models\Site;
+use Massada\Application\Models\SiteContact;
+use Massada\Application\Models\Location;
 
 function onDeleteSite() {
     $siteId = post('siteId');
-    $site = Sites::find($siteId);
+    $site = Site::find($siteId);
     $sitePhoto=$site->photo;
     
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     $site->delete();
 }
 
 function onSelectSite() {
-    $temp = Sites::with('locations')->get();
+    $temp = Site::with('location')->get();
     $temp = json_encode($temp);
 
     return $temp;
@@ -27,6 +27,22 @@ function onSelectSite() {
 ?>
 ==
 <div class="row">
+    <!-- <alert type="jenis" message="pesan" ng-class="animation"></alert> -->
+
+    
+<style>
+    .avatar-icon {
+	  display: block;
+	  height: 50px;
+	  width: 50px;
+	  border: 3px solid #fff;
+	  border-radius: 5px;
+	  box-shadow: 0 0 5px rgba(0,0,0,.15);
+	  cursor: pointer;
+	  overflow: hidden;
+}
+</style>
+   <alert></alert>
     {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
     
@@ -35,7 +51,7 @@ function onSelectSite() {
         <h2 class="sub-header">Sites List</h2>
         <hr/>
         
-        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
+        {% partial 'tools/list' label='Add New Site' addLinks='administration-site-insert'|page %}
         
         
         
@@ -47,6 +63,7 @@ function onSelectSite() {
                 <thead>
                     <tr>
                         <th><a href="" ng-click="sortField = 'id'             ; reverse = !reverse" >#</a></th>
+                        <th><a href="">Photo</a></th>
                         <th><a href="" ng-click="sortField = 'name'           ; reverse = !reverse" >Site Name</a></th>
                         <th><a href="" ng-click="sortField = 'owner'          ; reverse = !reverse" >Building Owner</a></th>
                         <th><a href="" ng-click="sortField = 'project_type'   ; reverse = !reverse" >Project Type</a></th>
@@ -59,10 +76,15 @@ function onSelectSite() {
                 <tbody>
                     <tr ng-repeat="st in administration.sites | filter:search | orderBy:sortField:reverse">
                         <td>{{ '{{ $index + 1}}' }}</td>
+                        <td>
+                            <div class="avatar-icon" title="Change the avatar"> 	
+		                        <img style=" height: 50px; width: 50px;" ng-src="http://localhost:8080/massada/uploads/public/images/site/avatar/{{ '{{ st.photo }}' }}.png">
+	                        </div>
+	                    </td>
                         <td>{{ '{{ st.name }}' }}</td>
                         <td>{{ '{{ st.owner }}' }}</td>
                         <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
+                        <td>{{ '{{ st.location.name }}' }}</td>
                         <td>{{ '{{ st.address }}' }}</td>
                         <td>{{ '{{ st.photo }}' }}</td>
                         <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
@@ -72,31 +94,47 @@ function onSelectSite() {
             </table>
         </div>
         <hr/>
-        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
+        {% partial 'tools/list' label='Add New Site' addLinks='administration-site-insert'|page %}
     </div>
 </div>
-{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:22:"Administration - Sites";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:508:"
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\Locations;
+{% framework extras %}";s:8:"settings";a:5:{s:5:"title";s:21:"Administration - Site";s:3:"url";s:21:"/administration/sites";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:0:{}}s:4:"code";s:500:"
+use Massada\Application\Models\Site;
+use Massada\Application\Models\SiteContact;
+use Massada\Application\Models\Location;
 
 function onDeleteSite() {
     $siteId = post('siteId');
-    $site = Sites::find($siteId);
+    $site = Site::find($siteId);
     $sitePhoto=$site->photo;
     
-    $contact = SiteContacts::where('sites_id', '=', $site->id);
+    $contact = SiteContact::where('site_id', '=', $site->id);
     $contact->delete();
     $site->delete();
 }
 
 function onSelectSite() {
-    $temp = Sites::with('locations')->get();
+    $temp = Site::with('location')->get();
     $temp = json_encode($temp);
 
     return $temp;
 }
-";s:6:"markup";s:2521:"<div class="row">
+";s:6:"markup";s:3257:"<div class="row">
+    <!-- <alert type="jenis" message="pesan" ng-class="animation"></alert> -->
+
+    
+<style>
+    .avatar-icon {
+	  display: block;
+	  height: 50px;
+	  width: 50px;
+	  border: 3px solid #fff;
+	  border-radius: 5px;
+	  box-shadow: 0 0 5px rgba(0,0,0,.15);
+	  cursor: pointer;
+	  overflow: hidden;
+}
+</style>
+   <alert></alert>
     {% partial 'sidebar/administration' %}
     <div class="col-sm-9 col-md-10">
     
@@ -105,7 +143,7 @@ function onSelectSite() {
         <h2 class="sub-header">Sites List</h2>
         <hr/>
         
-        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
+        {% partial 'tools/list' label='Add New Site' addLinks='administration-site-insert'|page %}
         
         
         
@@ -117,6 +155,7 @@ function onSelectSite() {
                 <thead>
                     <tr>
                         <th><a href="" ng-click="sortField = 'id'             ; reverse = !reverse" >#</a></th>
+                        <th><a href="">Photo</a></th>
                         <th><a href="" ng-click="sortField = 'name'           ; reverse = !reverse" >Site Name</a></th>
                         <th><a href="" ng-click="sortField = 'owner'          ; reverse = !reverse" >Building Owner</a></th>
                         <th><a href="" ng-click="sortField = 'project_type'   ; reverse = !reverse" >Project Type</a></th>
@@ -129,10 +168,15 @@ function onSelectSite() {
                 <tbody>
                     <tr ng-repeat="st in administration.sites | filter:search | orderBy:sortField:reverse">
                         <td>{{ '{{ $index + 1}}' }}</td>
+                        <td>
+                            <div class="avatar-icon" title="Change the avatar"> 	
+		                        <img style=" height: 50px; width: 50px;" ng-src="http://localhost:8080/massada/uploads/public/images/site/avatar/{{ '{{ st.photo }}' }}.png">
+	                        </div>
+	                    </td>
                         <td>{{ '{{ st.name }}' }}</td>
                         <td>{{ '{{ st.owner }}' }}</td>
                         <td>{{ '{{ st.project_type }}' }}</td>
-                        <td>{{ '{{ st.locations.name }}' }}</td>
+                        <td>{{ '{{ st.location.name }}' }}</td>
                         <td>{{ '{{ st.address }}' }}</td>
                         <td>{{ '{{ st.photo }}' }}</td>
                         <td><a href="http://localhost:8080/massada/administration/site/update/{{ '{{ st.id }}'  }}">Update</a> | 
@@ -142,7 +186,7 @@ function onSelectSite() {
             </table>
         </div>
         <hr/>
-        {% partial 'tools/list' label='Add New Sites' addLinks='administration-site-insert'|page %}
+        {% partial 'tools/list' label='Add New Site' addLinks='administration-site-insert'|page %}
     </div>
 </div>
 {% framework extras %}";}";

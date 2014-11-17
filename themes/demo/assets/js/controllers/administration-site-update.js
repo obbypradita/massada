@@ -1,11 +1,11 @@
-october.controllers['administration-site-update'] = function ($scope, $request, $parse, $location) {
+october.controllers['administration-site-update'] = function ($scope, $request, $parse, $location, alertFlash) {
     $scope.site={};
     $scope.master={};
     //$scope.frm={};
     
 
     //$scope.site.sitePhoto='';
-    $scope.site.contacts=[];
+    $scope.site.contact=[];
     $scope.ganti = function() {
         $scope.site.siteProjectType="Reseller";
     }
@@ -19,16 +19,16 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
                 $scope.site.siteName        = temp.name,
 	            $scope.site.siteOwner       = temp.owner,
 	            $scope.site.siteAddress     = temp.address,
-	            $scope.site.siteProjectType = temp.project_type;
+	            $scope.site.siteProjectType = temp.project_type,
 	            $scope.site.sitePhone       = temp.phone,
 	            $scope.site.siteFax         = temp.fax,
-	            $scope.site.siteLocation    = temp.locations_id,
+	            $scope.site.siteLocation    = temp.location_id,
 	            $scope.img                  = temp.photo,
 	            $scope.avatar               = temp.avatar,
-	            $scope.site.contacts		= temp.contacts
+	            $scope.site.contact		    = temp.contact
             });
             $scope.img = $scope.avatar;
-            $scope.site.siteForm.$setPristine();
+            $scope.siteForm.$setPristine();
         },
         
     });
@@ -51,7 +51,32 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
 	};
 	angular.element(document.querySelector('#fileToUpload')).on('change',handleFileSelect);
 	
-	
+	$scope.validate = function() {
+	      
+         $scope.siteForm.siteName.$dirty=true;         
+         $scope.siteForm.siteOwner.$dirty=true;         
+         $scope.siteForm.siteProjectType.$dirty=true;   
+         $scope.siteForm.siteLocation.$dirty=true;      
+         $scope.siteForm.siteAddress.$dirty=true;       
+         $scope.siteForm.sitePhone.$dirty=true;         
+         $scope.siteForm.siteFax.$dirty=true;    
+
+        for (field in $scope.siteForm) {
+             if (field[0] != '$' && $scope.siteForm[field].$pristine) {
+                  $scope.siteForm[field].$setViewValue(
+                      $scope.siteForm[field].$modelValue
+                  );
+             }
+         }   
+        if ($scope.siteForm.$valid){  
+             alertFlash.success('All valid and can be save');
+        }   else {
+            alertFlash.error('Still got an error please manually check');
+        } 
+        
+
+    }
+    
 	$scope.save = function() {
 	    $request('onSiteUpdate', {
 	        data: {
@@ -64,7 +89,7 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
 	            siteLocation    : $scope.site.siteLocation,
 	            sitePhoto       : $scope.site.sitePhoto,
 	            siteAvatar      : $scope.avatar,
-	            siteContacts    : angular.toJson($scope.site.contacts)
+	            siteContact    : angular.toJson($scope.site.contact)
 	        },
 	        success: function() {
 	            alert('berhasil');
@@ -89,7 +114,7 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
         $scope.img                    = ''; console.log($scope.img);
         $scope.avatar                 = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="; console.log($scope.avatar);
         
-        $scope.site.siteForm.$setPristine();
+        $scope.siteForm.$setPristine();
     }
     
     
@@ -101,37 +126,39 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
     
     
     
-    $scope.contacs = [];
+ 
 
-    $scope.site.contacts  = [];
+    $scope.site.contact  = [];
     
     $scope.addContact = function() {
         //$scope.contacs.push({index: index, name: "Iblis"}); 
-        var index = $scope.site.contacts.length + 1;
+        var index = $scope.site.contact.length + 1;
         var item = new Object('');
-        $scope.site.contacts.splice(index, 0, {no: index, name: item,  phones: [], emails: []}); 
-        console.log($scope.site.contacts);
+        $scope.site.contact.splice(index, 0, {no: index, name: item,  phone: [], email: []}); 
+        console.log($scope.site.contact);
     }
 
     $scope.removeContact = function(index) {
-        $scope.site.contacts.splice(index, 1);
+        console.log(index);
+        //alert('zentot');
+        $scope.site.contact.splice(index, 1);
     }
 
     $scope.addPhone = function (index) {
         //$scope.phones.push({phone: "021"});
         var phones = [];
-        phones = $scope.site.contacts[index];
-        var index = phones.phones.length + 1;
+        phones = $scope.site.contact[index];
+        var index = phones.phone.length + 1;
         var item = new Object('');
-        phones.phones.splice(index, 0, {no: index, phone: item});
+        phones.phone.splice(index, 0, {no: index, phone: item});
         console.log(phones); 
     }
 
     $scope.removePhone = function (index, id) {
         var phones = [];
-        phones = $scope.site.contacts[index];
-        console.log(phones.phones[id]); 
-        phones.phones.splice(id, 1);
+        phones = $scope.site.contact[index];
+        console.log(phones.phone[id]); 
+        phones.phone.splice(id, 1);
         //console.log(index); 
     }
 
@@ -139,18 +166,18 @@ october.controllers['administration-site-update'] = function ($scope, $request, 
      $scope.addEmail = function (index) {
         //$scope.phones.push({phone: "021"});
         var emails = [];
-        emails = $scope.site.contacts[index];
-        var index = emails.emails.length + 1;
+        emails = $scope.site.contact[index];
+        var index = emails.email.length + 1;
         var item = new Object('');
-        emails.emails.splice(index, 0, {no: index, email: item});
+        emails.email.splice(index, 0, {no: index, email: item});
         console.log(emails); 
     }
 
     $scope.removeEmail = function (index, id) {
         var emails = [];
-        emails = $scope.site.contacts[index];
-        console.log(emails.emails[id]); 
-        emails.emails.splice(id, 1);
+        emails = $scope.site.contact[index];
+        console.log(emails.email[id]); 
+        emails.email.splice(id, 1);
         //console.log(index); 
     }
 

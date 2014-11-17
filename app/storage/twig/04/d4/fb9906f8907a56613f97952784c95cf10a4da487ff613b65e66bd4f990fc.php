@@ -25,112 +25,105 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
     }
 </style>
 
-<!--S
-<div id = \"alert_placeholder\"></div>
-<div class=\"alert alert-info flash fade-in alert-fixed\">  
-  <a class=\"close\" data-dismiss=\"alert\">×</a>  
-  <strong>Info!</strong>Watch this, but you may forget.  
-</div> 
--->
-
 <div class=\"row\">
+<alert></alert>
     ";
-        // line 19
+        // line 12
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 20
+        // line 13
         echo "    <div class=\"col-sm-9 col-md-10\">
         ";
-        // line 21
+        // line 14
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("header/sites"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 22
+        // line 15
         echo "
         <h2 class=\"sub-header\">Update Site</h2>
         <hr/>
         
-        <form name=\"site.siteForm\" method=\"POST\" enctype=\"multipart/from-data\" novalidate>
+        <form name=\"siteForm\" method=\"POST\" enctype=\"multipart/from-data\" ng-submit=\"save()\" novalidate>
             ";
-        // line 27
+        // line 20
         $context['__cms_partial_params'] = [];
         $context['__cms_partial_params']['link'] = $this->env->getExtension('CMS')->pageFilter("administration-sites")        ;
-        $context['__cms_partial_params']['base'] = "site.siteForm"        ;
+        $context['__cms_partial_params']['base'] = "siteForm"        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/form"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 28
-        echo "            <hr/>
+        // line 21
+        echo "      
             
             <div class=\"container-fluid\">
                 <div class=\"col-md-4 col-sm-5\">
                     ";
-        // line 32
+        // line 25
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("sitePhoto"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 33
+        // line 26
         echo "                </div>
                 <div class=\"col-md-8 col-sm-7\">
                     <div class=\"form-horizontal\">
                         ";
-        // line 36
+        // line 29
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteName"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 37
+        // line 30
         echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteOwner"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 38
+        // line 31
         echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteProjectType"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 39
+        // line 32
         echo "                        ";
         $context['__cms_component_params'] = [];
         $context['__cms_component_params']['myObject'] = (isset($context["myObject"]) ? $context["myObject"] : null)        ;
         echo $this->env->getExtension('CMS')->componentFunction("siteLocation"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 40
+        // line 33
         echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteAddress"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 41
+        // line 34
         echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("sitePhone"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 42
+        // line 35
         echo "                        ";
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteFax"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 43
+        // line 36
         echo "                    </div>
                 </div>
             </div>
             <hr/>
             
             ";
-        // line 48
+        // line 41
         $context['__cms_component_params'] = [];
         echo $this->env->getExtension('CMS')->componentFunction("siteContact"        , $context['__cms_component_params']        );
         unset($context['__cms_component_params']);
-        // line 49
+        // line 42
         echo "            <hr/>
             
             ";
-        // line 51
+        // line 44
         $context['__cms_partial_params'] = [];
         $context['__cms_partial_params']['link'] = $this->env->getExtension('CMS')->pageFilter("administration-sites")        ;
-        $context['__cms_partial_params']['base'] = "site.siteForm"        ;
+        $context['__cms_partial_params']['base'] = "siteForm"        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/form"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 52
+        // line 45
         echo "        </form>
         
     
@@ -150,6 +143,6 @@ class __TwigTemplate_04d4fb9906f8907a56613f97952784c95cf10a4da487ff613b65e66bd4f
 
     public function getDebugInfo()
     {
-        return array (  134 => 52,  128 => 51,  124 => 49,  120 => 48,  113 => 43,  108 => 42,  103 => 41,  98 => 40,  92 => 39,  87 => 38,  82 => 37,  78 => 36,  73 => 33,  69 => 32,  63 => 28,  57 => 27,  50 => 22,  46 => 21,  43 => 20,  39 => 19,  19 => 1,);
+        return array (  127 => 45,  121 => 44,  117 => 42,  113 => 41,  106 => 36,  101 => 35,  96 => 34,  91 => 33,  85 => 32,  80 => 31,  75 => 30,  71 => 29,  66 => 26,  62 => 25,  56 => 21,  50 => 20,  43 => 15,  39 => 14,  36 => 13,  32 => 12,  19 => 1,);
     }
 }

@@ -1,4 +1,4 @@
-october.controllers['administration-operators'] = function ($scope, $request, $parse) {
+october.controllers['administration-operators'] = function ($scope, $request, $parse, alertFlash) {
     $scope.administration={};
     $scope.sortField='id';
 
@@ -12,7 +12,7 @@ october.controllers['administration-operators'] = function ($scope, $request, $p
                 $scope.$apply(function () {
                      $scope.administration.operators = $parse(temp)($scope);
                 });
-                $('.loading-icon').hide();
+                alertFlash.info('everything gonna be ok');
             }
         });
     };

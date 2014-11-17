@@ -1,4 +1,4 @@
-1416107254s:1542:"a:5:{s:5:"mtime";i:1415972766;s:7:"content";s:706:"==
+1416213933s:1958:"a:5:{s:5:"mtime";i:1416153256;s:7:"content";s:914:"==
 <div class="form-inline">
     <div class="form-group">
         <a type="button" class="btn btn-default" href="{{ link }}" >
@@ -12,15 +12,24 @@
             Clear
         </button>
     </div>
+    
+    <div class="form-group">
+        <button type="button" ng-click="validate()" class="btn btn-default"> 
+            <span class="fa fa-save"></span>
+            Validate
+        </button>
+    </div>
+    
     <!-- Submit -->
     <div class="form-group">
-        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" class="btn btn-primary"> 
             <span class="fa fa-save"></span>
             Save
         </button>
     </div>
+    
 </div>
-<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:702:"<div class="form-inline">
+<hr/>";s:8:"settings";a:1:{s:10:"components";a:0:{}}s:4:"code";N;s:6:"markup";s:910:"<div class="form-inline">
     <div class="form-group">
         <a type="button" class="btn btn-default" href="{{ link }}" >
             <span class="fa fa-undo"></span>
@@ -33,12 +42,21 @@
             Clear
         </button>
     </div>
+    
+    <div class="form-group">
+        <button type="button" ng-click="validate()" class="btn btn-default"> 
+            <span class="fa fa-save"></span>
+            Validate
+        </button>
+    </div>
+    
     <!-- Submit -->
     <div class="form-group">
-        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" ng-click="save()" class="btn btn-primary"> 
+        <button type="submit" name="submit" ng-disabled="{{ base }}.$invalid" class="btn btn-primary"> 
             <span class="fa fa-save"></span>
             Save
         </button>
     </div>
+    
 </div>
 <hr/>";}";

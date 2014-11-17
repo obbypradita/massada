@@ -32,16 +32,25 @@ class __TwigTemplate_0df7eb53f322a3439b6d98deca65c0bf3469de7d55033e602d0fcaf2b75
             Clear
         </button>
     </div>
+    
+    <div class=\"form-group\">
+        <button type=\"button\" ng-click=\"validate()\" class=\"btn btn-default\"> 
+            <span class=\"fa fa-save\"></span>
+            Validate
+        </button>
+    </div>
+    
     <!-- Submit -->
     <div class=\"form-group\">
         <button type=\"submit\" name=\"submit\" ng-disabled=\"";
-        // line 16
+        // line 24
         echo twig_escape_filter($this->env, (isset($context["base"]) ? $context["base"] : null), "html", null, true);
-        echo ".\$invalid\" ng-click=\"save()\" class=\"btn btn-primary\"> 
+        echo ".\$invalid\" class=\"btn btn-primary\"> 
             <span class=\"fa fa-save\"></span>
             Save
         </button>
     </div>
+    
 </div>
 <hr/>";
     }
@@ -58,6 +67,6 @@ class __TwigTemplate_0df7eb53f322a3439b6d98deca65c0bf3469de7d55033e602d0fcaf2b75
 
     public function getDebugInfo()
     {
-        return array (  39 => 16,  23 => 3,  19 => 1,);
+        return array (  47 => 24,  23 => 3,  19 => 1,);
     }
 }

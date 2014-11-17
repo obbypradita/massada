@@ -19,7 +19,7 @@ class __TwigTemplate_bdc23c4602f184be99cea624d3eb6b1b5bbe9e9ff436e9d342b442e33c1
         echo "<div class=\"jumbotron\">
     <div class=\"container\">
         <h1>Page not found</h1>
-        <p>We're sorry, but the page you requested cannot be found. tai anjing</p>
+        <p>We're sorry, but the page you requested cannot be found.</p>
     </div>
 </div>";
     }

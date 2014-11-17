@@ -26,28 +26,23 @@ class __TwigTemplate_a31ad12fbe95bd0d46b576d5f3b0f4fd65c93a01ae811693726fb16d44d
         echo "</title>
         <meta name=\"author\" content=\"October CMS\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-        <link rel=\"icon\" type=\"image/png\" href=\"";
-        // line 8
-        echo $this->env->getExtension('CMS')->themeFilter("assets/images/massadaTransp.png");
-        echo "\" />
-       
-       
+
         <script src=\"";
-        // line 11
+        // line 9
         echo $this->env->getExtension('CMS')->themeFilter(array(0 => "assets/js/angular.min.js", 1 => "assets/js/angular-animate.min.js", 2 => "assets/js/angular-route.min.js", 3 => "assets/js/angular-sanitize.min.js", 4 => "assets/js/ng-img-crop.js", 5 => "assets/js/massada.js"));
-        // line 18
+        // line 16
         echo "\"></script>
 
         
         ";
-        // line 21
+        // line 19
         echo $this->env->getExtension('CMS')->assetsFunction('css');
         echo $this->env->getExtension('CMS')->displayBlock('styles');
-        // line 22
+        // line 20
         echo "        
         <link href=\"";
-        // line 23
-        echo $this->env->getExtension('CMS')->themeFilter(array(0 => "assets/css/theme.css", 1 => "assets/css/jasny-bootstrap.min.css", 2 => "assets/css/bootstrap.min.css", 3 => "assets/css/font-awesome.min.css", 4 => "assets/css/ng-img-crop.css", 5 => "assets/css/massada.css"));
+        // line 21
+        echo $this->env->getExtension('CMS')->themeFilter(array(0 => "assets/css/theme.css", 1 => "assets/css/jasny-bootstrap.min.css", 2 => "assets/css/bootstrap.min.css", 3 => "assets/css/font-awesome.min.css", 4 => "assets/css/ng-img-crop.css", 5 => "assets/css/animate.css", 6 => "assets/css/ng-animation.css", 7 => "assets/css/massada.css"));
         // line 30
         echo "\" rel=\"stylesheet\">
 
@@ -231,6 +226,6 @@ class __TwigTemplate_a31ad12fbe95bd0d46b576d5f3b0f4fd65c93a01ae811693726fb16d44d
 
     public function getDebugInfo()
     {
-        return array (  217 => 103,  213 => 102,  206 => 101,  203 => 100,  201 => 99,  197 => 97,  195 => 94,  190 => 91,  186 => 90,  181 => 87,  177 => 86,  173 => 84,  169 => 83,  147 => 68,  137 => 65,  129 => 64,  121 => 63,  113 => 62,  105 => 61,  97 => 60,  89 => 59,  82 => 55,  58 => 33,  56 => 32,  52 => 30,  50 => 23,  47 => 22,  44 => 21,  39 => 18,  37 => 11,  31 => 8,  25 => 5,  19 => 1,);
+        return array (  212 => 103,  208 => 102,  201 => 101,  198 => 100,  196 => 99,  192 => 97,  190 => 94,  185 => 91,  181 => 90,  176 => 87,  172 => 86,  168 => 84,  164 => 83,  142 => 68,  132 => 65,  124 => 64,  116 => 63,  108 => 62,  100 => 61,  92 => 60,  84 => 59,  77 => 55,  53 => 33,  51 => 32,  47 => 30,  45 => 21,  42 => 20,  39 => 19,  34 => 16,  32 => 9,  25 => 5,  19 => 1,);
     }
 }

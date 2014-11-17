@@ -1,4 +1,4 @@
-1416107254s:11416:"a:2:{s:5:"mtime";i:1415831551;s:7:"content";s:11360:"<h2 class="sub-header">Contact Person</h2>
+1416213933s:11606:"a:2:{s:5:"mtime";i:1416151087;s:7:"content";s:11550:"<h2 class="sub-header">Contact Person</h2>
 <!-- contact menu toolbox-->
 <hr/>
 <div class="form-inline">
@@ -24,8 +24,8 @@
     <div ng-repeat="contact in {{ __SELF__.mModel }} track by $index">
         <hr/>
         <div class="form-group" ng-class="{ 
-            'has-error':   {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$invalid && {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$dirty, 
-            'has-success': {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$valid   && {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$dirty }">
+            'has-error':   {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$invalid && {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$dirty , 
+            'has-success': {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$valid   && {{ __SELF__.mBase }}.{{ 'contact{{ $index }}' }}.$dirty  }">
             <label for="" class="col-sm-2 control-label">Contact {{ '{{ $index + 1 }}' }} : </label>
             <div class="col-sm-10 controls">
                 <div class="input-group">
@@ -38,7 +38,7 @@
 							ng-maxlength 	= "{{ __SELF__.mMaxContact }}"
 							ng-required 	= "{{ __SELF__.mRequireContact }}">
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" ng-click="removeContact($index)">X</button>
+                        <button class="btn btn-danger"  type="button" ng-click="removeContact($index)">X</button>
                     </span>
                 </div>
                 <i style="right: 50px; top:0px" ng-class="{ 
@@ -63,10 +63,11 @@
         <div class="form-group">
             <label for="" class="col-sm-2 control-label"></label>
             <div class="col-sm-10 controls">
-                <h4>Phone {{ '{{ contact.name }}' }}</h4>
+                <h4 style="float: left; overflow:auto; padding-right:25px;" >Phone {{ '{{ contact.name }}' }}</h4>
+                <button type="button" class="btn btn-default" ng-click="addPhone($index)">Add Phone</button>
                 <hr/>
                 <div class="form-horizontal">
-                    <div class="form-group" ng-repeat="phone in contact.phones track by $index" ng-class="{ 
+                    <div class="form-group" ng-repeat="phone in contact.phone track by $index" ng-class="{ 
 						'has-error':   {{ __SELF__.mBase }}.{{ 'phone{{$parent.$index}}{{ $index }}' }}.$invalid && {{ __SELF__.mBase }}.{{ 'phone{{$parent.$index}}{{ $index }}' }}.$dirty, 
 						'has-success': {{ __SELF__.mBase }}.{{ 'phone{{$parent.$index}}{{ $index }}' }}.$valid   && {{ __SELF__.mBase }}.{{ 'phone{{$parent.$index}}{{ $index }}' }}.$dirty }">
                         <label for="" class="col-sm-2 control-label">Phone {{ '{{ $index + 1 }}' }} : </label>
@@ -81,7 +82,7 @@
 										ng-maxlength 	= "{{ __SELF__.mMaxPhone }}"
 										ng-required 	= "{{ __SELF__.mRequirePhone }}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-danger" ng-click="removePhone($parent.$index, $index)">X</button>
+                                    <button class="btn btn-danger" type="button" ng-click="removePhone($parent.$index, $index)">X</button>
                                 </span>
                             </div>
                             <i style="right: 50px; top:0px;" ng-class="{ 
@@ -101,7 +102,7 @@
 					    	</small>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default" ng-click="addPhone($index)">Add Phone</button>
+                    
                 </div>
             </div>
         </div>
@@ -111,10 +112,11 @@
         <div class="form-group">
             <label for="" class="col-sm-2 control-label"></label>
             <div class="col-sm-10 controls">
-                <h4>Email {{ '{{ contact.name }}' }}</h4>
+                <h4 style="float: left; overflow:auto; padding-right:25px;">Email {{ '{{ contact.name }}' }}</h4>
+                <button type="button" class="btn btn-default" ng-click="addEmail($index)">Add Email</button>
                 <hr/>
                 <div class="form-horizontal">
-                    <div class="form-group" ng-repeat="email in contact.emails track by $index" ng-class="{ 
+                    <div class="form-group" ng-repeat="email in contact.email track by $index" ng-class="{ 
 						'has-error':   {{ __SELF__.mBase }}.{{ 'email{{$parent.$index}}{{$index}}' }}.$invalid && {{ __SELF__.mBase }}.{{ 'email{{$parent.$index}}{{$index}}'}}.$dirty, 
 						'has-success': {{ __SELF__.mBase }}.{{ 'email{{$parent.$index}}{{$index}}' }}.$valid   && {{ __SELF__.mBase }}.{{ 'email{{$parent.$index}}{{$index}}'}}.$dirty }">
                         <label for="" class="col-sm-2 control-label">Email {{ '{{ $index + 1 }}' }} : </label>
@@ -129,7 +131,7 @@
 										ng-maxlength 	= "{{ __SELF__.mMaxEmail }}"
 										ng-required 	= "{{ __SELF__.mRequireEmail }}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-danger" ng-click="removeEmail($parent.$index, $index)">X</button>
+                                    <button class="btn btn-danger" type="button" ng-click="removeEmail($parent.$index, $index)">X</button>
                                 </span>
                             </div>
                             <i style="right: 50px; top:0px;" ng-class="{ 
@@ -149,7 +151,7 @@
 					    	</small>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default" ng-click="addEmail($index)">Add Email</button>
+                    
                 </div>
             </div>
         </div><!--end email -->

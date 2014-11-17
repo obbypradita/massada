@@ -113,7 +113,7 @@ req_msg = "Butuh foto neh"
 id = "mTextbox"
 name = "mTextbox"
 label = "mTextbox"
-mModel = "site.contacts"
+mModel = "site.contact"
 base = "siteForm"
 mModelContact = "name"
 mReqContact = "true"
@@ -146,16 +146,16 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
-use Massada\Application\Models\Locations;
-use Massada\Application\Models\Sites;
-use Massada\Application\Models\SiteContacts;
-use Massada\Application\Models\SiteContactPhones;
-use Massada\Application\Models\SiteContactEmails;
+use Massada\Application\Models\Location;
+use Massada\Application\Models\Site;
+use Massada\Application\Models\SiteContact;
+use Massada\Application\Models\SiteContactPhone;
+use Massada\Application\Models\SiteContactEmail;
 use Massada\Application\Classes\Operation;
 
 function onStart() {
     $temp = "["; $delimiter="";
-    $cmb = Locations::get();
+    $cmb = Location::get();
     foreach($cmb as $key=>$value) {
         $temp .= $delimiter . "{key: '" . $value->id . "', value: '" . $value->name . "'}";
         $delimiter=",";
@@ -166,8 +166,8 @@ function onStart() {
     $this['mObject']=$temp;
 }
 
-function onGetSites() {
-    $temp = Sites::get();
+function onGetSite() {
+    $temp = Site::get();
     $temp = json_encode($temp);
 
     return $temp;
@@ -176,14 +176,14 @@ function onGetSites() {
 function onInsertSite() {
     
   
-    $site = new Sites;
+    $site = new Site;
     $site->name         = post('siteName')          ; /*"stName"          ; // */ 
     $site->owner        = post('siteOwner')         ; /*"stOwner"         ; // */ 
     $site->address      = post('siteAddress')       ; /*"stAddress"       ; // */ 
     $site->project_type = post('siteProjectType')   ; /*"Multioperator"   ; // */ 
     $site->phone        = post('sitePhone')         ; /*"022589948565"    ; // */ 
     $site->fax          = post('siteFax')           ; /*"087958745856"    ; // */ 
-    $site->locations_id = post('siteLocation')      ; /*"1"               ; // */ 
+    $site->location_id  = post('siteLocation')      ; /*"1"               ; // */ 
    
     if (!empty(post('siteAvatar'))) {
         $rand = Operation::generateRandomString(10);
@@ -206,23 +206,23 @@ function onInsertSite() {
 
     $site->save();
 
-    $contact = json_decode(post('siteContacts'));
+    $contact = json_decode(post('siteContact'));
 
     foreach($contact as $key=>$value) {
-        $people = new SiteContacts;
+        $people = new SiteContact;
         $people->name = $value->name;
-        $people->sites_id = $site->id;
+        $people->site_id = $site->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new SiteContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new SiteContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->site_contacts_id = $people->id;
+            $phone->site_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new SiteContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new SiteContactEmail;
             $email->email = $vemail->email;
-            $email->site_contacts_id = $people->id;
+            $email->site_contact_id = $people->id;
             $email->save();
         }
 
@@ -230,6 +230,7 @@ function onInsertSite() {
 }
 ?>
 ==
+<alert></alert>
 <div>
     <div class="row">
         {% partial 'sidebar/administration' %}
@@ -239,7 +240,7 @@ function onInsertSite() {
     
             <h2 class="sub-header">Insert New Site</h2>
 
-            <form name="siteForm" method="POST" enctype="multipart/from-data" novalidate>
+            <form name="siteForm" method="POST" ng-submit="save()" enctype="multipart/from-data"  ng-class="{submitted:trySubmit}" novalidate>
                 <hr/>
                 {% partial 'tools/form' link='administration-sites'|page base='siteForm' %}
                 

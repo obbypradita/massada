@@ -1,32 +1,32 @@
-title = "Administration - Operators"
+title = "Administration - Operator"
 url = "/administration/operators"
 layout = "default"
 hidden = "0"
 ==
 <?php
-use Massada\Application\Models\Operators;
-use Massada\Application\Models\OperatorContacts;
+use Massada\Application\Models\Operator;
+use Massada\Application\Models\OperatorContact;
 
 function onDeleteOperator() {
     $operatorId = post('operatorId');
-    $operator = Operators::find($operatorId);
+    $operator = Operator::find($operatorId);
     $operatorLogo=$operator->logo;
     
-    $contact = OperatorContacts::where('operators_id', '=', $operator->id);
+    $contact = OperatorContact::where('operator_id', '=', $operator->id);
     $contact->delete();
     $operator->delete();
 }
 
 function onSelectOperator() {
-    return json_encode(Operators::get());
+    return json_encode(Operator::get());
 }
 ?>
 ==
+<alert></alert>
 <div class="row">
         {% partial 'sidebar/administration' %}
         <div class="col-sm-9 col-md-10">
             {% partial 'header/operators' %}
-            
             <h2 class="sub-header">Operator List</h2>
             <hr/>
             

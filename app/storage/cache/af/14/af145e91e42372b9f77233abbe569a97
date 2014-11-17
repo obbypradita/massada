@@ -1,4 +1,4 @@
-1416107218s:15132:"a:5:{s:5:"mtime";i:1416007776;s:7:"content";s:7040:"title = "Administration - Operator - Insert"
+1416214059s:14806:"a:5:{s:5:"mtime";i:1416213437;s:7:"content";s:6877:"title = "Administration - Operator - Insert"
 url = "/administration/operator/insert"
 layout = "default"
 hidden = "0"
@@ -126,10 +126,10 @@ mExpEmail_msg = "format salah"
 mTrimEmail = "true"
 ==
 <?php
-use Massada\Application\Models\Operators;
-use Massada\Application\Models\OperatorContacts;
-use Massada\Application\Models\OperatorContactPhones;
-use Massada\Application\Models\OperatorContactEmails;
+use Massada\Application\Models\Operator;
+use Massada\Application\Models\OperatorContact;
+use Massada\Application\Models\OperatorContactPhone;
+use Massada\Application\Models\OperatorContactEmail;
 use Massada\Application\Classes\Operation;
 
 function onStart() {
@@ -137,16 +137,14 @@ function onStart() {
 }
 
 function onSelectOperator() {
-    $temp = Operators::get();
+    $temp = Operator::get();
     $temp = json_encode($temp);
 
     return $temp;
 }
 
 function onInsertOperator() {
-    
-  
-    $operator = new Operators;
+    $operator = new Operator;
     $operator->name         = post('operatorName')          ; /*"stName"          ; // */ 
     $operator->company      = post('operatorCompany')       ; /*"stOwner"         ; // */ 
     $operator->address      = post('operatorAddress')       ; /*"stAddress"       ; // */ 
@@ -177,20 +175,20 @@ function onInsertOperator() {
     $contact = json_decode(post('operatorContacts'));
 
     foreach($contact as $key=>$value) {
-        $people = new OperatorContacts;
+        $people = new OperatorContact;
         $people->name = $value->name;
-        $people->operators_id = $operator->id;
+        $people->operator_id = $operator->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new OperatorContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new OperatorContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->operator_contacts_id = $people->id;
+            $phone->operator_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new OperatorContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new OperatorContactEmail;
             $email->email = $vemail->email;
-            $email->operator_contacts_id = $people->id;
+            $email->operator_contact_id = $people->id;
             $email->save();
         }
 
@@ -198,54 +196,53 @@ function onInsertOperator() {
 }
 ?>
 ==
-<div>
-    <div class="row">
-        {% partial 'sidebar/administration' %}
-        <div class="col-sm-9 col-md-10">
-            
-            {% partial 'header/operators' %}
-    
-            <h2 class="sub-header">Insert New Operator</h2>
+<alert></alert>
+<div class="row">
+    {% partial 'sidebar/administration' %}
+    <div class="col-sm-9 col-md-10">
+        
+        {% partial 'header/operators' %}
 
-            <form name="operatorForm" method="POST" enctype="multipart/from-data" novalidate>
-                <hr/>
-                {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
-                
-                <div class="container-fluid">
-                    <div class="col-md-4 col-sm-5">
-                        {% component 'operatorLogo' %}
-                    </div>
-                    <div class="col-md-8 col-sm-7">
-                        <div class="form-horizontal">
-                            
-                            {% component 'operatorName' %}
-                            {% component 'operatorCompany' %}
-                            {% component 'operatorAddress' %}
-                            {% component 'operatorPhone' %}
-                            {% component 'operatorFax' %}
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-            
-            
-                <!-- contact -->
-                {% component 'operatorContact' %}
-              <!-- end contacts-->
-            </form>
+        <h2 class="sub-header">Insert New Operator</h2>
 
+        <form name="operatorForm" method="POST" ng-submit="save()" enctype="multipart/from-data" novalidate>
             <hr/>
             {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
             
-            
-            {{ mObject }}
-        </div>
+            <div class="container-fluid">
+                <div class="col-md-4 col-sm-5">
+                    {% component 'operatorLogo' %}
+                </div>
+                <div class="col-md-8 col-sm-7">
+                    <div class="form-horizontal">
+                        
+                        {% component 'operatorName' %}
+                        {% component 'operatorCompany' %}
+                        {% component 'operatorAddress' %}
+                        {% component 'operatorPhone' %}
+                        {% component 'operatorFax' %}
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        
+        
+            <!-- contact -->
+            {% component 'operatorContact' %}
+          <!-- end contacts-->
+        </form>
+
+        <hr/>
+        {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
+        
+        
+        {{ mObject }}
     </div>
-</div>";s:8:"settings";a:5:{s:5:"title";s:34:"Administration - Operator - Insert";s:3:"url";s:31:"/administration/operator/insert";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:7:{s:21:"mTextbox operatorName";a:13:{s:2:"id";s:12:"operatorName";s:4:"name";s:12:"operatorName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"operator.name";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:24:"mTextbox operatorCompany";a:14:{s:2:"id";s:15:"operatorCompany";s:4:"name";s:15:"operatorCompany";s:5:"label";s:9:"Company :";s:5:"model";s:16:"operator.company";s:4:"base";s:12:"operatorForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:25:"mTextarea operatorAddress";a:14:{s:2:"id";s:15:"operatorAddress";s:4:"name";s:15:"operatorAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"operator.address";s:4:"base";s:12:"operatorForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:22:"mTextbox operatorPhone";a:13:{s:2:"id";s:13:"operatorPhone";s:4:"name";s:13:"operatorPhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"operator.phone";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:20:"mTextbox operatorFax";a:13:{s:2:"id";s:11:"operatorFax";s:4:"name";s:11:"operatorFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"operator.fax";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:19:"mImage operatorLogo";a:7:{s:2:"id";s:12:"operatorLogo";s:9:"namePhoto";s:12:"operatorLogo";s:10:"nameAvatar";s:14:"operatorAvatar";s:5:"model";s:13:"operator.logo";s:3:"src";s:12:"operatorLogo";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}s:24:"mContact operatorContact";a:34:{s:2:"id";s:15:"operatorContact";s:4:"name";s:15:"operatorContact";s:5:"label";s:15:"operatorContact";s:6:"mModel";s:17:"operator.contacts";s:4:"base";s:12:"operatorForm";s:13:"mModelContact";s:4:"name";s:11:"mReqContact";s:4:"true";s:15:"mReqContact_msg";s:6:"needed";s:11:"mMaxContact";s:2:"50";s:15:"mMaxContact_msg";s:6:"50 max";s:11:"mMinContact";s:1:"5";s:15:"mMinContact_msg";s:5:"5 min";s:11:"mExpContact";s:15:"/^[a-z A-Z,.]*/";s:15:"mExpContact_msg";s:17:"Format nama salah";s:12:"mTrimContact";s:4:"true";s:11:"mModelPhone";s:5:"phone";s:9:"mReqPhone";s:4:"true";s:13:"mReqPhone_msg";s:4:"need";s:9:"mMaxPhone";s:2:"16";s:13:"mMaxPhone_msg";s:6:"16 max";s:9:"mMinPhone";s:2:"10";s:13:"mMinPhone_msg";s:6:"10 min";s:9:"mExpPhone";s:14:"/^[0-9 ()-]*$/";s:13:"mExpPhone_msg";s:20:"phone format invalid";s:11:"mModelEmail";s:5:"email";s:9:"mReqEmail";s:4:"true";s:13:"mReqEmail_msg";s:5:"butuh";s:9:"mMaxEmail";s:2:"50";s:13:"mMaxEmail_msg";s:6:"50 max";s:9:"mMinEmail";s:2:"10";s:13:"mMinEmail_msg";s:6:"10 min";s:9:"mExpEmail";s:15:"/^[a-zA-Z.@]*$/";s:13:"mExpEmail_msg";s:12:"format salah";s:10:"mTrimEmail";s:4:"true";}}}s:4:"code";s:2611:"
-use Massada\Application\Models\Operators;
-use Massada\Application\Models\OperatorContacts;
-use Massada\Application\Models\OperatorContactPhones;
-use Massada\Application\Models\OperatorContactEmails;
+</div>";s:8:"settings";a:5:{s:5:"title";s:34:"Administration - Operator - Insert";s:3:"url";s:31:"/administration/operator/insert";s:6:"layout";s:7:"default";s:6:"hidden";s:1:"0";s:10:"components";a:7:{s:21:"mTextbox operatorName";a:13:{s:2:"id";s:12:"operatorName";s:4:"name";s:12:"operatorName";s:5:"label";s:6:"Name :";s:5:"model";s:13:"operator.name";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:13:"Name Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:1:"5";s:7:"min_msg";s:8:"to short";s:3:"exp";s:15:"[A-Za-z 0-9()&]";s:7:"exp_msg";s:27:"No Ilegal Characters please";}s:24:"mTextbox operatorCompany";a:14:{s:2:"id";s:15:"operatorCompany";s:4:"name";s:15:"operatorCompany";s:5:"label";s:9:"Company :";s:5:"model";s:16:"operator.company";s:4:"base";s:12:"operatorForm";s:10:"capitalize";s:4:"true";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Owner Required";s:3:"max";s:2:"50";s:7:"max_msg";s:8:"too long";s:3:"min";s:2:"10";s:7:"min_msg";s:9:"too short";s:3:"exp";s:10:"[a-z A-z.]";s:7:"exp_msg";s:13:"Alphabet Only";}s:25:"mTextarea operatorAddress";a:14:{s:2:"id";s:15:"operatorAddress";s:4:"name";s:15:"operatorAddress";s:5:"label";s:9:"Address :";s:5:"model";s:16:"operator.address";s:4:"base";s:12:"operatorForm";s:3:"rws";s:1:"2";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Address Needed";s:3:"exp";s:18:"[a-zA-Z(-) @/.,#&]";s:7:"exp_msg";s:20:"no ilegal characters";s:3:"max";s:3:"100";s:7:"max_msg";s:15:"Address To long";s:3:"min";s:2:"10";s:7:"min_msg";s:21:"10 Characters minimum";}s:22:"mTextbox operatorPhone";a:13:{s:2:"id";s:13:"operatorPhone";s:4:"name";s:13:"operatorPhone";s:5:"label";s:7:"Phone :";s:5:"model";s:14:"operator.phone";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Phone required";s:3:"max";s:2:"14";s:7:"max_msg";s:20:"beetwen 12-14 digits";s:3:"min";s:2:"12";s:7:"min_msg";s:20:"beetwen 12-14 digits";s:3:"exp";s:7:"[0-9()]";s:7:"exp_msg";s:20:"Invalid phone format";}s:20:"mTextbox operatorFax";a:13:{s:2:"id";s:11:"operatorFax";s:4:"name";s:11:"operatorFax";s:5:"label";s:5:"Fax :";s:5:"model";s:12:"operator.fax";s:4:"base";s:12:"operatorForm";s:3:"req";s:4:"true";s:7:"req_msg";s:12:"Fax required";s:3:"max";s:2:"14";s:7:"max_msg";s:5:"12-14";s:3:"min";s:2:"12";s:7:"min_msg";s:5:"12-14";s:3:"exp";s:9:"[0-9 ()-]";s:7:"exp_msg";s:18:"Invalid fax format";}s:19:"mImage operatorLogo";a:7:{s:2:"id";s:12:"operatorLogo";s:9:"namePhoto";s:12:"operatorLogo";s:10:"nameAvatar";s:14:"operatorAvatar";s:5:"model";s:13:"operator.logo";s:3:"src";s:12:"operatorLogo";s:3:"req";s:4:"true";s:7:"req_msg";s:14:"Butuh foto neh";}s:24:"mContact operatorContact";a:34:{s:2:"id";s:15:"operatorContact";s:4:"name";s:15:"operatorContact";s:5:"label";s:15:"operatorContact";s:6:"mModel";s:17:"operator.contacts";s:4:"base";s:12:"operatorForm";s:13:"mModelContact";s:4:"name";s:11:"mReqContact";s:4:"true";s:15:"mReqContact_msg";s:6:"needed";s:11:"mMaxContact";s:2:"50";s:15:"mMaxContact_msg";s:6:"50 max";s:11:"mMinContact";s:1:"5";s:15:"mMinContact_msg";s:5:"5 min";s:11:"mExpContact";s:15:"/^[a-z A-Z,.]*/";s:15:"mExpContact_msg";s:17:"Format nama salah";s:12:"mTrimContact";s:4:"true";s:11:"mModelPhone";s:5:"phone";s:9:"mReqPhone";s:4:"true";s:13:"mReqPhone_msg";s:4:"need";s:9:"mMaxPhone";s:2:"16";s:13:"mMaxPhone_msg";s:6:"16 max";s:9:"mMinPhone";s:2:"10";s:13:"mMinPhone_msg";s:6:"10 min";s:9:"mExpPhone";s:14:"/^[0-9 ()-]*$/";s:13:"mExpPhone_msg";s:20:"phone format invalid";s:11:"mModelEmail";s:5:"email";s:9:"mReqEmail";s:4:"true";s:13:"mReqEmail_msg";s:5:"butuh";s:9:"mMaxEmail";s:2:"50";s:13:"mMaxEmail_msg";s:6:"50 max";s:9:"mMinEmail";s:2:"10";s:13:"mMinEmail_msg";s:6:"10 min";s:9:"mExpEmail";s:15:"/^[a-zA-Z.@]*$/";s:13:"mExpEmail_msg";s:12:"format salah";s:10:"mTrimEmail";s:4:"true";}}}s:4:"code";s:2587:"
+use Massada\Application\Models\Operator;
+use Massada\Application\Models\OperatorContact;
+use Massada\Application\Models\OperatorContactPhone;
+use Massada\Application\Models\OperatorContactEmail;
 use Massada\Application\Classes\Operation;
 
 function onStart() {
@@ -253,16 +250,14 @@ function onStart() {
 }
 
 function onSelectOperator() {
-    $temp = Operators::get();
+    $temp = Operator::get();
     $temp = json_encode($temp);
 
     return $temp;
 }
 
 function onInsertOperator() {
-    
-  
-    $operator = new Operators;
+    $operator = new Operator;
     $operator->name         = post('operatorName')          ; /*"stName"          ; // */ 
     $operator->company      = post('operatorCompany')       ; /*"stOwner"         ; // */ 
     $operator->address      = post('operatorAddress')       ; /*"stAddress"       ; // */ 
@@ -293,66 +288,65 @@ function onInsertOperator() {
     $contact = json_decode(post('operatorContacts'));
 
     foreach($contact as $key=>$value) {
-        $people = new OperatorContacts;
+        $people = new OperatorContact;
         $people->name = $value->name;
-        $people->operators_id = $operator->id;
+        $people->operator_id = $operator->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new OperatorContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new OperatorContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->operator_contacts_id = $people->id;
+            $phone->operator_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new OperatorContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new OperatorContactEmail;
             $email->email = $vemail->email;
-            $email->operator_contacts_id = $people->id;
+            $email->operator_contact_id = $people->id;
             $email->save();
         }
 
     }
 }
-";s:6:"markup";s:1598:"<div>
-    <div class="row">
-        {% partial 'sidebar/administration' %}
-        <div class="col-sm-9 col-md-10">
-            
-            {% partial 'header/operators' %}
-    
-            <h2 class="sub-header">Insert New Operator</h2>
+";s:6:"markup";s:1459:"<alert></alert>
+<div class="row">
+    {% partial 'sidebar/administration' %}
+    <div class="col-sm-9 col-md-10">
+        
+        {% partial 'header/operators' %}
 
-            <form name="operatorForm" method="POST" enctype="multipart/from-data" novalidate>
-                <hr/>
-                {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
-                
-                <div class="container-fluid">
-                    <div class="col-md-4 col-sm-5">
-                        {% component 'operatorLogo' %}
-                    </div>
-                    <div class="col-md-8 col-sm-7">
-                        <div class="form-horizontal">
-                            
-                            {% component 'operatorName' %}
-                            {% component 'operatorCompany' %}
-                            {% component 'operatorAddress' %}
-                            {% component 'operatorPhone' %}
-                            {% component 'operatorFax' %}
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-            
-            
-                <!-- contact -->
-                {% component 'operatorContact' %}
-              <!-- end contacts-->
-            </form>
+        <h2 class="sub-header">Insert New Operator</h2>
 
+        <form name="operatorForm" method="POST" ng-submit="save()" enctype="multipart/from-data" novalidate>
             <hr/>
             {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
             
-            
-            {{ mObject }}
-        </div>
+            <div class="container-fluid">
+                <div class="col-md-4 col-sm-5">
+                    {% component 'operatorLogo' %}
+                </div>
+                <div class="col-md-8 col-sm-7">
+                    <div class="form-horizontal">
+                        
+                        {% component 'operatorName' %}
+                        {% component 'operatorCompany' %}
+                        {% component 'operatorAddress' %}
+                        {% component 'operatorPhone' %}
+                        {% component 'operatorFax' %}
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        
+        
+            <!-- contact -->
+            {% component 'operatorContact' %}
+          <!-- end contacts-->
+        </form>
+
+        <hr/>
+        {% partial 'tools/form' link='administration-operators'|page base='operatorForm' %}
+        
+        
+        {{ mObject }}
     </div>
 </div>";}";

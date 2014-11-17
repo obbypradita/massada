@@ -17,32 +17,48 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
     {
         // line 1
         echo "<div class=\"row\">
+    <!-- <alert type=\"jenis\" message=\"pesan\" ng-class=\"animation\"></alert> -->
+
+    
+<style>
+    .avatar-icon {
+\t  display: block;
+\t  height: 50px;
+\t  width: 50px;
+\t  border: 3px solid #fff;
+\t  border-radius: 5px;
+\t  box-shadow: 0 0 5px rgba(0,0,0,.15);
+\t  cursor: pointer;
+\t  overflow: hidden;
+}
+</style>
+   <alert></alert>
     ";
-        // line 2
+        // line 18
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 3
+        // line 19
         echo "    <div class=\"col-sm-9 col-md-10\">
     
         ";
-        // line 5
+        // line 21
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("header/sites"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 6
+        // line 22
         echo "
         <h2 class=\"sub-header\">Sites List</h2>
         <hr/>
         
         ";
-        // line 10
+        // line 26
         $context['__cms_partial_params'] = [];
-        $context['__cms_partial_params']['label'] = "Add New Sites"        ;
+        $context['__cms_partial_params']['label'] = "Add New Site"        ;
         $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-site-insert")        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 11
+        // line 27
         echo "        
         
         
@@ -54,6 +70,7 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                 <thead>
                     <tr>
                         <th><a href=\"\" ng-click=\"sortField = 'id'             ; reverse = !reverse\" >#</a></th>
+                        <th><a href=\"\">Photo</a></th>
                         <th><a href=\"\" ng-click=\"sortField = 'name'           ; reverse = !reverse\" >Site Name</a></th>
                         <th><a href=\"\" ng-click=\"sortField = 'owner'          ; reverse = !reverse\" >Building Owner</a></th>
                         <th><a href=\"\" ng-click=\"sortField = 'project_type'   ; reverse = !reverse\" >Project Type</a></th>
@@ -66,39 +83,47 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
                 <tbody>
                     <tr ng-repeat=\"st in administration.sites | filter:search | orderBy:sortField:reverse\">
                         <td>";
-        // line 33
+        // line 50
         echo "{{ \$index + 1}}";
         echo "</td>
+                        <td>
+                            <div class=\"avatar-icon\" title=\"Change the avatar\"> \t
+\t\t                        <img style=\" height: 50px; width: 50px;\" ng-src=\"http://localhost:8080/massada/uploads/public/images/site/avatar/";
+        // line 53
+        echo "{{ st.photo }}";
+        echo ".png\">
+\t                        </div>
+\t                    </td>
                         <td>";
-        // line 34
+        // line 56
         echo "{{ st.name }}";
         echo "</td>
                         <td>";
-        // line 35
+        // line 57
         echo "{{ st.owner }}";
         echo "</td>
                         <td>";
-        // line 36
+        // line 58
         echo "{{ st.project_type }}";
         echo "</td>
                         <td>";
-        // line 37
-        echo "{{ st.locations.name }}";
+        // line 59
+        echo "{{ st.location.name }}";
         echo "</td>
                         <td>";
-        // line 38
+        // line 60
         echo "{{ st.address }}";
         echo "</td>
                         <td>";
-        // line 39
+        // line 61
         echo "{{ st.photo }}";
         echo "</td>
                         <td><a href=\"http://localhost:8080/massada/administration/site/update/";
-        // line 40
+        // line 62
         echo "{{ st.id }}";
         echo "\">Update</a> | 
                             <a href=\"\" ng-click=\"onDelete(";
-        // line 41
+        // line 63
         echo "st.id";
         echo ")\">Delete</a></td>
                     </tr>
@@ -107,17 +132,17 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
         </div>
         <hr/>
         ";
-        // line 47
+        // line 69
         $context['__cms_partial_params'] = [];
-        $context['__cms_partial_params']['label'] = "Add New Sites"        ;
+        $context['__cms_partial_params']['label'] = "Add New Site"        ;
         $context['__cms_partial_params']['addLinks'] = $this->env->getExtension('CMS')->pageFilter("administration-site-insert")        ;
         echo $this->env->getExtension('CMS')->partialFunction("tools/list"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 48
+        // line 70
         echo "    </div>
 </div>
 ";
-        // line 50
+        // line 72
         echo '<script src="'. Request::getBasePath()
                 .'/modules/system/assets/js/framework.js"></script>'.PHP_EOL;
         echo '<script src="'. Request::getBasePath()
@@ -138,6 +163,6 @@ class __TwigTemplate_ce2db051c2c5f6892f92efba4959ea706736bbd8052b623f0d07541dcf7
 
     public function getDebugInfo()
     {
-        return array (  121 => 50,  117 => 48,  111 => 47,  102 => 41,  98 => 40,  94 => 39,  90 => 38,  86 => 37,  82 => 36,  78 => 35,  74 => 34,  70 => 33,  46 => 11,  40 => 10,  34 => 6,  30 => 5,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  146 => 72,  142 => 70,  136 => 69,  127 => 63,  123 => 62,  119 => 61,  115 => 60,  111 => 59,  107 => 58,  103 => 57,  99 => 56,  93 => 53,  87 => 50,  62 => 27,  56 => 26,  50 => 22,  46 => 21,  42 => 19,  38 => 18,  19 => 1,);
     }
 }

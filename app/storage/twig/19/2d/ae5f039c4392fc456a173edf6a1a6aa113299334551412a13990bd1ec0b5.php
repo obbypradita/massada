@@ -16,22 +16,22 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<div class=\"row\">
+        echo "<alert></alert>
+<div class=\"row\">
         ";
-        // line 2
+        // line 3
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("sidebar/administration"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 3
+        // line 4
         echo "        <div class=\"col-sm-9 col-md-10\">
             ";
-        // line 4
+        // line 5
         $context['__cms_partial_params'] = [];
         echo $this->env->getExtension('CMS')->partialFunction("header/operators"        , $context['__cms_partial_params']        );
         unset($context['__cms_partial_params']);
-        // line 5
-        echo "            
-            <h2 class=\"sub-header\">Operator List</h2>
+        // line 6
+        echo "            <h2 class=\"sub-header\">Operator List</h2>
             <hr/>
             
             
@@ -128,6 +128,6 @@ class __TwigTemplate_192dae5f039c4392fc456a173edf6a1a6aa113299334551412a13990bd1
 
     public function getDebugInfo()
     {
-        return array (  114 => 45,  108 => 44,  98 => 37,  94 => 36,  90 => 35,  86 => 34,  82 => 33,  78 => 32,  74 => 31,  70 => 30,  66 => 29,  46 => 11,  40 => 10,  33 => 5,  29 => 4,  26 => 3,  22 => 2,  19 => 1,);
+        return array (  114 => 45,  108 => 44,  98 => 37,  94 => 36,  90 => 35,  86 => 34,  82 => 33,  78 => 32,  74 => 31,  70 => 30,  66 => 29,  46 => 11,  40 => 10,  34 => 6,  30 => 5,  27 => 4,  23 => 3,  19 => 1,);
     }
 }

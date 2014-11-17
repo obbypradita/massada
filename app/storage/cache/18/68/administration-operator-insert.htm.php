@@ -1,5 +1,5 @@
 <?php 
-use Massada\Application\Models\Operators;use Massada\Application\Models\OperatorContacts;use Massada\Application\Models\OperatorContactPhones;use Massada\Application\Models\OperatorContactEmails;use Massada\Application\Classes\Operation;class Cms546690644e02a_92878311Class extends \Cms\Classes\PageCode
+use Massada\Application\Models\Operator;use Massada\Application\Models\OperatorContact;use Massada\Application\Models\OperatorContactPhone;use Massada\Application\Models\OperatorContactEmail;use Massada\Application\Classes\Operation;class Cms5469b3d3f1a6b_919029160Class extends \Cms\Classes\PageCode
 {
 
 
@@ -11,15 +11,13 @@ public function onStart() {
 
 }
 public function onSelectOperator() {
-    $temp = Operators::get();
+    $temp = Operator::get();
     $temp = json_encode($temp);
 
     return $temp;
 }
 public function onInsertOperator() {
-    
-  
-    $operator = new Operators;
+    $operator = new Operator;
     $operator->name         = post('operatorName')          ; /*"stName"          ; // */ 
     $operator->company      = post('operatorCompany')       ; /*"stOwner"         ; // */ 
     $operator->address      = post('operatorAddress')       ; /*"stAddress"       ; // */ 
@@ -50,20 +48,20 @@ public function onInsertOperator() {
     $contact = json_decode(post('operatorContacts'));
 
     foreach($contact as $key=>$value) {
-        $people = new OperatorContacts;
+        $people = new OperatorContact;
         $people->name = $value->name;
-        $people->operators_id = $operator->id;
+        $people->operator_id = $operator->id;
         $people->save();
-        foreach($value->phones as $kphone=>$vphone) {
-            $phone = new OperatorContactPhones;
+        foreach($value->phone as $kphone=>$vphone) {
+            $phone = new OperatorContactPhone;
             $phone->phone = $vphone->phone;
-            $phone->operator_contacts_id = $people->id;
+            $phone->operator_contact_id = $people->id;
             $phone->save();
         }
-        foreach($value->emails as $kemail=>$vemail) {
-            $email = new OperatorContactEmails;
+        foreach($value->email as $kemail=>$vemail) {
+            $email = new OperatorContactEmail;
             $email->email = $vemail->email;
-            $email->operator_contacts_id = $people->id;
+            $email->operator_contact_id = $people->id;
             $email->save();
         }
 
